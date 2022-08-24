@@ -4,9 +4,9 @@ services:
   redis:
     image: redis
     ports:
-      - "6379:6379"
+      - "6378:6378"
   backend:
-    container_name: backend
+    container_name: stackoverflow
     build: .
     ports:
       - "8080:8080"
