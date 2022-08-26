@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 public class QuestionRequestDto {
 
@@ -14,6 +15,8 @@ public class QuestionRequestDto {
     @AllArgsConstructor
     @Builder
     public static class CreatedQuestionDto{
+        @NotNull
+        private long memberId;
 
         @NotBlank
         private String title;
@@ -33,5 +36,8 @@ public class QuestionRequestDto {
 
         @NotBlank
         private String question;
+
+        @NotNull
+        private long memberId;
     }
 }

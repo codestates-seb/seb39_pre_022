@@ -4,17 +4,19 @@ import com.Team22.preproject.StackOverFlow.audit.Auditable;
 import com.Team22.preproject.StackOverFlow.comment.entity.AnswerComment;
 import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import com.Team22.preproject.StackOverFlow.question.entity.Question;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 public class Answer extends Auditable{

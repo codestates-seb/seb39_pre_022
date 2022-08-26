@@ -28,23 +28,21 @@ public class QuestionResponseDto {
     public static class QuestionInfo{
         private long questionId;
 
+        private String title;
         private String question;
 
-        private String title;
     }
 
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class UpdateQuestionDto extends Auditable {
+    public static class UpdateQuestionDto{
         private long questionId;
 
         private String title;
 
         private String question;
-
-
 
     }
 }

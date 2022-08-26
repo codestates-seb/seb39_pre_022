@@ -28,7 +28,12 @@ public class MemberController {
     private final MemberService memberService;
     private final MemberMapper mapper;
     private final PasswordEncoder passwordEncoder;
+    /*
+    로그아웃 기능 구현 필요
+    - 로그아웃 기능을 구현하려면 securityConfig 파일을 수정해야한다 - 용호님과 의논
+     */
 
+    //회원가입
     @PostMapping("/signup")
     public ResponseEntity singUp(@RequestBody @Valid MemberRequestDto.singUpDto singUpDto){
         singUpDto.setPassword(passwordEncoder.encode(singUpDto.getPassword()));
@@ -43,6 +48,7 @@ public class MemberController {
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
 
+    //로그인
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid MemberRequestDto.loginDto loginDto){
         Member member = mapper.loginDtoToMember(loginDto);
@@ -52,6 +58,7 @@ public class MemberController {
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.memberToMemberInfo(loginMember),"SUCCESS"),HttpStatus.OK);
     }
 
+    //회원 정보 수정
     @PatchMapping("/{member-id}")
     public ResponseEntity updateMember(@Positive @PathVariable("member-id") long memberId, @RequestBody MemberRequestDto.updateDto updateDto){
         updateDto.setMemberId(memberId);
@@ -61,7 +68,8 @@ public class MemberController {
         return new ResponseEntity<>(new SingleResponseWithMessageDto(memberInfo, "SUCCESS"), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{member-id")
+    //회원정보 삭제
+    @DeleteMapping("/{member-id}")
     public ResponseEntity deleteMember(@Positive @PathVariable("member-id") long memberId){
         memberService.deleteMember(memberId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

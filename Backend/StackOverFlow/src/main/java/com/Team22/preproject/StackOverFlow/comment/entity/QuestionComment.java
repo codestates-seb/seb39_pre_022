@@ -3,14 +3,15 @@ package com.Team22.preproject.StackOverFlow.comment.entity;
 import com.Team22.preproject.StackOverFlow.audit.Auditable;
 import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import com.Team22.preproject.StackOverFlow.question.entity.Question;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 public class QuestionComment extends Auditable {

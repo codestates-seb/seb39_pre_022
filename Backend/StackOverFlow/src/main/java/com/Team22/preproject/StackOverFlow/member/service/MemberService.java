@@ -45,7 +45,7 @@ public class MemberService {
 
     public void deleteMember(long memberId) {
         Member member = findVerifiedMember(memberId);
-        memberRepository.save(member);
+        memberRepository.delete(member);
     }
 
     public void verifyEmail(String email){
