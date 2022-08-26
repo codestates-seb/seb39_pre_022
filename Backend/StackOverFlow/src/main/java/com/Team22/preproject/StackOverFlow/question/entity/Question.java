@@ -2,18 +2,16 @@ package com.Team22.preproject.StackOverFlow.question.entity;
 
 import com.Team22.preproject.StackOverFlow.answer.entity.Answer;
 import com.Team22.preproject.StackOverFlow.member.entity.Member;
-import com.Team22.preproject.StackOverFlow.qeustionComments.entity.QuestionComments;
-import lombok.Getter;
+import com.Team22.preproject.StackOverFlow.comments.entity.QuestionComment;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Entity
 @NoArgsConstructor
 public class Question {
@@ -39,12 +37,12 @@ public class Question {
     private Member member;
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    private List<QuestionComments> questionCommentsList = new ArrayList<>();
+    private List<QuestionComment> questionCommentsList = new ArrayList<>();
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<Answer> answerList = new ArrayList<>();
 
-    public void addQuestionComments(QuestionComments questionComments){
+    public void addQuestionComments(QuestionComment questionComments){
         if(!this.questionCommentsList.contains(questionComments)){
             questionCommentsList.add(questionComments);
         }

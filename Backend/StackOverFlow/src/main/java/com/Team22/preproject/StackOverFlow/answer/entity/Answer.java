@@ -1,19 +1,19 @@
 package com.Team22.preproject.StackOverFlow.answer.entity;
 
-import com.Team22.preproject.StackOverFlow.answerComments.entity.AnswerComments;
+import com.Team22.preproject.StackOverFlow.comments.entity.AnswerComment;
 import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import com.Team22.preproject.StackOverFlow.question.entity.Question;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Entity
 @NoArgsConstructor
 public class Answer {
@@ -22,10 +22,12 @@ public class Answer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long answerId;
 
-    @Column(nullable = false, columnDefinition = "TEXT", length = 300)
+    @NotBlank
+    @Column(nullable = false)
+    @Length(min = 30, max = 300)
     private String answer;
 
-    private byte likeCount;
+    private int likeCount = 0;
 
     @Column(nullable = false, name = "FIRST_CREATED_AT")
     private LocalDateTime createdAt = LocalDateTime.now();
@@ -42,28 +44,33 @@ public class Answer {
     private Question question;
 
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
-    private List<AnswerComments> answerCommentsList = new ArrayList<>();
+    private List<AnswerComment> answerComments = new ArrayList<>();
 
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
     private List<Like> likes = new ArrayList<>();
 
-    public void addMember(Member member) {
-        this.member = member;
-    }
-
-    public void addQuestion(Question question){
-        this.question=question;
-    }
-
-    public void addAnswerComments(AnswerComments answerComments){
-        if(!answerCommentsList.contains(answerComments)){
-            answerCommentsList.add(answerComments);
+    public void addLike(Like like) {
+        if(like != null && !this.likes.contains(like)){
+            like.addAnswer(this);
+            this.likes.add(like); // 코드의 this 인자를 보고 현재 클래스의 likes 배열에서 추가한 다는 것을 나타내는 명시적인 효과를 위해 적었습니다.
         }
     }
 
-    public void addLike(Like like) {
-        if(!this.likes.contains(like)) {
-            this.likes.add(like);
+    public void addAnswerComment(AnswerComment answerComment){
+        if(answerComment != null && !this.answerComments.contains(answerComment)){
+            answerComment.addAnswer(this);
+            this.answerComments.add(answerComment);
+        }
+    }
+
+    public void addQuestion(Question question) {
+        if(this.question == null && question != null){
+            this.question = question;
+        }
+    }
+    public void addMember(Member member) {
+        if(this.member == null && member != null){
+            this.member = member;
         }
     }
 }

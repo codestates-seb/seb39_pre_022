@@ -1,23 +1,22 @@
 package com.Team22.preproject.StackOverFlow.member.entity;
 
 import com.Team22.preproject.StackOverFlow.answer.entity.Answer;
-import com.Team22.preproject.StackOverFlow.answerComments.entity.AnswerComments;
-import com.Team22.preproject.StackOverFlow.qeustionComments.entity.QuestionComments;
+import com.Team22.preproject.StackOverFlow.comments.entity.AnswerComment;
+import com.Team22.preproject.StackOverFlow.comments.entity.QuestionComment;
 import com.Team22.preproject.StackOverFlow.question.entity.Question;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@NoArgsConstructor
-@Getter
-@Setter
+
+@Data
 @Entity
+@NoArgsConstructor
 public class Member {
 
     @Id
@@ -39,29 +38,44 @@ public class Member {
     private LocalDateTime modifiedAt = LocalDateTime.now();
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-    private List<Question> questionList = new ArrayList<>();
+    private List<Question> questions = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-    private List<QuestionComments> questionCommentsList= new ArrayList<>();
+    private List<QuestionComment> questionComments= new ArrayList<>();
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-    private List<Answer> answerList = new ArrayList<>();
+    private List<Answer> answers = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-    private List<AnswerComments> answerCommentsList = new ArrayList<>();
+    private List<AnswerComment> answerComments = new ArrayList<>();
 
 //    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
 //    private List<Like> likes = new ArrayList<>();
 
+    public void addAnswer(Answer answer){
+        if(answer != null && !answers.contains(answer)){
+            answer.addMember(this);
+            this.answers.add(answer);
+        }
+    }
     public void addQuestion(Question question){
-        if(!this.questionList.contains(question)){
-            this.questionList.add(question);
+        if(question != null && !this.questions.contains(question)){
+            question.addMember(this);
+            this.questions.add(question);
         }
     }
 
-    public void addAnswer(Answer answer){
-        if(!this.answerList.contains(answer)){
-            this.answerList.add(answer);
+    public void addQuestionComment(QuestionComment questionComment){
+        if(questionComment != null && !this.questionComments.contains(questionComment)){
+            questionComment.addMember(this);
+            this.questionComments.add(questionComment);
+        }
+    }
+
+    public void addAnswerComment(AnswerComment answerComment){
+        if (answerComment != null && !this.answerComments.contains(answerComment)){
+            answerComment.addMember(this);
+            this.answerComments.add(answerComment);
         }
     }
 }

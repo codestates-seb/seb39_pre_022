@@ -1,25 +1,25 @@
-package com.Team22.preproject.StackOverFlow.qeustionComments.entity;
+package com.Team22.preproject.StackOverFlow.comments.entity;
 
 import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import com.Team22.preproject.StackOverFlow.question.entity.Question;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
+@Data
 @Entity
 @NoArgsConstructor
-public class QuestionComments {
+public class QuestionComment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long questionCommentsId;
 
-    @Column(nullable = false, columnDefinition = "TEXT",length = 300)
+    @Column(nullable = false)
+    @Length(max = 300)
     private String questionComments;
 
     @Column(nullable = false, name = "FIRST_CREATED_AT")
@@ -37,6 +37,14 @@ public class QuestionComments {
     private Question question;
 
     public void addMember(Member member) {
-        this.member = member;
+        if(this.member == null && member != null){
+            this.member = member;
+        }
+    }
+
+    public void addQuestion(Question question) {
+        if(this.question == null && question != null){
+            this.question = question;
+        }
     }
 }

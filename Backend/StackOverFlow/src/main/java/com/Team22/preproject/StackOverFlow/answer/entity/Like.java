@@ -1,15 +1,12 @@
 package com.Team22.preproject.StackOverFlow.answer.entity;
 
 import com.Team22.preproject.StackOverFlow.member.entity.Member;
-import com.Team22.preproject.StackOverFlow.answer.entity.Answer;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
+@Data
 @Entity
 @NoArgsConstructor
 @Table(name = "LIKES")
