@@ -42,7 +42,6 @@ public class MemberController {
     public ResponseEntity login(@RequestBody @Valid MemberRequestDto.loginDto loginDto){
         Member member = mapper.loginDtoToMember(loginDto);
         memberService.login(member);
-        Member member1 = memberService.login(mapper.loginDtoToMember(loginDto));
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.memberToMemberInfo(member),"SUCCESS"),HttpStatus.OK);
 //        return new ResponseEntity<>(new SingleResponseWithMessageDto<>(member1,"SUCCESS"),HttpStatus.OK);
     }

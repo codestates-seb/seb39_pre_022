@@ -1,6 +1,7 @@
 package com.Team22.preproject.StackOverFlow.question.entity;
 
 import com.Team22.preproject.StackOverFlow.answer.entity.Answer;
+import com.Team22.preproject.StackOverFlow.audit.Auditable;
 import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import com.Team22.preproject.StackOverFlow.comment.entity.QuestionComment;
 import lombok.Data;
@@ -14,7 +15,7 @@ import java.util.List;
 @Data
 @Entity
 @NoArgsConstructor
-public class Question {
+public class Question extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,12 +26,6 @@ public class Question {
 
     @Column(nullable = false, columnDefinition = "TEXT", length = 200)
     private String title;
-
-    @Column(nullable = false, name = "FIRST_CREATED_AT")
-    private LocalDateTime createdAt = LocalDateTime.now();
-
-    @Column(nullable = false, name = "LAST_MODIFIED_AT")
-    private LocalDateTime modifiedAt = LocalDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
