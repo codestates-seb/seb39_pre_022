@@ -12,10 +12,9 @@ public interface MemberMapper {
 
     Member loginDtoToMember(MemberRequestDto.loginDto loginDto);
 
-    default MemberResponseDto.MemberInfo memberToMemberInfo(Member member){
-        return MemberResponseDto.MemberInfo.builder()
-                .email(member.getEmail())
-                .nickName(member.getNickName())
-                .build();
-    }
+    MemberResponseDto.MemberInfo memberToMemberInfo(Member member);
+
+    Member updateDtoToMember(MemberRequestDto.updateDto updateDto);
+
+    MemberResponseDto.UpdateDto memberToUpdateDto(Member member);
 }
