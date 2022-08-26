@@ -1,11 +1,10 @@
 package com.Team22.preproject.StackOverFlow.question.entity;
 
 import com.Team22.preproject.StackOverFlow.answer.entity.Answer;
-import com.Team22.preproject.StackOverFlow.comment.entity.QuestionComment;
 import com.Team22.preproject.StackOverFlow.member.entity.Member;
+import com.Team22.preproject.StackOverFlow.comments.entity.QuestionComment;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,49 +15,40 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 public class Question {
-    // PK와 FK들 또는 그래프 탐색을 위한 객체들
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long questionId;
 
+    @Column(nullable = false, columnDefinition = "TEXT",length = 300)
+    private String question;
+
+    @Column(nullable = false, columnDefinition = "TEXT", length = 200)
+    private String title;
+
+    @Column(nullable = false, name = "FIRST_CREATED_AT")
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+    @Column(nullable = false, name = "LAST_MODIFIED_AT")
+    private LocalDateTime modifiedAt = LocalDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
-    @OneToMany(mappedBy = "question")
-    private List<Answer> answers = new ArrayList<>();
 
-    @OneToMany(mappedBy = "question")
-    private List<QuestionComment> questionComments = new ArrayList<>();
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    private List<QuestionComment> questionCommentsList = new ArrayList<>();
 
-    // Question의 속성들
-    @Column(nullable = false)
-    @Length(min=15, max=50)
-    private String title;
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    private List<Answer> answerList = new ArrayList<>();
 
-    private LocalDateTime createdAt = LocalDateTime.now();
-
-    private LocalDateTime modifiedAt = LocalDateTime.now();
-
-    // 객체참조를 위한 메서드
+    public void addQuestionComments(QuestionComment questionComments){
+        if(!this.questionCommentsList.contains(questionComments)){
+            questionCommentsList.add(questionComments);
+        }
+    }
 
     public void addMember(Member member) {
-        if(this.member == null && member != null){
-            this.member = member;
-        }
+        this.member = member;
     }
-
-    public void addAnswer(Answer answer) {
-        if(!this.answers.contains(answer) && answer != null){
-            answer.addQuestion(this);
-            this.answers.add(answer);
-        }
-    }
-
-    public void addQuestionComment(QuestionComment questionComment){
-        if(questionComment != null && !this.questionComments.contains(questionComment)){
-            this.questionComments.add(questionComment);
-        }
-    }
-
 }

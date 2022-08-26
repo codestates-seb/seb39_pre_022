@@ -1,7 +1,6 @@
 package com.Team22.preproject.StackOverFlow.answer.entity;
 
-import com.Team22.preproject.StackOverFlow.comment.entity.AnswerComment;
-import com.Team22.preproject.StackOverFlow.like.entity.Like;
+import com.Team22.preproject.StackOverFlow.comments.entity.AnswerComment;
 import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import com.Team22.preproject.StackOverFlow.question.entity.Question;
 import lombok.Data;
@@ -19,39 +18,36 @@ import java.util.List;
 @NoArgsConstructor
 public class Answer {
 
-    // Answer 답변의 PK와 FK들
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long answerId;
 
-    @ManyToOne
-    @JoinColumn(name="QUESTION_ID")
-    private Question question;
+    @NotBlank
+    @Column(nullable = false)
+    @Length(min = 30, max = 300)
+    private String answer;
+
+    private int likeCount = 0;
+
+    @Column(nullable = false, name = "FIRST_CREATED_AT")
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+    @Column(nullable = false, name = "LAST_MODIFIED_AT")
+    private LocalDateTime modifiedAt = LocalDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
+    @ManyToOne
+    @JoinColumn(name = "QUESTION_ID")
+    private Question question;
+
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
     private List<AnswerComment> answerComments = new ArrayList<>();
+
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
     private List<Like> likes = new ArrayList<>();
-
-
-    // 답변의 전용 속성들
-    @NotBlank
-    @Length(min = 30, max=300)
-    @Column(nullable = false)
-    private String answer;
-
-    // Like를 합친 값입니다. likeCount도 괜찮을 것 같습니다.
-    private int likeCount = 0;
-
-    private LocalDateTime createdAt = LocalDateTime.now();
-    private LocalDateTime modifiedAt = LocalDateTime.now();
-
-
-    // 객체 참조를 위한 메서드
 
     public void addLike(Like like) {
         if(like != null && !this.likes.contains(like)){
