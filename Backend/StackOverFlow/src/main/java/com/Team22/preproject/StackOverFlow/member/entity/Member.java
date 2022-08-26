@@ -1,8 +1,8 @@
 package com.Team22.preproject.StackOverFlow.member.entity;
 
 import com.Team22.preproject.StackOverFlow.answer.entity.Answer;
-import com.Team22.preproject.StackOverFlow.comments.entity.AnswerComment;
-import com.Team22.preproject.StackOverFlow.comments.entity.QuestionComment;
+import com.Team22.preproject.StackOverFlow.comment.entity.AnswerComment;
+import com.Team22.preproject.StackOverFlow.comment.entity.QuestionComment;
 import com.Team22.preproject.StackOverFlow.question.entity.Question;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;

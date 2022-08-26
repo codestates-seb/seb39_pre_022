@@ -1,6 +1,6 @@
 package com.Team22.preproject.StackOverFlow.answer.entity;
 
-import com.Team22.preproject.StackOverFlow.comments.entity.AnswerComment;
+import com.Team22.preproject.StackOverFlow.comment.entity.AnswerComment;
 import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import com.Team22.preproject.StackOverFlow.question.entity.Question;
 import lombok.Data;

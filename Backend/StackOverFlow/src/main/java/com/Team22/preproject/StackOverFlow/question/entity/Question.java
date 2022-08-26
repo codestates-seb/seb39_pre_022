@@ -2,7 +2,7 @@ package com.Team22.preproject.StackOverFlow.question.entity;
 
 import com.Team22.preproject.StackOverFlow.answer.entity.Answer;
 import com.Team22.preproject.StackOverFlow.member.entity.Member;
-import com.Team22.preproject.StackOverFlow.comments.entity.QuestionComment;
+import com.Team22.preproject.StackOverFlow.comment.entity.QuestionComment;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

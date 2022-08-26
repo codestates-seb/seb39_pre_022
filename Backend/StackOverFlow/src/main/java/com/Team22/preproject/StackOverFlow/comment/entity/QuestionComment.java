@@ -13,10 +13,20 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 public class QuestionComment {
-    // PK와 FK들
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long question_comment_id;
+    private long questionCommentsId;
+
+    @Column(nullable = false)
+    @Length(max = 300)
+    private String questionComments;
+
+    @Column(nullable = false, name = "FIRST_CREATED_AT")
+    private LocalDateTime createdAt = LocalDateTime.now();
+
+    @Column(nullable = false, name = "LAST_MODIFIED_AT")
+    private LocalDateTime modifiedAt = LocalDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
@@ -25,16 +35,6 @@ public class QuestionComment {
     @ManyToOne
     @JoinColumn(name = "QUESTION_ID")
     private Question question;
-
-
-    // Question Comment 질문 전용 댓글의 속성들
-    @Column(nullable = false)
-    @Length(max=300)
-    private String questionComment;
-
-    private LocalDateTime createdAt = LocalDateTime.now();
-
-    private LocalDateTime modifiedAt = LocalDateTime.now();
 
     public void addMember(Member member) {
         if(this.member == null && member != null){
