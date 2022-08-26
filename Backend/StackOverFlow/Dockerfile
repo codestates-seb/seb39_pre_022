@@ -1,4 +1,5 @@
 FROM openjdk:11-jdk
+FROM ubuntu:latest
 
 ENV LC_ALL=C.UTF-8
 
