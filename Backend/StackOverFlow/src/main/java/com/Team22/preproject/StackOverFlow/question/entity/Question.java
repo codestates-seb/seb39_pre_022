@@ -1,22 +1,19 @@
-package com.Team22.preproject.StackOverFlow.question.domain;
+package com.Team22.preproject.StackOverFlow.question.entity;
 
-import com.Team22.preproject.StackOverFlow.answer.domain.Answer;
-import com.Team22.preproject.StackOverFlow.comment.domain.QuestionComment;
-import com.Team22.preproject.StackOverFlow.member.domain.Member;
+import com.Team22.preproject.StackOverFlow.answer.entity.Answer;
+import com.Team22.preproject.StackOverFlow.comment.entity.QuestionComment;
+import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-@Entity
 @Data
+@Entity
 @NoArgsConstructor
 public class Question {
     // PK와 FK들 또는 그래프 탐색을 위한 객체들

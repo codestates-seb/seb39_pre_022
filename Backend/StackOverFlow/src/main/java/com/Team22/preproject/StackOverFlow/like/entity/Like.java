@@ -1,15 +1,15 @@
-package com.Team22.preproject.StackOverFlow.like.domain;
+package com.Team22.preproject.StackOverFlow.like.entity;
 
-import com.Team22.preproject.StackOverFlow.answer.domain.Answer;
-import com.Team22.preproject.StackOverFlow.member.domain.Member;
+import com.Team22.preproject.StackOverFlow.answer.entity.Answer;
+import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 
-@Entity(name="LIKES")
 @Data
+@Entity(name="LIKES")
 @NoArgsConstructor
 public class Like {
     // PK와 FK들

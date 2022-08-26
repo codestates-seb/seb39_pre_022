@@ -1,9 +1,9 @@
-package com.Team22.preproject.StackOverFlow.answer.domain;
+package com.Team22.preproject.StackOverFlow.answer.entity;
 
-import com.Team22.preproject.StackOverFlow.comment.domain.AnswerComment;
-import com.Team22.preproject.StackOverFlow.like.domain.Like;
-import com.Team22.preproject.StackOverFlow.member.domain.Member;
-import com.Team22.preproject.StackOverFlow.question.domain.Question;
+import com.Team22.preproject.StackOverFlow.comment.entity.AnswerComment;
+import com.Team22.preproject.StackOverFlow.like.entity.Like;
+import com.Team22.preproject.StackOverFlow.member.entity.Member;
+import com.Team22.preproject.StackOverFlow.question.entity.Question;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
@@ -12,11 +12,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-@Entity
 @Data
+@Entity
 @NoArgsConstructor
 public class Answer {
 
@@ -33,19 +32,20 @@ public class Answer {
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    @OneToMany(mappedBy = "answer")
+    @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
     private List<AnswerComment> answerComments = new ArrayList<>();
-    @OneToMany(mappedBy = "answer")
+    @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
     private List<Like> likes = new ArrayList<>();
 
 
     // 답변의 전용 속성들
+    @NotBlank
     @Length(min = 30, max=300)
     @Column(nullable = false)
     private String answer;
 
     // Like를 합친 값입니다. likeCount도 괜찮을 것 같습니다.
-    private int voteCount = 0;
+    private int likeCount = 0;
 
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime modifiedAt = LocalDateTime.now();
