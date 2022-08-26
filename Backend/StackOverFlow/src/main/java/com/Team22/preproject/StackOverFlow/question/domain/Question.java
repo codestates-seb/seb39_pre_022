@@ -43,6 +43,7 @@ public class Question {
 
     private LocalDateTime modifiedAt = LocalDateTime.now();
 
+    // 객체참조를 위한 메서드
 
     public void addMember(Member member) {
         if(this.member == null && member != null){

@@ -35,13 +35,14 @@ public class Answer {
 
     @OneToMany(mappedBy = "answer")
     private List<AnswerComment> answerComments = new ArrayList<>();
+    @OneToMany(mappedBy = "answer")
+    private List<Like> likes = new ArrayList<>();
 
+
+    // 답변의 전용 속성들
     @Length(min = 30, max=300)
     @Column(nullable = false)
     private String answer;
-
-    @OneToMany(mappedBy = "answer")
-    private List<Like> likes = new ArrayList<>();
 
     // Like를 합친 값입니다. likeCount도 괜찮을 것 같습니다.
     private int voteCount = 0;
@@ -50,13 +51,14 @@ public class Answer {
     private LocalDateTime modifiedAt = LocalDateTime.now();
 
 
+    // 객체 참조를 위한 메서드
+
     public void addLike(Like like) {
         if(like != null && !this.likes.contains(like)){
             like.addAnswer(this);
             this.likes.add(like); // 코드의 this 인자를 보고 현재 클래스의 likes 배열에서 추가한 다는 것을 나타내는 명시적인 효과를 위해 적었습니다.
         }
     }
-
 
     public void addAnswerComment(AnswerComment answerComment){
         if(answerComment != null && !this.answerComments.contains(answerComment)){

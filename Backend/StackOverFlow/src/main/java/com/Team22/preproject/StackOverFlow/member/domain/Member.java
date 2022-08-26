@@ -15,32 +15,20 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class Member {
+
+    //Member의 PK와 FK들
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int memberId;
 
-
     @OneToMany(mappedBy = "member")
     private List<Question> questions = new ArrayList<>();
-
-    public void addQuestion(Question question){
-        if(question != null && !this.questions.contains(question)){
-            question.addMember(this);
-            this.questions.add(question);
-        }
-    }
 
     @OneToMany(mappedBy = "member")
     private List<Answer> answers = new ArrayList<>();
 
-    public void addAnswer(Answer answer){
-        if(answer != null && !answers.contains(answer)){
-            answer.addMember(this);
-            this.answers.add(answer);
-        }
-    }
 
-
+    // Member의 속성들
     @Email
     @Column(updatable = false, unique = true)
     private String email;
@@ -53,6 +41,21 @@ public class Member {
 
     @Column(updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
+
     @Column(nullable = false)
     private LocalDateTime modifiedAt = LocalDateTime.now();
+
+    // 객체 참조를 위한 메서드
+    public void addAnswer(Answer answer){
+        if(answer != null && !answers.contains(answer)){
+            answer.addMember(this);
+            this.answers.add(answer);
+        }
+    }
+    public void addQuestion(Question question){
+        if(question != null && !this.questions.contains(question)){
+            question.addMember(this);
+            this.questions.add(question);
+        }
+    }
 }

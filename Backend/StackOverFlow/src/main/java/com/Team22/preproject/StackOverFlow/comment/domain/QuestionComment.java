@@ -28,7 +28,7 @@ public class QuestionComment {
     private Question question;
 
 
-    // Question Comment 질문 전용 댓글으 속성들
+    // Question Comment 질문 전용 댓글의 속성들
     @Column(nullable = false, length = 300)
     private String questionComment;
 
