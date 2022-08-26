@@ -24,12 +24,23 @@ public class MemberService {
         memberRepository.save(member);
     }
 
+//    public Member login(Member member){
+//        Member findMember = findVerifiedMemberByEmail(member.getEmail());
+//
+//        if(!passwordEncoder.matches(member.getPassword(), findMember.getPassword())) {
+//            throw new BusinessLogicException(ExceptionCode.PASSWORD_INCORRECT);
+//        }
+//
+//        return member;
+//    }
+
     public Member login(Member member){
         Member findMember = findVerifiedMemberByEmail(member.getEmail());
 
         if(!passwordEncoder.matches(member.getPassword(), findMember.getPassword())) {
             throw new BusinessLogicException(ExceptionCode.PASSWORD_INCORRECT);
         }
+
         return member;
     }
 
