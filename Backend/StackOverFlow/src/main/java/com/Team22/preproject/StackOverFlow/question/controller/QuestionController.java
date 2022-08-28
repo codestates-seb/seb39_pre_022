@@ -44,7 +44,7 @@ public class QuestionController {
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.createdDtoToQuestion(question),"CREATED"), HttpStatus.CREATED);
     }
 
-    //본인이 작성한 질문 조회
+    //본인이 작성한 특정 질문 조회
     @GetMapping("/{member-id}/question/{question-id}")
     public ResponseEntity getQuestion(@Positive @PathVariable("member-id") long memberId,
                                         @Positive @PathVariable("question-id") long questionId){
@@ -84,15 +84,16 @@ public class QuestionController {
     }
 
 
-//    //전체 질문 조회
-//    @GetMapping
-//    public ResponseEntity getQuestions(@Positive @PathParam("page") int page,
-//                                       @Positive @PathParam("size") int size){
-//        Page<Question> pageQuestions = questionService.findQuestions(page-1,size);
-//        List<Question> questionList = pageQuestions.getContent();
-//
-//        return new ResponseEntity(new MultiResponseWithPageInfoDto<>(mapper.questionToQuestionInfo(questionList),pageQuestions),HttpStatus.OK);
-//    }
+    //전체 질문 조회
+    @GetMapping
+    public ResponseEntity getQuestions(@Positive @PathParam("page") int page,
+                                       @Positive @PathParam("size") int size,
+                                       Question question){
+        Page<Question> pageQuestions = questionService.findQuestionCreatedAt(question,page-1,size);
+        List<Question> questionList = pageQuestions.getContent();
+
+        return new ResponseEntity(new MultiResponseWithPageInfoDto<>(mapper.questionToQuestionInfo(questionList),pageQuestions),HttpStatus.OK);
+    }
 
     //최신순 조회
 

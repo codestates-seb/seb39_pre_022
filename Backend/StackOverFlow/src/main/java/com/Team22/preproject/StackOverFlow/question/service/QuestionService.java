@@ -54,8 +54,12 @@ public class QuestionService {
         questionRepository.delete(question);
     }
 
+    public Page<Question> findQuestions(int page, int size) {
+        return questionRepository.findAll(PageRequest.of(page, size,Sort.DEFAULT_DIRECTION));
+    }
 
-//    public Page<Question> findQuestions(int page, int size) {
-//        return questionRepository.findAll(PageRequest.of(page, size, Sort.by("CREATED_AT").descending()));
-//    }
+    public Page<Question> findQuestionCreatedAt(Question question,int page, int size) {
+        return questionRepository.findAllByCreatedAt(question.getQuestionId(),PageRequest.of(page, size,Sort.Direction.DESC));
+    }
+
 }

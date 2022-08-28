@@ -2,12 +2,14 @@ package com.Team22.preproject.StackOverFlow.question.mapper;
 
 import com.Team22.preproject.StackOverFlow.question.dto.QuestionResponseDto;
 import com.Team22.preproject.StackOverFlow.question.entity.Question;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-27T03:13:24+0900",
+    date = "2022-08-28T15:05:22+0900",
     comments = "version: 1.5.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.jar, environment: Java 11.0.13 (Oracle Corporation)"
 )
 @Component
@@ -37,9 +39,23 @@ public class QuestionMapperImpl implements QuestionMapper {
         QuestionResponseDto.QuestionInfo.QuestionInfoBuilder questionInfo = QuestionResponseDto.QuestionInfo.builder();
 
         questionInfo.questionId( question.getQuestionId() );
-        questionInfo.question( question.getQuestion() );
         questionInfo.title( question.getTitle() );
+        questionInfo.question( question.getQuestion() );
 
         return questionInfo.build();
+    }
+
+    @Override
+    public List<QuestionResponseDto.QuestionInfo> questionToQuestionInfo(List<Question> questionList) {
+        if ( questionList == null ) {
+            return null;
+        }
+
+        List<QuestionResponseDto.QuestionInfo> list = new ArrayList<QuestionResponseDto.QuestionInfo>( questionList.size() );
+        for ( Question question : questionList ) {
+            list.add( questionToInfo( question ) );
+        }
+
+        return list;
     }
 }

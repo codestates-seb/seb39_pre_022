@@ -29,5 +29,6 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
     @Query(value = "select * from QUESTION where MEMBER_ID = :memberId",nativeQuery = true)
     Page<Question> findAllByMemberId(@Param("memberId") long memberId, Pageable pageable);
 
-
+//    @Query(value = "select * from QUESTION where QUESTION_ID = :questionId", nativeQuery = true)
+    Page<Question> findAllByCreatedAt(long questionId, Pageable pageable);
 }
