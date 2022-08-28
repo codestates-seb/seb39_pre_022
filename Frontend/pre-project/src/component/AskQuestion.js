@@ -43,11 +43,9 @@ export default function AskQuestion() {
                             value={body}
                         />
                     </form>
-                    <article>
-                        도움말
-                    </article>
+                    <Link to='/question'><button>Review your question</button></Link>
                 </section>
-                <Link to='/question'><button>Review your question</button></Link>
+
             </AskContainer>
         </>
     )
@@ -55,11 +53,14 @@ export default function AskQuestion() {
 
 const AskContainer = styled.div`
 border: 1px solid black;
+background: rgb(241, 242, 243);
+height: 100vh;
 text-align: left;
 
 section{
     border: 1px solid black;
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
 
     .ask-form{

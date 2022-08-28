@@ -8,7 +8,8 @@ public enum ExceptionCode {
   PASSWORD_INCORRECT(404, "Password Incorrect"),
   FIELD_ERROR(400, "Field Error"),
   CONSTRAINT_VIOLATION_ERROR(400, "Constraint Violation Error"),
-  NICKNAME_NOT_FOUND(404, "NickName not found");
+  NICKNAME_NOT_FOUND(404, "NickName Not Found"),
+  QUESTION_NOT_FOUND(404, "Question Not Found" );
 
 
   @Getter
