@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Navbar from './Navbar';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import axios from 'axios';
 import moment from 'moment';
 
 export default function AskQuestion() {
@@ -13,20 +12,6 @@ export default function AskQuestion() {
     // moment 라이브러리로 현재 시간 확인 가능
     const time = moment().format('YYYY.MM.DD HH:mm:ss');
     console.log(time)
-
-    // axios.post('http://localhost:8080/questions', {
-    //     data: {
-    //         title: title,
-    //         body: body,
-    //         time: time
-    //     }
-    // }).then(res => {
-    //     console.log(res)
-    //     navigate('/questions')
-    // }).catch(err => {
-    //     console.log(err)
-    // })
-
 
 
     return (
@@ -41,7 +26,7 @@ export default function AskQuestion() {
                         <input
                             type='text'
                             id='title'
-                            placeholder='e.g plz help me'
+                            placeholder='e.g Is there an R function for finding the index of an element in a vector'
                             autoComplete='off'
                             required
                             onChange={event => setTitle(event.target.value)}

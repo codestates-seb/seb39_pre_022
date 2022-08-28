@@ -3,82 +3,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../img/stack-overflow-logo.png';
 import Navbar from './Navbar';
-import data from '../data/data.json'; //로그인 확인용 데이터
 import axios from 'axios';
-
-const LoginContainer = styled.div`
-/* border: 1px solid black; */
-
-.logo{
-    width: 2rem;
-    margin-top: 7rem;
-    padding: 1rem;
-}
-
-.container {
-  margin: 0 auto;
-  border: 1px solid black;
-  width: 30rem;
-  padding: 1rem;
-}
-
-.login-form {
-  display: flex;
-  flex-direction: column;
-  padding: 2rem;
-  text-align: left;
-}
-
-.login-form input,
-.login-form button {
-  margin: 0.5rem;
-  margin-bottom: 1rem;
-  height: 3rem;
-}
-
-.login-form label{
-    padding: 0 0.5rem;
-}
-.nohaveid {
-  /* border: 1px solid black; */
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
-
-button{
-    border: none;
-    border-radius: 0.2rem;
-    background-color: rgb(1, 153, 255);
-    color: white;
-    font-weight: 900;
-    font-size: 1.1rem;
-}
-`;
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    // 로그인 확인용 데이터
-    const user = data.user
-    console.log(user)
-
-    const check = () => {
-        for (let i = 0; i < user.length; i++) {
-            if (email === user[i].email && password === user[i].password) {
-                navigate('/')
-                return;
-            }
-        }
-        alert('fail')
-    }
-    // 로그인 확인용 데이터
-
-
     // BE 통신때
-    // axios.post('http://localhost:8080/members/login', {
+    // axios.post('/members/login', {
     //     data: {
     //         email: email,
     //         password: password
@@ -109,7 +42,6 @@ export default function Login() {
                     <input
                         type='text'
                         id='userEmail'
-                        placeholder='Email을 입력해주세요'
                         // 자동완성 기능 해제
                         autoComplete='off'
                         value={email}
@@ -122,20 +54,98 @@ export default function Login() {
                     <input
                         type='password'
                         id='userPassword'
-                        placeholder='비밀번호를 입력해주세요'
                         autoComplete='off'
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
                         required
                     >
                     </input>
-                    <button onClick={() => { check() }}>Log in</button>
+                    <button>Log in</button>
                 </form>
-                <div className='nohaveid'>
-                    don't you have account?
-                    <Link to='/signup'>go to sign up</Link>
-                </div>
+            </div>
+            <div className='nohaveid'>
+                <span>Don't you have an account?<Link to='/signup'>Sign up</Link></span>
             </div>
         </LoginContainer>
     )
 }
+
+const LoginContainer = styled.div`
+/* border: 1px solid black; */
+background: rgb(241, 242, 243);
+height: 100vh;
+
+.logo{
+    width: 2rem;
+    margin-top: 11rem;
+    padding: 1.5rem;
+}
+
+.container {
+  margin: 0 auto;
+  /* border: 1px solid black; */
+  border-radius: 0.5rem;
+  background: white;
+  box-shadow: 0.1rem 0.1rem 1rem rgba(211,212,213,0.5);
+  width: 20rem;
+  /* padding: 1rem; */
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+.login-form input{
+  margin: 0.5rem;
+  margin-bottom: 1rem;
+  height: 2rem;
+  border-radius: .2rem;
+  border: 0.1rem solid rgb(211,212,213);
+}
+
+.login-form label{
+    padding: 0 0.5rem;
+}
+
+button{
+    margin: 0.5rem;
+    margin-top: -.3rem;
+    height: 2.5rem;
+    border: none;
+    border-radius: 0.2rem;
+    background-color: rgb(16, 143, 249);
+    color: white;
+    font-weight: 900;
+    box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 40%);
+}
+
+button:hover{
+    background-color: rgb(4, 113, 201);
+}
+
+.nohaveid {
+  /* border: 1px solid black; */
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+
+  span{
+    font-size: .8rem;
+      padding: 2rem;
+
+      a{
+          color: rgb(4, 113, 201);
+          padding: .5rem;
+          text-decoration: inherit;
+      }
+
+      a:hover{
+        color: rgb(25, 150, 250);
+      }
+  }
+}
+`;
