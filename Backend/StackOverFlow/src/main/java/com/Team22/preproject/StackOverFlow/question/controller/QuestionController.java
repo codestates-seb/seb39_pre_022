@@ -1,10 +1,8 @@
 package com.Team22.preproject.StackOverFlow.question.controller;
 
 
-import com.Team22.preproject.StackOverFlow.dto.response.MultiResponseWithMessageDto;
 import com.Team22.preproject.StackOverFlow.dto.response.MultiResponseWithPageInfoDto;
 import com.Team22.preproject.StackOverFlow.dto.response.SingleResponseWithMessageDto;
-import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import com.Team22.preproject.StackOverFlow.question.dto.QuestionRequestDto;
 import com.Team22.preproject.StackOverFlow.question.entity.Question;
 import com.Team22.preproject.StackOverFlow.question.mapper.QuestionMapper;
@@ -13,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -89,7 +86,7 @@ public class QuestionController {
     public ResponseEntity getQuestions(@Positive @PathParam("page") int page,
                                        @Positive @PathParam("size") int size,
                                        Question question){
-        Page<Question> pageQuestions = questionService.findQuestionCreatedAt(question,page-1,size);
+        Page<Question> pageQuestions = questionService.findQuestions(page-1,size);
         List<Question> questionList = pageQuestions.getContent();
 
         return new ResponseEntity(new MultiResponseWithPageInfoDto<>(mapper.questionToQuestionInfo(questionList),pageQuestions),HttpStatus.OK);
