@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-29T11:37:15+0900",
+    date = "2022-08-29T23:48:48+0900",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 11.0.13 (Oracle Corporation)"
 )
 @Component
@@ -57,5 +57,47 @@ public class QuestionMapperImpl implements QuestionMapper {
         }
 
         return list;
+    }
+
+    @Override
+    public List<QuestionResponseDto.QuestionInfoList> questionToQuestionInfoList(List<Question> questionList) {
+        if ( questionList == null ) {
+            return null;
+        }
+
+        List<QuestionResponseDto.QuestionInfoList> list = new ArrayList<QuestionResponseDto.QuestionInfoList>( questionList.size() );
+        for ( Question question : questionList ) {
+            list.add( questionToInfoList( question ) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<QuestionResponseDto.QuestionAndAnswer> questionToQuestionAnswerInfoList(List<Question> questionList) {
+        if ( questionList == null ) {
+            return null;
+        }
+
+        List<QuestionResponseDto.QuestionAndAnswer> list = new ArrayList<QuestionResponseDto.QuestionAndAnswer>( questionList.size() );
+        for ( Question question : questionList ) {
+            list.add( questionToQuestionAndAnswer( question ) );
+        }
+
+        return list;
+    }
+
+    protected QuestionResponseDto.QuestionAndAnswer questionToQuestionAndAnswer(Question question) {
+        if ( question == null ) {
+            return null;
+        }
+
+        QuestionResponseDto.QuestionAndAnswer.QuestionAndAnswerBuilder questionAndAnswer = QuestionResponseDto.QuestionAndAnswer.builder();
+
+        questionAndAnswer.questionId( question.getQuestionId() );
+        questionAndAnswer.title( question.getTitle() );
+        questionAndAnswer.question( question.getQuestion() );
+
+        return questionAndAnswer.build();
     }
 }

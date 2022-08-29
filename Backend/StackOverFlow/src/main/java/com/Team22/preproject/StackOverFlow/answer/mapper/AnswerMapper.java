@@ -9,6 +9,9 @@ import com.Team22.preproject.StackOverFlow.question.dto.QuestionResponseDto;
 import com.Team22.preproject.StackOverFlow.question.entity.Question;
 import org.mapstruct.Mapper;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Mapper(componentModel = "spring")
 public interface AnswerMapper {
 
@@ -25,15 +28,37 @@ public interface AnswerMapper {
         return answer;
     }
 
+    AnswerResponseDto.CreateAnswerDto createAnswerDtoInfo(Answer answer);
+
+
     default AnswerResponseDto.AnswerInfo answerToAnswersInfo(Answer answer){
         return AnswerResponseDto.AnswerInfo.builder()
                 .answerId(answer.getAnswerId())
                 .answer(answer.getAnswer())
-                .questionInfo(QuestionResponseDto.QuestionInfo.builder()
+                .questionAnswerDto(QuestionResponseDto.questionAnswerDto.builder()
                         .questionId(answer.getQuestion().getQuestionId())
-                        .title(answer.getQuestion().getTitle())
+                        .nickName(answer.getMember().getNickName())
                         .question(answer.getQuestion().getQuestion())
+                        .title(answer.getQuestion().getTitle())
                         .build())
                 .build();
+    }
+
+    default List<AnswerResponseDto.AnswerInfo> answerListToAnswerInfoList(List<Answer> answerList){
+        return answerList.stream().map(this::answerToAnswersInfo).collect(Collectors.toList());
+    }
+
+
+    default Answer updateAnswerToAnswer(AnswerRequestDto.UpdateAnswerDto answerDto){
+        Question question = new Question();
+        Member member = new Member();
+        member.setMemberId(answerDto.getMemberId());
+        question.setMember(member);
+        question.setQuestionId(answerDto.getQuestionId());
+        Answer answer = new Answer();
+        answer.setAnswerId(answerDto.getAnswerId());
+        answer.setQuestion(question);
+        answer.setAnswer(answerDto.getAnswer());
+        return answer;
     }
 }

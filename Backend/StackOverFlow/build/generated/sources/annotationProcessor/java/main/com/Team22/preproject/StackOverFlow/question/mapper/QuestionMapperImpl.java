@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-08-29T11:36:40+0900",
+    date = "2022-08-29T17:44:54+0900",
     comments = "version: 1.5.2.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.5.jar, environment: Java 11.0.13 (Oracle Corporation)"
 )
 @Component
@@ -54,6 +54,20 @@ public class QuestionMapperImpl implements QuestionMapper {
         List<QuestionResponseDto.QuestionInfo> list = new ArrayList<QuestionResponseDto.QuestionInfo>( questionList.size() );
         for ( Question question : questionList ) {
             list.add( questionToInfo( question ) );
+        }
+
+        return list;
+    }
+
+    @Override
+    public List<QuestionResponseDto.QuestionInfoList> questionToQuestionInfoList(List<Question> questionList) {
+        if ( questionList == null ) {
+            return null;
+        }
+
+        List<QuestionResponseDto.QuestionInfoList> list = new ArrayList<QuestionResponseDto.QuestionInfoList>( questionList.size() );
+        for ( Question question : questionList ) {
+            list.add( questionToInfoList( question ) );
         }
 
         return list;

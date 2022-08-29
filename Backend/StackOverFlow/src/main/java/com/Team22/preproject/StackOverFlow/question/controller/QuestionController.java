@@ -81,7 +81,7 @@ public class QuestionController {
     }
 
 
-    //전체 질문 조회
+    //전체 질문 조회(예비 메인)
     @GetMapping
     public ResponseEntity getQuestions(@Positive @PathParam("page") int page,
                                        @Positive @PathParam("size") int size,
@@ -89,10 +89,19 @@ public class QuestionController {
         Page<Question> pageQuestions = questionService.findQuestions(page-1,size);
         List<Question> questionList = pageQuestions.getContent();
 
-        return new ResponseEntity(new MultiResponseWithPageInfoDto<>(mapper.questionToQuestionInfo(questionList),pageQuestions),HttpStatus.OK);
+        return new ResponseEntity(new MultiResponseWithPageInfoDto<>(mapper.questionToQuestionInfoList(questionList),pageQuestions),HttpStatus.OK);
     }
 
-    //최신순 조회
+    //main페이지
+//    @GetMapping
+//    public ResponseEntity getAllQuestionAndAnswer(@Positive @PathParam("page") int page,
+//                                                  @Positive @PathParam("size") int size,
+//                                                  Question question){
+//        Page<Question> pageQuestions = questionService.findQuestions(page-1,size);
+//        List<Question> questionList = pageQuestions.getContent();
+//
+//        return new ResponseEntity(new MultiResponseWithPageInfoDto<>(mapper.questionToQuestionAnswerInfoList(questionList),pageQuestions),HttpStatus.OK);
+//    }
 
     //내용별 조회
 }

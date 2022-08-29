@@ -40,7 +40,7 @@ public class Answer extends Auditable{
     @JoinColumn(name = "QUESTION_ID")
     private Question question;
 
-    @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<AnswerComment> answerComments = new ArrayList<>();
 
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)

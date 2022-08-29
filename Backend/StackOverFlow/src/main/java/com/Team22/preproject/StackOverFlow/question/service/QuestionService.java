@@ -58,8 +58,8 @@ public class QuestionService {
         return questionRepository.findAll(PageRequest.of(page, size));
     }
 
-    public Page<Question> findQuestionCreatedAt(Question question,int page, int size) {
-        return questionRepository.findAllByCreatedAt(question.getQuestionId(),PageRequest.of(page, size,Sort.Direction.DESC));
-    }
+//    public Page<Question> findQuestionCreatedAt(Question question,int page, int size) {
+//        return questionRepository.findAllByCreatedAt(question.getQuestionId(),PageRequest.of(page, size,Sort.Direction.DESC));
+//    }
 
 }
