@@ -15,8 +15,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
+
+import static com.Team22.preproject.StackOverFlow.auth.SessionConst.LOGIN_MEMBER;
 
 @Validated
 @Slf4j
@@ -50,11 +55,13 @@ public class MemberController {
 
     //로그인
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid MemberRequestDto.loginDto loginDto){
+    public ResponseEntity login(@RequestBody @Valid MemberRequestDto.loginDto loginDto, HttpServletRequest request, HttpServletResponse response){
         Member member = mapper.loginDtoToMember(loginDto);
         Member loginMember = memberService.login(member);
 //        System.out.println("longinMember = " + loginMember);
 //        log.info("loginMember : {}", loginMember);
+        HttpSession session = request.getSession(true);
+        session.setAttribute(LOGIN_MEMBER, loginMember);
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.memberToMemberInfo(loginMember),"SUCCESS"),HttpStatus.OK);
     }
 

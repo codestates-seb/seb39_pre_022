@@ -38,7 +38,6 @@ public class SecurityConfig {
             http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .formLogin().disable();
-
     return http.build();
   }
 }

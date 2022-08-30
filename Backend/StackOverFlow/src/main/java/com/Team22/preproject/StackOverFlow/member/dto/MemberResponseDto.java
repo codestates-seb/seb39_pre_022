@@ -24,5 +24,11 @@ public class MemberResponseDto {
         private String nickName;
         private long memberId;
     }
-
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class MemberComments {
+        private String nickName;
+    }
 }
