@@ -1,23 +1,25 @@
 package com.Team22.preproject.StackOverFlow.member.entity;
 
 import com.Team22.preproject.StackOverFlow.answer.entity.Answer;
+import com.Team22.preproject.StackOverFlow.audit.Auditable;
 import com.Team22.preproject.StackOverFlow.comment.entity.AnswerComment;
 import com.Team22.preproject.StackOverFlow.comment.entity.QuestionComment;
 import com.Team22.preproject.StackOverFlow.question.entity.Question;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
-public class Member {
+public class Member extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,12 +32,6 @@ public class Member {
     private String password;
 
     private String nickName;
-
-    @Column(nullable = false, name = "FIRST_CREATED_AT")
-    private LocalDateTime createdAt = LocalDateTime.now();
-
-    @Column(nullable = false, name = "LAST_MODIFIED_AT")
-    private LocalDateTime modifiedAt = LocalDateTime.now();
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Question> questions = new ArrayList<>();

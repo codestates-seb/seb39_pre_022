@@ -1,22 +1,25 @@
 package com.Team22.preproject.StackOverFlow.answer.entity;
 
+import com.Team22.preproject.StackOverFlow.audit.Auditable;
 import com.Team22.preproject.StackOverFlow.comment.entity.AnswerComment;
 import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import com.Team22.preproject.StackOverFlow.question.entity.Question;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
-public class Answer {
+public class Answer extends Auditable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,12 +32,6 @@ public class Answer {
 
     private int likeCount = 0;
 
-    @Column(nullable = false, name = "FIRST_CREATED_AT")
-    private LocalDateTime createdAt = LocalDateTime.now();
-
-    @Column(nullable = false, name = "LAST_MODIFIED_AT")
-    private LocalDateTime modifiedAt = LocalDateTime.now();
-
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
@@ -43,7 +40,7 @@ public class Answer {
     @JoinColumn(name = "QUESTION_ID")
     private Question question;
 
-    @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<AnswerComment> answerComments = new ArrayList<>();
 
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
