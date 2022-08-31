@@ -20,23 +20,23 @@ export default function Accordion(props) {
                 </div>
                 <div>{show && props.list}</div>
             </li >
-
         </AccordionList>
     )
 }
 
 const AccordionList = styled.div`
-width: 24rem;
+width: 17rem;
 height: auto;
 padding: 1rem;
-margin-left: -1rem;
 background: white;
 display: flex;
 flex-direction: column;
 box-shadow: 1rem 1rem 1rem rgba(211,212,213,0.5);
 border-bottom-left-radius: 0.5rem;
 border-bottom-right-radius: 0.5rem;
-margin-top: -1rem;
+margin-left: -1rem;
+margin-bottom: -1rem;
+font-size: .9rem;
 
     .open_btn{
         background: url('https://raw.githubusercontent.com/eirikmadland/notion-icons/master/v5/icon3/mt-keyboard_arrow_down.svg');

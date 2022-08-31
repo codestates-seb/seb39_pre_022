@@ -1,34 +1,33 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import logo from '../img/stack-overflow-logo.png';
 import Navbar from './Navbar';
 
 export default function SignUp() {
+    const url = 'http://localhost:8080/members/signup';
     const [nickName, setNickName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
     const signUp = () => {
-        fetch('http://localhost:8080/members/signup', {
-            method: "POST",
-            headers: { "Content-Type": "application/json", },
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 nickName: nickName,
                 email: email,
                 password: password,
             })
         })
-            .then(res => res.json())
             .then((res) => {
-                console.log(res)
-                console.log('회원가입 성공');
-                navigate('/login')
+                console.log('respnose:', res)
+                if (res.status === 200) {
+                    navigate('/login')
+                }
             })
             .catch((err) => {
-                console.log(err)
-                console.log('회원가입 실패');
+                console.log('error:', err)
             });
     }
 

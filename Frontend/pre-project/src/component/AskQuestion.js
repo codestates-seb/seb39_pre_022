@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from './Navbar';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import moment from 'moment';
 import Accordion from './Accordion';
@@ -8,12 +8,34 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default function AskQuestion() {
+    const url = 'http://localhost:8080/questoins/{member-id}';
     const [title, setTitle] = useState('')
+    const [question, setQuestion] = useState('')
     const navigate = useNavigate();
 
+
+    const ask = () => {
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                title: title,
+                question: question,
+            })
+        })
+            .then((res) => {
+                // console.log(res)
+                console.log('질문 등록 성공');
+                navigate('/question')
+            })
+            .catch((err) => {
+                console.log(err)
+                console.log('질문 등록 실패');
+            });
+    }
     // moment 라이브러리로 현재 시간 확인 가능
     const time = moment().format('YYYY.MM.DD HH:mm:ss');
-    console.log(time)
+    // console.log(time)
 
     const list1 = (
         <ul className='acc_item'>
@@ -25,7 +47,7 @@ export default function AskQuestion() {
 
     const list2 = (
         <p>
-            Show what you’ve tried and tell us wh\at you found (on this site or elsewhere) and why it didn’t meet your needs. You can get better answers when you provide research.
+            Show what you’ve tried and tell us what you found (on this site or elsewhere) and why it didn’t meet your needs. You can get better answers when you provide research.
         </p>
     )
 
@@ -43,7 +65,7 @@ export default function AskQuestion() {
                 <article>
                     <form className='ask-form'>
                         <label htmlFor='title'>Title</label>
-                        <p>Be specific and imagine you’re asking a question to another person</p>
+                        <p className='label'>Be specific and imagine you’re asking a question to another person</p>
                         <input
                             type='text'
                             id='title'
@@ -54,10 +76,9 @@ export default function AskQuestion() {
                             value={title}
                         />
                         <label htmlFor='body'>Body</label>
-                        <p>Include all the information someone would need to answer your question</p>
+                        <p className='label'>Include all the information someone would need to answer your question</p>
                         <CKEditor
                             editor={ClassicEditor}
-                            data="<p>Write you question</p>"
                             onChange={(event, editor) => {
                                 const data = editor.getData();
                                 console.log(data)
@@ -67,7 +88,7 @@ export default function AskQuestion() {
                             }}
                         />
                     </form>
-                    <Link to='/question'><button className='que_btn'>Review your question</button></Link>
+                    <button onClick={ask} className='que_btn'>Review your question</button>
                 </article>
                 <article className='accordion'>
                     <h2>Step 1:  Draft your question</h2>
@@ -99,66 +120,85 @@ export default function AskQuestion() {
 }
 
 const AskContainer = styled.div`
+background: rgb(241, 242, 243);
 height: 100vh;
-text-align: left;
-display: flex;
-flex-direction: column;
-align-items: center;
 
 h1{
-    font-weight: 500;
+    /* border: 1px solid black; */
     display: flex;
-    width: 61rem;
-    margin-bottom: 3rem;
+    justify-content: space-around;
+    font-weight:500;
+    font-size: 1.7rem;
 }
 
 section{
+    /* border: 1px solid red; */
     display: flex;
     justify-content: center;
-    width: 62rem;
+    padding: 1rem;
 
-    .ask-form{
+
+    article{
+        /* border: 1px solid black; */
+        margin-right: 1rem;
         display: flex;
         flex-direction: column;
-        background: white;
-        padding: 1rem;
-        margin-right: 1.5rem;
-        width: 36rem;
-        box-shadow: 0.1rem 0.1rem 1rem rgba(211,212,213,0.5);
         border-radius: 0.5rem;
 
+        .ask-form{
+            background: white;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            text-align: left;
+            border-radius: 0.5rem;
+            box-shadow: 0.1rem 0.1rem 1rem rgba(211,212,213,0.5);
+        }
+
         label{
-            font-weight: bold;
+            font-weight: 500;
+        }
+
+        .label{
+            font-size: .9rem;
+            color: rgb(201,205,209);
+            margin: .5rem 0;
         }
 
         input{
-            margin-bottom: 1rem;
             height: 2rem;
-            border-radius: .2rem;
-            border: 0.1rem solid rgb(211,212,213);
-            padding: 0 .5rem;
+            margin-bottom: 2rem;
+            border: .1rem solid rgb(201,205,209);
+            padding-left: .5rem;
+            letter-spacing: .1rem;
         }
 
         .ck-content{
             height: 15rem;
+            width: 33rem;
+            font-size: .9rem;
+            color: gray;
         }
 
-        p{
-            font-size: .8rem;
-            color: rgb(61,64,68);
-            margin: .5rem 0;
+        .ck.ck-dropdown.ck-heading-dropdown .ck-dropdown__button .ck-button__label {
+            width: 4em;
+        }
+
+        .ck-file-dialog-button{
+            display: none;
         }
     }
 
     .que_btn{
-    margin-top: 2rem;
-    height: 2.5rem;
-    border: none;
-    border-radius: 0.2rem;
-    background-color: rgb(16, 143, 249);
-    color: white;
-    font-weight: 900;
-    box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 40%);
+        margin-top: 2rem;
+        width: 10rem;
+        height: 2.5rem;
+        border: none;
+        border-radius: 0.2rem;
+        background-color: rgb(16, 143, 249);
+        color: white;
+        font-weight: 900;
+        box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 40%);
     }
 
     .que_btn:hover{
@@ -166,12 +206,27 @@ section{
     }
 
     .accordion{
-        height: 12rem;
-        background-color: white;
-        width: 24rem;
+        background: white;
+        width: 17rem;
+        height: 15rem;
+        text-align: left;
         padding: 1rem;
-        border-radius: 0.5rem;
+        flex-direction: column;
         box-shadow: 0.1rem 0.1rem 1rem rgba(211,212,213,0.5);
+
+        h2{
+            font-size: 1rem;
+            margin: 0;
+            margin-bottom: .5rem;
+        }
+
+        hr{
+            width: 17rem;
+        }
+
+        p{
+            font-size: .9rem;
+        }
     }
 }
 

@@ -3,33 +3,32 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../img/stack-overflow-logo.png';
 import Navbar from './Navbar';
-import axios from 'axios';
 
 export default function Login() {
+    const url = 'http://localhost:8080/members/login';
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    // BE 통신때
-    // axios.post('/members/login', {
-    //     data: {
-    //         email: email,
-    //         password: password
-    //     }
-    // },
-    //     // cookie 에 token을 발급할때 설정
-    //     { withCredentails: true }
-    // )
-    //     .then((res) => {
-    //         console.log(res);
-    //         console.log(res.data);
-    //         console.log('success');
-    //         navigate('/');
-    //     })
-    //     .catch((err) => {
-    //         console.log(err)
-    //         console.log('error');
-    //     });
+    const login = () => {
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+            })
+        })
+            .then((res) => {
+                // console.log(res)
+                console.log('로그인 성공');
+                navigate('/')
+            })
+            .catch((err) => {
+                console.log(err)
+                console.log('로그인 실패');
+            });
+    }
 
 
     return (
@@ -60,7 +59,7 @@ export default function Login() {
                         required
                     >
                     </input>
-                    <button>Log in</button>
+                    <button onClick={login}>Log in</button>
                 </form>
             </div>
             <div className='nohaveid'>

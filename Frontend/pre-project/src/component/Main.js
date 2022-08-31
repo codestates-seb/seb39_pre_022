@@ -8,8 +8,9 @@ export default function Main() {
     return (
         <>
             <Navbar />
-            <apsn>Top Questions</apsn><Link to='/askquestion'><button>Ask Question</button></Link>
+            <span>Top Questions</span><Link to='/askquestion'><button>Ask Question</button></Link>
             <Questions />
+            <Link to='/question'>plz help me</Link>
         </>
     )
 }

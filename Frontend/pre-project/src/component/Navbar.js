@@ -26,7 +26,7 @@ function Navbar() {
                             placeholder="Search"
                             onChange={e => setSearch(e.target.value)}
                         />
-                        {console.log(search)}
+                        {/* {console.log(search)} */}
                     </NavbarLink>
 
                     <OpenLinksButton /* 사이즈가 작아졌을 때 나타나는 버거메뉴 */
