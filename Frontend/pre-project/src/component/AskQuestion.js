@@ -57,6 +57,12 @@ export default function AskQuestion() {
         </p>
     )
 
+    const [show, setShow] = React.useState(true);
+
+    const openHandler = () => {
+        setShow(!show)
+    }
+
     return (
         <AskContainer>
             <Navbar />
@@ -91,28 +97,33 @@ export default function AskQuestion() {
                     <button onClick={ask} className='que_btn'>Review your question</button>
                 </article>
                 <article className='accordion'>
-                    <h2>Step 1:  Draft your question</h2>
+                    <h2 onClick={openHandler}>
+                        Step 1:  Draft your question
+                        <span>
+                            <button className={show ? 'close_btn' : 'open_btn'}></button>
+                        </span>
+                    </h2>
                     <hr></hr>
-                    <p>The community is here to help you with specific coding, algorithm, or language problems.
+                    <p>{show && `The community is here to help you with specific coding, algorithm, or language problems.`}
                         <br></br>
                         <br></br>
-                        Avoid asking opinion-based questions.
+                        {show && `Avoid asking opinion-based questions.1`}
                     </p>
-                    <Accordion
+                    {show && <Accordion
                         num={`1.`}
                         title='Summarize the problem'
                         list={list1}
-                    />
-                    <Accordion
+                    />}
+                    {show && <Accordion
                         num={`2.`}
                         title={`Describe what you've tried`}
                         list={list2}
-                    />
-                    <Accordion
+                    />}
+                    {show && <Accordion
                         num={`3.`}
                         title='Show some code'
                         list={list3}
-                    />
+                    />}
                 </article>
             </section>
         </AskContainer>
@@ -121,7 +132,7 @@ export default function AskQuestion() {
 
 const AskContainer = styled.div`
 background: rgb(241, 242, 243);
-height: 100vh;
+height: auto;
 
 h1{
     /* border: 1px solid black; */
@@ -135,11 +146,11 @@ section{
     /* border: 1px solid red; */
     display: flex;
     justify-content: center;
-    padding: 1rem;
+    padding: 2rem;
 
 
     article{
-        /* border: 1px solid black; */
+        /* border: 1px solid blue; */
         margin-right: 1rem;
         display: flex;
         flex-direction: column;
@@ -170,7 +181,7 @@ section{
             margin-bottom: 2rem;
             border: .1rem solid rgb(201,205,209);
             padding-left: .5rem;
-            letter-spacing: .1rem;
+            /* letter-spacing: .1rem; */
         }
 
         .ck-content{
@@ -190,7 +201,7 @@ section{
     }
 
     .que_btn{
-        margin-top: 2rem;
+        margin: 2rem 0;
         width: 10rem;
         height: 2.5rem;
         border: none;
@@ -207,7 +218,6 @@ section{
 
     .accordion{
         background: white;
-        width: 17rem;
         height: 15rem;
         text-align: left;
         padding: 1rem;
@@ -218,6 +228,25 @@ section{
             font-size: 1rem;
             margin: 0;
             margin-bottom: .5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h2 .open_btn{
+            background: url('https://raw.githubusercontent.com/eirikmadland/notion-icons/master/v5/icon3/mt-keyboard_arrow_up.svg');
+            background-size: cover;
+            width: 2rem;
+            height: 2rem;
+            border: none;
+        }
+
+        h2 .close_btn{
+            background: url('https://raw.githubusercontent.com/eirikmadland/notion-icons/master/v5/icon3/mt-keyboard_arrow_down.svg');
+            background-size: cover;
+            width: 2rem;
+            height: 2rem;
+            border: none;
         }
 
         hr{
@@ -226,8 +255,78 @@ section{
 
         p{
             font-size: .9rem;
+            width: 10rem;
         }
     }
 }
 
+@media screen and (max-width: 816px){
+
+    section{
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+
+        .accordion{
+            width: inherit;
+            margin-bottom: 2rem;
+            height: auto;
+
+            h2{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                span{
+                    margin-left: 22rem;
+                }
+            }
+            h2 .open_btn{
+                background: url('https://raw.githubusercontent.com/eirikmadland/notion-icons/master/v5/icon3/mt-keyboard_arrow_down.svg');
+                background-size: cover;
+                width: 2rem;
+                height: 2rem;
+                border: none;
+            }
+
+            h2 .close_btn{
+                background: url('https://raw.githubusercontent.com/eirikmadland/notion-icons/master/v5/icon3/mt-keyboard_arrow_up.svg');
+                background-size: cover;
+                width: 2rem;
+                height: 2rem;
+                border: none;
+            }
+
+            hr, br{
+                display: none;
+            }
+
+            p{
+            width: 32rem;
+            }
+        }
+
+        .ask-form{
+            width: inherit;
+            flex-grow: 1;
+            display: flex;
+
+            .ck-content{
+            height: 10rem;
+            width: inherit;
+            font-size: .9rem;
+            color: gray;
+            }
+
+            .ck.ck-dropdown.ck-heading-dropdown .ck-dropdown__button .ck-button__label {
+                width: inherit;
+            }
+
+            .ck-file-dialog-button{
+                display: block;
+            }
+        }
+    }
+}
 `

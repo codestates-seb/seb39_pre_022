@@ -35,11 +35,12 @@ box-shadow: 1rem 1rem 1rem rgba(211,212,213,0.5);
 border-bottom-left-radius: 0.5rem;
 border-bottom-right-radius: 0.5rem;
 margin-left: -1rem;
+margin-right: -1rem;
 margin-bottom: -1rem;
 font-size: .9rem;
 
-    .open_btn{
-        background: url('https://raw.githubusercontent.com/eirikmadland/notion-icons/master/v5/icon3/mt-keyboard_arrow_down.svg');
+    .open_btn{ 
+        background: url('https://raw.githubusercontent.com/eirikmadland/notion-icons/master/v5/icon3/mt-keyboard_arrow_up.svg');
         background-size: cover;
         width: 2rem;
         height: 2rem;
@@ -47,7 +48,7 @@ font-size: .9rem;
     }
 
     .close_btn{
-        background: url('https://raw.githubusercontent.com/eirikmadland/notion-icons/master/v5/icon3/mt-keyboard_arrow_up.svg');
+        background: url('https://raw.githubusercontent.com/eirikmadland/notion-icons/master/v5/icon3/mt-keyboard_arrow_down.svg');
         background-size: cover;
         width: 2rem;
         height: 2rem;
@@ -76,5 +77,11 @@ font-size: .9rem;
 
     button{
         cursor: pointer;
+    }
+
+    @media screen and (max-width: 816px){
+        width: inherit;
+        margin-left: 0;
+        margin-right: -1rem;
     }
 `

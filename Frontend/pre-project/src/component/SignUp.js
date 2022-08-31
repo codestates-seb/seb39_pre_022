@@ -47,6 +47,9 @@ export default function SignUp() {
                     <p className='blue'>Get Stack Overflow for Teams free for up to 50 users.</p>
                 </div>
                 <div className='container'>
+                    <h2 className='signup_content'>
+                        Create your Stack Overflow account. It's free and only takes a minute.
+                    </h2>
                     <form onSubmit={(e) => e.preventDefault()} className='signup-form'>
                         <label htmlFor='userName'>Display name</label>
                         <input
@@ -94,8 +97,12 @@ const SignupContainer = styled.div`
 background: rgb(241, 242, 243);
 height: 100vh;
 
+.signup_content{
+    display: none;
+}
+
 section{
-    margin-top: 13rem;
+    margin-top: 10rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -104,10 +111,12 @@ section{
         display: flex;
         flex-direction: column;
         justify-content: start;
+        margin-left: 2rem;
 
         h1{
             font-weight: 400;
             font-size: 1.8rem;
+            text-align: left;
         }
 
         ul{
@@ -145,6 +154,7 @@ section{
             width: 17rem;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             padding: 2rem 1.5rem;
             text-align: left;
             font-weight: 600;
@@ -200,4 +210,29 @@ section{
         }
     }
 }
+
+@media screen and (max-width: 816px){
+        section .contents{
+           display: none;
+        }
+
+        .signup_content{
+            display: flex;
+            justify-content: center;
+            margin-top: -5rem;
+            /* border: 1px solid black; */
+            text-align: left;
+            font-weight: 400;
+            font-size: 1.4rem;
+            padding-left: 1rem;
+        }
+
+        .container{
+            /* border: 1px solid black; */
+            width: 25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
 `
