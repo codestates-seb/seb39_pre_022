@@ -7,7 +7,6 @@ import com.Team22.preproject.StackOverFlow.member.dto.MemberResponseDto;
 import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import com.Team22.preproject.StackOverFlow.member.mapper.MemberMapper;
 import com.Team22.preproject.StackOverFlow.member.service.MemberService;
-import com.Team22.preproject.StackOverFlow.session.SessionManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

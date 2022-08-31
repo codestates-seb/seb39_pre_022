@@ -9,8 +9,8 @@ import com.Team22.preproject.StackOverFlow.question.entity.Question;
 import com.Team22.preproject.StackOverFlow.question.entity.SessionConst;
 import com.Team22.preproject.StackOverFlow.question.mapper.QuestionMapper;
 import com.Team22.preproject.StackOverFlow.question.service.QuestionService;
-import com.Team22.preproject.StackOverFlow.session.SessionManager;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +24,7 @@ import javax.validation.constraints.Positive;
 import javax.websocket.server.PathParam;
 import java.util.List;
 
+@Slf4j
 @Validated
 @RestController
 @RequestMapping("/questions")
@@ -31,19 +32,15 @@ import java.util.List;
 public class QuestionController {
     private final QuestionService questionService;
     private final QuestionMapper mapper;
-//    private final SessionManager sessionManager;
-    /*
-        db에서 memberId를 가져오려면 path에 memberId를 넣어주거나 body에 넣어줘야 한다 코드가 지저분하기 때문에 바꿔줘야한다
-        만약 body에 넣어주면 get method에서는 잘 동작하지 않는다 get은 dto를 사용하지 않기 때문에 - 용호님이랑 의논
-     */
+
     //질문 등록
     @PostMapping("/{member-id}")
     public ResponseEntity createQuestion(@Positive @PathVariable("member-id") long memberId, @RequestBody @Valid QuestionRequestDto.CreatedQuestionDto createdQuestionDto){
+
         createdQuestionDto.setMemberId(memberId);
-//        Question question = mapper.createQuestionDtoToQuestion(createdQuestionDto);
-//        questionService.createdQuestion(question);
         Question question = questionService.createdQuestion(mapper.createQuestionDtoToQuestion(createdQuestionDto));
-        System.out.println("question = " + question);
+        log.info("question = {}", question);
+
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.createdDtoToQuestion(question),"CREATED"), HttpStatus.CREATED);
     }
 
