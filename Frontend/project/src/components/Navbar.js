@@ -19,7 +19,7 @@ function Navbar() {
       <NavbarInnerContainer>
         <LeftContainer>
             <NavbarLink to="/"><img src={LogoImg}/></NavbarLink> 
-            <NavbarLink to="/search">
+            <NavbarLink className="inputContainer" to="/search">
             <input
             type="text"
             className="searchForm"
