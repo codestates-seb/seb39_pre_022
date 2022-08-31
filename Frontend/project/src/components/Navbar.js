@@ -8,7 +8,7 @@ import {
   NavbarLink,
   OpenLinksButton,
 
-} from "../styles/Navbar_style";
+} from "../styles/NavbarStyle";
 import LogoImg from "../Img/logo.png";
 
 function Navbar() {
