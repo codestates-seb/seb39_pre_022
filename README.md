@@ -1,10 +1,17 @@
-팀.22 프로젝트 Repository 
+### ! 메뉴바 컴포넌트 확인시, 필요한 파일.
+(리액트 기본설정에, 스타일 컴포넌트가 설치되어있는 상태)
 
-<br>
-<div>요구사항 명세서: https://docs.google.com/spreadsheets/d/1rgGFkdOszaaKD-_4fSFO6unIKImuL7JJI026zKLDUzs/edit#gid=0</div>
-</br>
+#### 1. Navbar.js
+``` $ Frontend/project/src/components/Navbar.js ``` 
+#### 2. Navbar_style.js
+``` $ Frontend/project/src/styles/Navbar_style.js ``` 
+#### 3. logo.png
+``` $ Frontend/project/src/Img/logo.png ``` 
+#### 4. App.js 
+``` $ Frontend/project/src/App.js ``` 
 
-<br>
-<div> 화면 정의서 Figma : https://www.figma.com/file/bvIhMw5R8BKpM43CRT9aOW/%ED%99%94%EB%A9%B4%EC%A0%95%EC%9D%98%EC%84%9C-220823?node-id=0%3A1 </div>
-</br>
+---
 
+- 로고, 검색창, 로그인, 회원가입 클릭시 -> 주소가 바뀐다. </br>
+ ``` http://localhost:3000/"이부분"  ``` </br>
+- 검색창에 입력한 text는, 콘솔창에서 확인 가능.
