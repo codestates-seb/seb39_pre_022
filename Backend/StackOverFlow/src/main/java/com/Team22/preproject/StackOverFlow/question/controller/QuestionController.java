@@ -11,6 +11,7 @@ import com.Team22.preproject.StackOverFlow.question.mapper.QuestionMapper;
 import com.Team22.preproject.StackOverFlow.question.service.QuestionService;
 import com.Team22.preproject.StackOverFlow.session.SessionManager;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ import javax.validation.constraints.Positive;
 import javax.websocket.server.PathParam;
 import java.util.List;
 
+@Slf4j
 @Validated
 @RestController
 @RequestMapping("/questions")
@@ -38,10 +40,11 @@ public class QuestionController {
      */
     //질문 등록
     @PostMapping()
-    public ResponseEntity createQuestion(@RequestBody @Valid QuestionRequestDto.CreatedQuestionDto createdQuestionDto, HttpServletRequest request){
-        Member sessionMember = (Member)sessionManager.getSession(request);
-        createdQuestionDto.setMemberId(sessionMember.getMemberId());
+    public ResponseEntity createQuestion(@RequestBody @Valid QuestionRequestDto.CreatedQuestionDto createdQuestionDto, @SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = true) Member loginMember){
+
+        createdQuestionDto.setMemberId(loginMember.getMemberId());
         Question question = questionService.createdQuestion(mapper.createQuestionDtoToQuestion(createdQuestionDto));
+
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.createdDtoToQuestion(question),"CREATED"), HttpStatus.CREATED);
     }
 

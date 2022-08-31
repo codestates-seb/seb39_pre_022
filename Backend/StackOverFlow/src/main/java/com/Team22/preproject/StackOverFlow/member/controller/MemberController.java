@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -44,9 +45,8 @@ public class MemberController {
     @PostMapping("/signup")
     public ResponseEntity singUp(@RequestBody @Valid MemberRequestDto.singUpDto singUpDto){
         singUpDto.setPassword(passwordEncoder.encode(singUpDto.getPassword()));
-        Member member = mapper.signUpDtoToMember(singUpDto);
-        memberService.createMember(member);
-        System.out.println("member = " + member);
+        Member member = memberService.createMember(mapper.signUpDtoToMember(singUpDto));
+        log.info("signUp Member = {}", member);
 
         MessageResponseDto message = MessageResponseDto.builder()
                 .message("WELCOME")
@@ -58,11 +58,17 @@ public class MemberController {
     //로그인
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid MemberRequestDto.loginDto loginDto, HttpServletRequest request, HttpServletResponse response){
+
+        // login 로직
         Member member = mapper.loginDtoToMember(loginDto);
         Member loginMember = memberService.login(member);
+
+        // session 생성 로직
         sessionManager.createSession(member,response); //sessionId 생성
         HttpSession session = request.getSession(true);
         session.setAttribute(LOGIN_MEMBER, loginMember);
+
+        // RequestBody 생성 로직
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.memberToMemberInfo(loginMember),"SUCCESS"),HttpStatus.OK);
     }
 
@@ -81,5 +87,27 @@ public class MemberController {
     public ResponseEntity deleteMember(@Positive @PathVariable("member-id") long memberId){
         memberService.deleteMember(memberId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostConstruct
+    public void init2Members() {
+        MemberRequestDto.singUpDto testUser1 = MemberRequestDto.singUpDto.builder()
+                .email("hdg@gmail.com")
+                .nickName("HonGilDong")
+                .password(passwordEncoder.encode("1234"))
+                .build();
+
+        Member testMember1 = mapper.signUpDtoToMember(testUser1);
+        memberService.createMember(testMember1);
+
+
+        MemberRequestDto.singUpDto testUser2 = MemberRequestDto.singUpDto.builder()
+                .email("test@gmail.com")
+                .nickName("test")
+                .password(passwordEncoder.encode("test!"))
+                .build();
+
+        Member testMember2 = mapper.signUpDtoToMember(testUser2);
+        memberService.createMember(testMember2);
     }
 }
