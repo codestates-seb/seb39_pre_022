@@ -30,29 +30,19 @@ public class AnswerController {
     private final AnswerService answerService;
     private final AnswerMapper mapper;
 
-    //답변 등록
-    @PostMapping("/{member-id}")
-    public ResponseEntity createdAnswer(@Positive @PathVariable("member-id") long memberId,
-                                        @Positive @PathVariable("question-id") long questionId,
-                                       @RequestBody AnswerRequestDto.CreateAnswerDto createAnswerDto){
-        createAnswerDto.setQuestionId(questionId);
-        createAnswerDto.setMemberId(memberId);
-        Answer answer = answerService.createAnswer(mapper.createAnswerDtoToAnswer(createAnswerDto));
-        return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.createAnswerDtoInfo(answer), "CREATED"), HttpStatus.CREATED);
-    }
-
-    // 코드를 쓰는 여러 방식이 있습니다. 그래서 여러가지 방식으로 보여 드릴게요 첫 번째가 HttpServletRequest를 이용한 방식입니다.
+    /**
+     * 답변 등록
+     * @param questionId 등록할 답변을 식별할 Id
+     * @param createAnswerDto
+     * @return
+     */
     @PostMapping
-    public ResponseEntity createdAnswerV2(@Positive @PathVariable("question-id") long questionId,
+    public ResponseEntity createAnswer(@Positive @PathVariable("question-id") long questionId,
                                           @RequestBody AnswerRequestDto.CreateAnswerDto createAnswerDto,
-                                          HttpServletRequest request){
-        // request에는 분명히 sessionId가 저장이 되어있을 거에요 그래서 그 request sessionId를 이용해서 session을 받아옵니다.
-        HttpSession session = request.getSession(false);
-        // 그리고 그 session은 Map 형태로 String:Object 로 매핑되어서 저장되어 있습니다. 여기서 우리가 전에 미리 설정해둔 문자열 상수로 저장된 값을 꺼냅니다.
-        // SessionConst가 지저분하면
-        Member member = (Member)session.getAttribute(SessionConst.LOGIN_MEMBER); // "String": Member 객체
+                                          @SessionAttribute(name=SessionConst.LOGIN_MEMBER, required = true) Member loginMember){
+
         createAnswerDto.setQuestionId(questionId);
-        createAnswerDto.setMemberId(member.getMemberId());
+        createAnswerDto.setMemberId(loginMember.getMemberId());
 
         Answer answer = answerService.createAnswer(mapper.createAnswerDtoToAnswer(createAnswerDto));
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.createAnswerDtoInfo(answer), "CREATED"), HttpStatus.CREATED);

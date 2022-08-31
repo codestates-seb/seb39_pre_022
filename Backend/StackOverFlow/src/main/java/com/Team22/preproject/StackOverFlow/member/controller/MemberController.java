@@ -34,7 +34,6 @@ public class MemberController {
     private final MemberService memberService;
     private final MemberMapper mapper;
     private final PasswordEncoder passwordEncoder;
-    private final SessionManager sessionManager;
 
     /*
     로그아웃 기능 구현 필요
@@ -62,9 +61,6 @@ public class MemberController {
         Member member = mapper.loginDtoToMember(loginDto);
         Member loginMember = memberService.login(member);
 
-//        sessionManager.createSession(member, response); // session_id값 : member 객체 session에 저장
-//        System.out.println("longinMember = " + loginMember);
-//        log.info("loginMember : {}", loginMember);
         HttpSession session = request.getSession(true); // sessionId: 12321414 가 쿠키에 등록됌
         session.setAttribute(LOGIN_MEMBER, loginMember);
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.memberToMemberInfo(loginMember),"SUCCESS"),HttpStatus.OK);
@@ -72,10 +68,18 @@ public class MemberController {
 
 
     @PostMapping("/logout")
-    public String logout(HttpServletRequest request) {
-        HttpSession session = request.getSession();
+    public String logout(HttpServletRequest request)
+    {
+        HttpSession session = request.getSession(false);
+
+        if (session == null)
+        {
+            throw new IllegalArgumentException("session이 없는 요청입니다.");
+        }
+
         session.invalidate();
-        return "logout";
+
+        return "redirect:/";
     }
 
     //회원 정보 수정
