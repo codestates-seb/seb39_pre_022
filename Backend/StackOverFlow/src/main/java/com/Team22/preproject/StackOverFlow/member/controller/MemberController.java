@@ -7,6 +7,7 @@ import com.Team22.preproject.StackOverFlow.member.dto.MemberResponseDto;
 import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import com.Team22.preproject.StackOverFlow.member.mapper.MemberMapper;
 import com.Team22.preproject.StackOverFlow.member.service.MemberService;
+import com.Team22.preproject.StackOverFlow.session.SessionManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,7 @@ public class MemberController {
     private final MemberService memberService;
     private final MemberMapper mapper;
     private final PasswordEncoder passwordEncoder;
+    private final SessionManager sessionManager;
     /*
     로그아웃 기능 구현 필요
     - 로그아웃 기능을 구현하려면 securityConfig 파일을 수정해야한다 - 용호님과 의논
@@ -58,8 +60,7 @@ public class MemberController {
     public ResponseEntity login(@RequestBody @Valid MemberRequestDto.loginDto loginDto, HttpServletRequest request, HttpServletResponse response){
         Member member = mapper.loginDtoToMember(loginDto);
         Member loginMember = memberService.login(member);
-//        System.out.println("longinMember = " + loginMember);
-//        log.info("loginMember : {}", loginMember);
+        sessionManager.createSession(member,response); //sessionId 생성
         HttpSession session = request.getSession(true);
         session.setAttribute(LOGIN_MEMBER, loginMember);
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.memberToMemberInfo(loginMember),"SUCCESS"),HttpStatus.OK);
