@@ -50,9 +50,11 @@ public class AnswerController {
 
     //답변 수정
     @PatchMapping("/{answer-id}")
-    public ResponseEntity updateAnswer(@Positive @PathVariable("question-id") long questionId,
+    public ResponseEntity updateAnswer(@SessionAttribute(name = SessionConst.LOGIN_MEMBER) Member member,
+                                       @Positive @PathVariable("question-id") long questionId,
                                        @Positive @PathVariable("answer-id") long answerId,
                                        @RequestBody AnswerRequestDto.UpdateAnswerDto answerDto){
+        answerDto.setMemberId(member.getMemberId());
         answerDto.setAnswerId(answerId);
         answerDto.setQuestionId(questionId);
         Answer answer = answerService.updateAnswer(mapper.updateAnswerToAnswer(answerDto));

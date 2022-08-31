@@ -35,7 +35,7 @@ public interface AnswerMapper {
         return AnswerResponseDto.AnswerInfo.builder()
                 .answerId(answer.getAnswerId())
                 .answer(answer.getAnswer())
-                .questionAnswerDto(QuestionResponseDto.questionAnswerDto.builder()
+                .questionInfo(QuestionResponseDto.questionAnswerDto.builder()
                         .questionId(answer.getQuestion().getQuestionId())
                         .nickName(answer.getMember().getNickName())
                         .question(answer.getQuestion().getQuestion())

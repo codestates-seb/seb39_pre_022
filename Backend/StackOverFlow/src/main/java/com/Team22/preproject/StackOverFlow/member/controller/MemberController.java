@@ -44,8 +44,7 @@ public class MemberController {
     @PostMapping("/signup")
     public ResponseEntity singUp(@RequestBody @Valid MemberRequestDto.singUpDto singUpDto){
         singUpDto.setPassword(passwordEncoder.encode(singUpDto.getPassword()));
-        Member member = mapper.signUpDtoToMember(singUpDto);
-        memberService.createMember(member);
+        Member member = memberService.createMember(mapper.signUpDtoToMember(singUpDto));
         System.out.println("member = " + member);
 
         MessageResponseDto message = MessageResponseDto.builder()
@@ -60,7 +59,7 @@ public class MemberController {
     public ResponseEntity login(@RequestBody @Valid MemberRequestDto.loginDto loginDto, HttpServletRequest request, HttpServletResponse response){
         Member member = mapper.loginDtoToMember(loginDto);
         Member loginMember = memberService.login(member);
-        sessionManager.createSession(member,response); //sessionId 생성
+//        sessionManager.createSession(member,response); //sessionId 생성
         HttpSession session = request.getSession(true);
         session.setAttribute(LOGIN_MEMBER, loginMember);
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.memberToMemberInfo(loginMember),"SUCCESS"),HttpStatus.OK);

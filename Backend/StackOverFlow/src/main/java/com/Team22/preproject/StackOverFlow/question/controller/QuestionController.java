@@ -38,15 +38,14 @@ public class QuestionController {
      */
     //질문 등록
     @PostMapping()
-    public ResponseEntity createQuestion(@RequestBody @Valid QuestionRequestDto.CreatedQuestionDto createdQuestionDto, HttpServletRequest request){
-        Member sessionMember = (Member)sessionManager.getSession(request);
-        createdQuestionDto.setMemberId(sessionMember.getMemberId());
+    public ResponseEntity createQuestion(@SessionAttribute(name = SessionConst.LOGIN_MEMBER)Member member, @RequestBody @Valid QuestionRequestDto.CreatedQuestionDto createdQuestionDto){
+        createdQuestionDto.setMemberId(member.getMemberId());
         Question question = questionService.createdQuestion(mapper.createQuestionDtoToQuestion(createdQuestionDto));
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.createdDtoToQuestion(question),"CREATED"), HttpStatus.CREATED);
     }
 
     //본인이 작성한 특정 질문 조회
-    @GetMapping("/question/{question-id}")
+    @GetMapping("/{question-id}/question")
     public ResponseEntity getQuestion(@SessionAttribute(name = SessionConst.LOGIN_MEMBER)Member member,
                                       @Positive @PathVariable("question-id") long questionId){
         Question question = questionService.findQuestion(member.getMemberId(), questionId);

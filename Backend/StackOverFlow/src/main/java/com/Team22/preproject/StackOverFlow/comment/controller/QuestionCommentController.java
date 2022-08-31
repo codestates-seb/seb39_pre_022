@@ -30,7 +30,27 @@ public class QuestionCommentController {
                                          @RequestBody @Valid QuestionCommentRequestDto.CreateQCommentDto createQCommentDto){
         createQCommentDto.setQuestionId(questionId);
         createQCommentDto.setMemberId(member.getMemberId());
-        QuestionComment questionComment = questionCommentService.createComment(mapper.createQuestionCommentDtoToComment(createQCommentDto));
+        QuestionComment questionComment = questionCommentService.createQuestionComment(mapper.createQuestionCommentDtoToComment(createQCommentDto));
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.questionCommentToCommentInfo(questionComment),"SUCCESS"), HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/{question-comments-id}")
+    public ResponseEntity updateQComment(@SessionAttribute(name = SessionConst.LOGIN_MEMBER) Member member,
+                                         @Positive @PathVariable("question-id") long questionId,
+                                         @Positive @PathVariable("question-comments-id") long questionCommentsId,
+                                         @RequestBody @Valid QuestionCommentRequestDto.UpdateQCommentDto updateQCommentDto){
+        updateQCommentDto.setMemberId(member.getMemberId());
+        updateQCommentDto.setQuestionId(questionId);
+        updateQCommentDto.setQuestionCommentsId(questionCommentsId);
+        QuestionComment questionComment = questionCommentService.updateQuestionComment(mapper.updateQuestionCommentDtoToComment(updateQCommentDto));
+        return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.questionCommentToCommentInfo(questionComment),"SUCCESS"),HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{question-comments-id}")
+    public ResponseEntity deleteQComment(@SessionAttribute(name = SessionConst.LOGIN_MEMBER) Member member,
+                                         @Positive @PathVariable("question-id") long questionId,
+                                         @Positive @PathVariable("question-comments-id") long questionCommentsId){
+        questionCommentService.deleteQuestionComment(questionCommentsId,questionId,member.getMemberId());
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

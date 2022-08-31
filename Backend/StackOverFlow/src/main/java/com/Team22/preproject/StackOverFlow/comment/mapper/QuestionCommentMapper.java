@@ -5,6 +5,7 @@ import com.Team22.preproject.StackOverFlow.comment.dto.QuestionCommentResponseDt
 import com.Team22.preproject.StackOverFlow.comment.entity.QuestionComment;
 import com.Team22.preproject.StackOverFlow.member.dto.MemberResponseDto;
 import com.Team22.preproject.StackOverFlow.member.entity.Member;
+import com.Team22.preproject.StackOverFlow.question.dto.QuestionResponseDto;
 import com.Team22.preproject.StackOverFlow.question.entity.Question;
 import org.mapstruct.Mapper;
 
@@ -25,11 +26,25 @@ public interface QuestionCommentMapper {
 
     default QuestionCommentResponseDto.QuestionCommentsInfo questionCommentToCommentInfo(QuestionComment questionComment){
         return QuestionCommentResponseDto.QuestionCommentsInfo.builder()
-                .questionCommentId(questionComment.getQuestionCommentsId())
+                .questionCommentsId(questionComment.getQuestionCommentsId())
                 .questionComments(questionComment.getQuestionComments())
                 .member(MemberResponseDto.MemberComments.builder()
                         .nickName(questionComment.getMember().getNickName())
                         .build())
                 .build();
     }
+
+    default QuestionComment updateQuestionCommentDtoToComment(QuestionCommentRequestDto.UpdateQCommentDto updateQCommentDto){
+        QuestionComment questionComment = new QuestionComment();
+        Member member = new Member();
+        member.setMemberId(updateQCommentDto.getMemberId());
+        questionComment.setMember(member);
+        Question question = new Question();
+        question.setQuestionId(updateQCommentDto.getQuestionId());
+        questionComment.setQuestionCommentsId(updateQCommentDto.getQuestionCommentsId());
+        questionComment.setQuestion(question);
+        questionComment.setQuestionComments(updateQCommentDto.getQuestionComments());
+        return questionComment;
+    }
+
 }
