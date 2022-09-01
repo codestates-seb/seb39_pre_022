@@ -6,6 +6,8 @@ import com.Team22.preproject.StackOverFlow.answer.mapper.AnswerMapper;
 import com.Team22.preproject.StackOverFlow.answer.service.AnswerService;
 import com.Team22.preproject.StackOverFlow.dto.response.MultiResponseWithPageInfoDto;
 import com.Team22.preproject.StackOverFlow.dto.response.SingleResponseWithMessageDto;
+import com.Team22.preproject.StackOverFlow.member.entity.Member;
+import com.Team22.preproject.StackOverFlow.question.entity.SessionConst;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -26,12 +28,12 @@ public class AnswerController {
     private final AnswerMapper mapper;
 
     //답변 등록
-    @PostMapping("/{member-id}")
-    public ResponseEntity createdAnswer(@Positive @PathVariable("member-id") long memberId,
+    @PostMapping()
+    public ResponseEntity createdAnswer(@SessionAttribute(name = SessionConst.LOGIN_MEMBER) Member member,
                                         @Positive @PathVariable("question-id") long questionId,
                                        @RequestBody AnswerRequestDto.CreateAnswerDto createAnswerDto){
         createAnswerDto.setQuestionId(questionId);
-        createAnswerDto.setMemberId(memberId);
+        createAnswerDto.setMemberId(member.getMemberId());
         Answer answer = answerService.createAnswer(mapper.createAnswerDtoToAnswer(createAnswerDto));
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.createAnswerDtoInfo(answer), "CREATED"), HttpStatus.CREATED);
     }
@@ -48,9 +50,11 @@ public class AnswerController {
 
     //답변 수정
     @PatchMapping("/{answer-id}")
-    public ResponseEntity updateAnswer(@Positive @PathVariable("question-id") long questionId,
+    public ResponseEntity updateAnswer(@SessionAttribute(name = SessionConst.LOGIN_MEMBER) Member member,
+                                       @Positive @PathVariable("question-id") long questionId,
                                        @Positive @PathVariable("answer-id") long answerId,
                                        @RequestBody AnswerRequestDto.UpdateAnswerDto answerDto){
+        answerDto.setMemberId(member.getMemberId());
         answerDto.setAnswerId(answerId);
         answerDto.setQuestionId(questionId);
         Answer answer = answerService.updateAnswer(mapper.updateAnswerToAnswer(answerDto));

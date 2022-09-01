@@ -10,7 +10,8 @@ public enum ExceptionCode {
   CONSTRAINT_VIOLATION_ERROR(400, "Constraint Violation Error"),
   NICKNAME_NOT_FOUND(404, "NickName Not Found"),
   QUESTION_NOT_FOUND(404, "Question Not Found" ),
-  ANSWER_NOT_FOUND(404, "Answer Not Found" );
+  ANSWER_NOT_FOUND(404, "Answer Not Found" ),
+  QUESTION_COMMENT_NOT_FOUND(404,"QuestionComment Not Found" );
 
 
   @Getter

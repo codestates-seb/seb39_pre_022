@@ -1,0 +1,20 @@
+|===
+|Path|Type|Description
+
+|`+data+`
+|`+Object+`
+|결과 데이터
+
+|`+data.email+`
+|`+String+`
+|이메일
+
+|`+data.nickName+`
+|`+String+`
+|닉네임
+
+|`+message+`
+|`+String+`
+|메시지
+
+|===
