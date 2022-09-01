@@ -39,7 +39,7 @@ public class QuestionController {
     //질문 등록
     @PostMapping()
     public ResponseEntity createQuestion(@SessionAttribute(name = SessionConst.LOGIN_MEMBER)Member member, @RequestBody @Valid QuestionRequestDto.CreatedQuestionDto createdQuestionDto){
-        createdQuestionDto.setMemberId(member.getMemberId());
+        createdQuestionDto.setMember(member);
         Question question = questionService.createdQuestion(mapper.createQuestionDtoToQuestion(createdQuestionDto));
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.createdDtoToQuestion(question),"CREATED"), HttpStatus.CREATED);
     }
@@ -69,7 +69,7 @@ public class QuestionController {
                                          @Positive @PathVariable("question-id") long questionId,
                                          @RequestBody @Valid QuestionRequestDto.UpdateQuestionDto updateQuestionDto){
         updateQuestionDto.setQuestionId(questionId);
-        updateQuestionDto.setMemberId(member.getMemberId());
+        updateQuestionDto.setMember(member);
         Question question = questionService.updateQuestion(mapper.updateQuestionDtoToQuestion(updateQuestionDto));
 
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.questionToInfo(question),"SUCCESS"),HttpStatus.OK);
