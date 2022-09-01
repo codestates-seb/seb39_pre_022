@@ -14,23 +14,23 @@ public class QuestionCommentRequestDto {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class CreateQCommentDto {
+    public static class CreateQuestionCommentDto {
         private Member member;
         private long questionId;
         @NotEmpty
-        private String questionComments;
+        private String questionComment;
     }
 
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class UpdateQCommentDto {
-        private long questionCommentsId;
+    public static class UpdateQuestionCommentDto {
         private long questionId;
+        private long questionCommentId;
         private Member member;
         @NotEmpty
-        private String questionComments;
+        private String questionComment;
     }
 
 }

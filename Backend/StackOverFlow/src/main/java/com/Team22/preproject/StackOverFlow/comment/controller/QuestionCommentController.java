@@ -1,6 +1,8 @@
 package com.Team22.preproject.StackOverFlow.comment.controller;
 
 import com.Team22.preproject.StackOverFlow.comment.dto.QuestionCommentRequestDto;
+import com.Team22.preproject.StackOverFlow.comment.dto.QuestionCommentRequestDto.CreateQuestionCommentDto;
+import com.Team22.preproject.StackOverFlow.comment.dto.QuestionCommentRequestDto.UpdateQuestionCommentDto;
 import com.Team22.preproject.StackOverFlow.comment.entity.QuestionComment;
 import com.Team22.preproject.StackOverFlow.comment.mapper.QuestionCommentMapper;
 import com.Team22.preproject.StackOverFlow.comment.service.QuestionCommentService;
@@ -28,10 +30,10 @@ public class QuestionCommentController {
     @PostMapping
     public ResponseEntity createQuestionComment(@SessionAttribute(name = SessionConst.LOGIN_MEMBER) Member member,
                                                 @Positive @PathVariable long questionId,
-                                                @RequestBody @Valid QuestionCommentRequestDto.CreateQCommentDto createQCommentDto){
-        createQCommentDto.setQuestionId(questionId);
-        createQCommentDto.setMember(member);
-        QuestionComment questionComment = questionCommentService.createQuestionComment(mapper.createQuestionCommentDtoToComment(createQCommentDto));
+                                                @RequestBody @Valid CreateQuestionCommentDto createQuestionCommentDto){
+        createQuestionCommentDto.setQuestionId(questionId);
+        createQuestionCommentDto.setMember(member);
+        QuestionComment questionComment = questionCommentService.createQuestionComment(mapper.createQuestionCommentDtoToComment(createQuestionCommentDto));
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.questionCommentToCommentInfo(questionComment),"SUCCESS"), HttpStatus.CREATED);
     }
 
@@ -39,12 +41,12 @@ public class QuestionCommentController {
     public ResponseEntity updateQuestionComment(@SessionAttribute(name = SessionConst.LOGIN_MEMBER) Member member,
                                                 @Positive @PathVariable long questionId,
                                                 @Positive @PathVariable long questionCommentId,
-                                                @RequestBody @Valid QuestionCommentRequestDto.UpdateQCommentDto updateQCommentDto){
+                                                @RequestBody @Valid UpdateQuestionCommentDto updateQuestionCommentDto){
 
-        updateQCommentDto.setMember(member);
-        updateQCommentDto.setQuestionId(questionId);
-        updateQCommentDto.setQuestionCommentsId(questionCommentId);
-        QuestionComment questionComment = questionCommentService.updateQuestionComment(mapper.updateQuestionCommentDtoToComment(updateQCommentDto));
+        updateQuestionCommentDto.setMember(member);
+        updateQuestionCommentDto.setQuestionId(questionId);
+        updateQuestionCommentDto.setQuestionCommentId(questionCommentId);
+        QuestionComment questionComment = questionCommentService.updateQuestionComment(mapper.updateQuestionCommentDtoToComment(updateQuestionCommentDto));
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.questionCommentToCommentInfo(questionComment),"SUCCESS"),HttpStatus.OK);
     }
 

@@ -1,6 +1,8 @@
 package com.Team22.preproject.StackOverFlow.comment.mapper;
 
 import com.Team22.preproject.StackOverFlow.comment.dto.QuestionCommentRequestDto;
+import com.Team22.preproject.StackOverFlow.comment.dto.QuestionCommentRequestDto.CreateQuestionCommentDto;
+import com.Team22.preproject.StackOverFlow.comment.dto.QuestionCommentRequestDto.UpdateQuestionCommentDto;
 import com.Team22.preproject.StackOverFlow.comment.dto.QuestionCommentResponseDto;
 import com.Team22.preproject.StackOverFlow.comment.entity.QuestionComment;
 import com.Team22.preproject.StackOverFlow.member.dto.MemberResponseDto;
@@ -12,7 +14,7 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface QuestionCommentMapper {
 
-    default QuestionComment createQuestionCommentDtoToComment(QuestionCommentRequestDto.CreateQCommentDto createQCommentDto) {
+    default QuestionComment createQuestionCommentDtoToComment(CreateQuestionCommentDto createQCommentDto) {
         QuestionComment questionComment = new QuestionComment();
         questionComment.setMember(createQCommentDto.getMember());
 
@@ -20,14 +22,14 @@ public interface QuestionCommentMapper {
         question.setQuestionId(createQCommentDto.getQuestionId());
 
         questionComment.setQuestion(question);
-        questionComment.setQuestionComment(createQCommentDto.getQuestionComments());
+        questionComment.setQuestionComment(createQCommentDto.getQuestionComment());
 
         return questionComment;
     }
 
     default QuestionCommentResponseDto.QuestionCommentsInfo questionCommentToCommentInfo(QuestionComment questionComment){
         return QuestionCommentResponseDto.QuestionCommentsInfo.builder()
-                .questionCommentsId(questionComment.getQuestionCommentId())
+                .questionCommentId(questionComment.getQuestionCommentId())
                 .questionComments(questionComment.getQuestionComment())
                 .member(MemberResponseDto.MemberComments.builder()
                         .nickName(questionComment.getMember().getNickName())
@@ -35,16 +37,16 @@ public interface QuestionCommentMapper {
                 .build();
     }
 
-    default QuestionComment updateQuestionCommentDtoToComment(QuestionCommentRequestDto.UpdateQCommentDto updateQCommentDto){
+    default QuestionComment updateQuestionCommentDtoToComment(UpdateQuestionCommentDto updateQCommentDto){
         QuestionComment questionComment = new QuestionComment();
 
         questionComment.setMember(updateQCommentDto.getMember());
 
         Question question = new Question();
         question.setQuestionId(updateQCommentDto.getQuestionId());
-        questionComment.setQuestionCommentId(updateQCommentDto.getQuestionCommentsId());
+        questionComment.setQuestionCommentId(updateQCommentDto.getQuestionCommentId());
         questionComment.setQuestion(question);
-        questionComment.setQuestionComment(updateQCommentDto.getQuestionComments());
+        questionComment.setQuestionComment(updateQCommentDto.getQuestionComment());
         return questionComment;
     }
 
