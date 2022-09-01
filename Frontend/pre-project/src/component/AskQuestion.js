@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Navbar from './Navbar';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import moment from 'moment';
 import Accordion from './Accordion';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -34,7 +33,6 @@ export default function AskQuestion() {
             });
     }
     // moment 라이브러리로 현재 시간 확인 가능
-    const time = moment().format('YYYY.MM.DD HH:mm:ss');
     // console.log(time)
 
     const list1 = (
@@ -132,7 +130,7 @@ export default function AskQuestion() {
 
 const AskContainer = styled.div`
 background: rgb(241, 242, 243);
-height: auto;
+height: 100vh;
 
 h1{
     /* border: 1px solid black; */
@@ -140,6 +138,7 @@ h1{
     justify-content: space-around;
     font-weight:500;
     font-size: 1.7rem;
+    padding-right: 33.9rem;
 }
 
 section{
@@ -255,13 +254,17 @@ section{
 
         p{
             font-size: .9rem;
-            width: 10rem;
+            width: 17rem;
         }
     }
 }
 
 @media screen and (max-width: 816px){
+height: auto;
 
+h1{
+    padding-right: 18rem;
+}
     section{
         display: flex;
         flex-direction: column-reverse;
@@ -279,7 +282,7 @@ section{
                 align-items: center;
 
                 span{
-                    margin-left: 22rem;
+                    margin-left: 20rem;
                 }
             }
             h2 .open_btn{

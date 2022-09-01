@@ -59,7 +59,7 @@ export default function Login() {
                         required
                     >
                     </input>
-                    <button onClick={login}>Log in</button>
+                    <button className="login_btn" onClick={login}>Log in</button>
                 </form>
             </div>
             <div className='nohaveid'>
@@ -70,7 +70,6 @@ export default function Login() {
 }
 
 const LoginContainer = styled.div`
-/* border: 1px solid black; */
 background: rgb(241, 242, 243);
 height: 100vh;
 
@@ -110,7 +109,7 @@ height: 100vh;
     padding: 0 0.5rem;
 }
 
-button{
+.login_btn{
     margin: 0.5rem;
     margin-top: -.3rem;
     height: 2.5rem;
@@ -122,7 +121,7 @@ button{
     box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 40%);
 }
 
-button:hover{
+.login_btn:hover{
     background-color: rgb(4, 113, 201);
 }
 

@@ -4,13 +4,16 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Questions from './Questions';
 
 export default function Question() {
     return (
         <Answer>
             <Navbar />
+            <hr></hr>
+            <Link className='ask_Link' to='/askquestion'><button className='ask_btn'>Ask Question</button></Link>
             <div className='you'>
-                수인님 컴포넌트
+                <Questions />
             </div>
             <div className='answer-container'>
                 <p>
@@ -37,12 +40,12 @@ export default function Question() {
 }
 
 const Answer = styled.div`
-border: 1px solid black;
+/* border: 1px solid black; */
 height: 100vh;
 text-align: left;
 
 .you{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     height: 20rem;
 }
 
@@ -90,7 +93,28 @@ text-align: left;
     .answer_btn:hover{
         background-color: rgb(4, 113, 201);
     }
+
+
 }
 
+.ask_Link{
+    display: flex;
+    justify-content: end;
+    text-decoration: none;
+}
+.ask_btn{
+        width: 8rem;
+        height: 2.5rem;
+        margin: 0 2rem;
+        border: none;
+        border-radius: 0.2rem;
+        background-color: rgb(16, 143, 249);
+        color: white;
+        font-weight: 900;
+        box-shadow: inset 0 1px 0 0 hsl(0deg 0% 100% / 40%);
+    }
 
+    .ask_btn:hover{
+        background-color: rgb(4, 113, 201);
+    }
 `

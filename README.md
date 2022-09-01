@@ -1,28 +1,25 @@
-## FE-CJH
+### ! 메뉴바 컴포넌트 확인시, 필요한 파일.
 
-### 진행사항
+(리액트 기본설정에, 스타일 컴포넌트가 설치되어있는 상태)
 
-<ul>
-component (본인)
-<li>Accordion</li>
-<li>AskQuestion</li>
-<li>Login</li>
-<li>SignUp</li>
-</ul>
+#### 1. Navbar.js
 
-<ul>
-component (수인님)
-<li>Main</li>
-<li>Navbar</li>
-<li>Question</li>
-<li>Questions</li>
-</ul>
+`$ Frontend/project/src/components/Navbar.js`
 
-### npm 관련
+#### 2. Navbar_style.js
 
-모듈 설치
-npm insall
+`$ Frontend/project/src/styles/Navbar_style.js`
 
-에디터 설치
-npm install --save @ckeditor/ckeditor5-react @ckeditor/ckeditor5-build-classic
-◊=
+#### 3. logo.png
+
+`$ Frontend/project/src/Img/logo.png`
+
+#### 4. App.js
+
+`$ Frontend/project/src/App.js`
+
+---
+
+- 로고, 검색창, 로그인, 회원가입 클릭시 -> 주소가 바뀐다. </br>
+  `http://localhost:3000/"이부분" ` </br>
+- 검색창에 입력한 text는, 콘솔창에서 확인 가능.

@@ -1,10 +1,12 @@
+// import React, { useState } from "react";
+//import React from "react";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { QnAcontainer, Qcontainer } from "../styles/QuestionsStyle"
-import Vote from "./Vote";
+import {QnAcontainer,Qcontainer} from "../styles/QuestionsStyle";
+import Vote from "../components/Vote";
 
 //<Link to = {"/"}> Home </Link>
-function Questions() {
+function Questions(){
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -15,30 +17,32 @@ function Questions() {
       );
       setPosts(response.data);
       setLoading(false);
-    };
+    }; 
     fetchData();
   }, []);
 
-  return (
-    <>
-      <QnAcontainer posts={(posts)} loading={loading}>
-        <p>title</p>{/* 게시글 추가 */}
-        <Qcontainer>
-          <Vote />
-          <div>
+    return (
+        <>
+          <QnAcontainer posts={(posts)} loading={loading}>
+            <p>title</p>{/* 게시글 추가 */}
+            <Qcontainer>
+            <Vote />
+            <div>
             <div className="Qbody"></div>
             <div className="Qfooter">
               <span>Edit</span>
               <p>user</p>
-            </div>
+              </div>
             <div className="Qcomment">
               <span>Add a comment</span>
             </div>
-          </div>
-        </Qcontainer>
-      </QnAcontainer>
-    </>
-  );
-}
+            </div>
+            </Qcontainer>
 
-export default Questions;
+           </QnAcontainer>
+        </>
+      );
+    }
+    
+    export default Questions;
+    
