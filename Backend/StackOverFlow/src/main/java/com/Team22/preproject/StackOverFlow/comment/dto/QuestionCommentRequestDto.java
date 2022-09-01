@@ -25,6 +25,7 @@ public class QuestionCommentRequestDto {
     @AllArgsConstructor
     @Builder
     public static class UpdateQCommentDto {
+        private long questionCommentsId;
         private long questionId;
         private long memberId;
         @NotEmpty

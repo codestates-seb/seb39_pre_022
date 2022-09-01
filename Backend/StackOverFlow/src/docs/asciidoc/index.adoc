@@ -1,0 +1,59 @@
+= StackOverFlow
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Table of Contents
+:source-highlighter: prettify
+
+v1.0.0, 2022.07.15
+
+***
+== MemberController
+=== 회원가입
+.curl-request
+include::{snippets}/member-create/curl-request.adoc[]
+
+.http-request
+include::{snippets}/member-create/http-request.adoc[]
+
+.request-fields
+include::{snippets}/member-create/request-fields.adoc[]
+
+.http-response
+include::{snippets}/member-create/http-response.adoc[]
+
+=== 로그인
+.curl-request
+include::{snippets}/member-login/curl-request.adoc[]
+
+.http-request
+include::{snippets}/member-login/http-request.adoc[]
+
+.request-fields
+include::{snippets}/member-login/request-fields.adoc[]
+
+.http-response
+include::{snippets}/member-login/http-response.adoc[]
+
+=== 회원정보 수정
+.curl-request
+include::{snippets}/member-update/curl-request.adoc[]
+
+.http-request
+include::{snippets}/member-update/http-request.adoc[]
+
+.request-fields
+include::{snippets}/member-update/request-fields.adoc[]
+
+.http-response
+include::{snippets}/member-update/http-response.adoc[]
+
+=== 회원정보 삭제
+.curl-request
+include::{snippets}/member-delete/curl-request.adoc[]
+
+.http-request
+include::{snippets}/member-delete/http-request.adoc[]
+
+.http-response
+include::{snippets}/member-delete/http-response.adoc[]

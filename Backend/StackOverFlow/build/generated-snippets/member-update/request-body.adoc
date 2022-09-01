@@ -1,0 +1,8 @@
+[source,options="nowrap"]
+----
+{
+  "password" : "5678",
+  "nickName" : "change",
+  "memberId" : 1
+}
+----

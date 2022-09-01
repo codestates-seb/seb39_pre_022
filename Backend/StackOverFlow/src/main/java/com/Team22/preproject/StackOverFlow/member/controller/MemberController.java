@@ -7,6 +7,7 @@ import com.Team22.preproject.StackOverFlow.member.dto.MemberResponseDto;
 import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import com.Team22.preproject.StackOverFlow.member.mapper.MemberMapper;
 import com.Team22.preproject.StackOverFlow.member.service.MemberService;
+import com.Team22.preproject.StackOverFlow.session.SessionManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -42,8 +43,7 @@ public class MemberController {
     @PostMapping("/signup")
     public ResponseEntity singUp(@RequestBody @Valid MemberRequestDto.singUpDto singUpDto){
         singUpDto.setPassword(passwordEncoder.encode(singUpDto.getPassword()));
-        Member member = mapper.signUpDtoToMember(singUpDto);
-        memberService.createMember(member);
+        Member member = memberService.createMember(mapper.signUpDtoToMember(singUpDto));
         System.out.println("member = " + member);
 
         MessageResponseDto message = MessageResponseDto.builder()
@@ -58,8 +58,7 @@ public class MemberController {
     public ResponseEntity login(@RequestBody @Valid MemberRequestDto.loginDto loginDto, HttpServletRequest request, HttpServletResponse response){
         Member member = mapper.loginDtoToMember(loginDto);
         Member loginMember = memberService.login(member);
-//        System.out.println("longinMember = " + loginMember);
-//        log.info("loginMember : {}", loginMember);
+//        sessionManager.createSession(member,response); //sessionId 생성
         HttpSession session = request.getSession(true);
         session.setAttribute(LOGIN_MEMBER, loginMember);
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.memberToMemberInfo(loginMember),"SUCCESS"),HttpStatus.OK);

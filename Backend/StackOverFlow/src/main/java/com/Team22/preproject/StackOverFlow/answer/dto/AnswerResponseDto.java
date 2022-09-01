@@ -25,7 +25,7 @@ public class AnswerResponseDto {
     @AllArgsConstructor
     @Builder
     public static class AnswerInfo{
-        private QuestionResponseDto.questionAnswerDto questionAnswerDto;
+        private QuestionResponseDto.questionAnswerDto questionInfo;
         private long answerId;
         private String answer;
     }
