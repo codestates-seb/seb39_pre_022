@@ -1,12 +1,8 @@
 package com.Team22.preproject.StackOverFlow.comment.controller;
 
 import com.Team22.preproject.StackOverFlow.answer.entity.Answer;
-import com.Team22.preproject.StackOverFlow.auth.SessionConst;
-import com.Team22.preproject.StackOverFlow.comment.dto.AnswerCommentRequestDto;
 import com.Team22.preproject.StackOverFlow.comment.dto.AnswerCommentRequestDto.createAnswerCommentDto;
 import com.Team22.preproject.StackOverFlow.comment.dto.AnswerCommentRequestDto.updateAnswerCommentDto;
-import com.Team22.preproject.StackOverFlow.comment.dto.AnswerResponseDto;
-import com.Team22.preproject.StackOverFlow.comment.dto.AnswerResponseDto.AnswerCommentInfo;
 import com.Team22.preproject.StackOverFlow.comment.entity.AnswerComment;
 import com.Team22.preproject.StackOverFlow.comment.mapper.AnswerCommentMapper;
 import com.Team22.preproject.StackOverFlow.comment.service.AnswerCommentService;
@@ -16,7 +12,6 @@ import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
