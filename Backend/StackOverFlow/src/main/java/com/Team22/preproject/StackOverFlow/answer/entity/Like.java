@@ -1,6 +1,7 @@
 package com.Team22.preproject.StackOverFlow.answer.entity;
 
 import com.Team22.preproject.StackOverFlow.member.entity.Member;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,10 +25,12 @@ public class Like {
     private byte vote;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "ANSWER_ID")
     private Answer answer;
 

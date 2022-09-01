@@ -11,15 +11,15 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface QuestionCommentMapper {
 
-    default QuestionComment createQuestionCommentDtoToComment(CreateQuestionCommentDto createQCommentDto) {
+    default QuestionComment createQuestionCommentDtoToComment(CreateQuestionCommentDto createQuestionCommentDto) {
         QuestionComment questionComment = new QuestionComment();
-        questionComment.setMember(createQCommentDto.getMember());
+        questionComment.setMember(createQuestionCommentDto.getMember());
 
         Question question = new Question();
-        question.setQuestionId(createQCommentDto.getQuestionId());
+        question.setQuestionId(createQuestionCommentDto.getQuestionId());
 
         questionComment.setQuestion(question);
-        questionComment.setContents(createQCommentDto.getQuestionComment());
+        questionComment.setQuestionComment(createQuestionCommentDto.getQuestionComment());
 
         return questionComment;
     }
@@ -27,23 +27,23 @@ public interface QuestionCommentMapper {
     default QuestionCommentResponseDto.QuestionCommentsInfo questionCommentToCommentInfo(QuestionComment questionComment){
         return QuestionCommentResponseDto.QuestionCommentsInfo.builder()
                 .questionCommentId(questionComment.getQuestionCommentId())
-                .questionComments(questionComment.getContents())
+                .questionComments(questionComment.getQuestionComment())
                 .member(MemberResponseDto.MemberComments.builder()
                         .nickName(questionComment.getMember().getNickName())
                         .build())
                 .build();
     }
 
-    default QuestionComment updateQuestionCommentDtoToComment(UpdateQuestionCommentDto updateQCommentDto){
+    default QuestionComment updateQuestionCommentDtoToComment(UpdateQuestionCommentDto updateQuestionCommentDto){
         QuestionComment questionComment = new QuestionComment();
 
-        questionComment.setMember(updateQCommentDto.getMember());
+        questionComment.setMember(updateQuestionCommentDto.getMember());
 
         Question question = new Question();
-        question.setQuestionId(updateQCommentDto.getQuestionId());
-        questionComment.setQuestionCommentId(updateQCommentDto.getQuestionCommentId());
+        question.setQuestionId(updateQuestionCommentDto.getQuestionId());
+        questionComment.setQuestionCommentId(updateQuestionCommentDto.getQuestionCommentId());
         questionComment.setQuestion(question);
-        questionComment.setContents(updateQCommentDto.getQuestionComment());
+        questionComment.setQuestionComment(updateQuestionCommentDto.getQuestionComment());
         return questionComment;
     }
 
