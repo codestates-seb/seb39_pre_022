@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - MemberControllerTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>MemberControllerTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.Team22.preproject.StackOverFlow.member.controller.html">com.Team22.preproject.StackOverFlow.member.controller</a> &gt; MemberControllerTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">4</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.513s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Method name</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">회원 삭제</td>
+<td class="success">deleteMember()</td>
+<td class="success">0.032s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">로그인</td>
+<td class="success">login()</td>
+<td class="success">0.044s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">회원가입</td>
+<td class="success">singUp()</td>
+<td class="success">0.091s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">회원정보 수정</td>
+<td class="success">updateMember()</td>
+<td class="success">0.346s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2022-09-01 21:15:22.833  INFO 52432 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.Team22.preproject.StackOverFlow.member.controller.MemberControllerTest], using SpringBootContextLoader
+2022-09-01 21:15:22.855  INFO 52432 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [com.Team22.preproject.StackOverFlow.member.controller.MemberControllerTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+2022-09-01 21:15:22.861  INFO 52432 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.Team22.preproject.StackOverFlow.member.controller.MemberControllerTest]: MemberControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2022-09-01 21:15:22.971  INFO 52432 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.Team22.preproject.StackOverFlow.StackOverFlowApplication for test class com.Team22.preproject.StackOverFlow.member.controller.MemberControllerTest
+2022-09-01 21:15:22.977  INFO 52432 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2022-09-01 21:15:22.980  INFO 52432 --- [    Test worker] .b.t.a.w.s.WebMvcTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@1077a7, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@6e0fd2dc, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@3110bb19, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@1be6c991, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@18482805, org.springframework.test.context.support.DirtiesContextTestExecutionListener@84180e2, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3c3d2a80, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@11bac6d7, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@48ebcce5, org.springframework.test.context.event.EventPublishingTestExecutionListener@4c29138a, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@199549a5, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@5edeb83e, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@4844cbe4, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@4c752425, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@7f1e946f, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@542adcfa, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@3adf3670]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.7.3)
+
+2022-09-01 21:15:23.245  INFO 52432 --- [    Test worker] c.T.p.S.m.c.MemberControllerTest         : Starting MemberControllerTest using Java 11.0.13 on imdong-geun-ui-MacBookAir.local with PID 52432 (started by limdongkeun in /Users/limdongkeun/Desktop/Team22 Project/seb39_pre_022/Backend/StackOverFlow)
+2022-09-01 21:15:23.246  INFO 52432 --- [    Test worker] c.T.p.S.m.c.MemberControllerTest         : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2022-09-01 21:15:25.502  WARN 52432 --- [    Test worker] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: ec256f73-74d9-4556-9404-ba58b71c7a33
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2022-09-01 21:15:25.611  INFO 52432 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@582ea857, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@650ee893, org.springframework.security.web.context.SecurityContextPersistenceFilter@24a38ef3, org.springframework.security.web.header.HeaderWriterFilter@489ec791, org.springframework.security.web.csrf.CsrfFilter@5a7e0d68, org.springframework.security.web.authentication.logout.LogoutFilter@2778f3d1, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@25ea3a5f, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@794fbf0d, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@13eb8ca, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@58179860, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4af32714, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@74efc394, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@68553e92, org.springframework.security.web.session.SessionManagementFilter@3597174b, org.springframework.security.web.access.ExceptionTranslationFilter@62a193e0, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@f9b97dc]
+2022-09-01 21:15:25.713  INFO 52432 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2022-09-01 21:15:25.714  INFO 52432 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2022-09-01 21:15:25.715  INFO 52432 --- [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2022-09-01 21:15:25.739  INFO 52432 --- [    Test worker] c.T.p.S.m.c.MemberControllerTest         : Started MemberControllerTest in 2.75 seconds (JVM running for 14.17)
+member = com.Team22.preproject.StackOverFlow.member.entity.Member@6415112c
+content = {&quot;email&quot;:&quot;hgd@gmail.com&quot;,&quot;password&quot;:&quot;1234&quot;}
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 7.5</a> at 2022. 9. 1. 오후 9:15:28</p>
+</div>
+</div>
+</body>
+</html>
