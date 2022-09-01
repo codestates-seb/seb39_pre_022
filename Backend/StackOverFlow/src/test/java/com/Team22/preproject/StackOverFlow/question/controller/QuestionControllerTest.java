@@ -35,7 +35,6 @@ class QuestionControllerTest {
     @Test
     void getQuestion() {
     }
-
     @Test
     void getMyQuestions() {
     }
