@@ -1,11 +1,9 @@
 package com.Team22.preproject.StackOverFlow.comment.mapper;
 
 import com.Team22.preproject.StackOverFlow.answer.entity.Answer;
-import com.Team22.preproject.StackOverFlow.comment.dto.AnswerCommentRequestDto;
 import com.Team22.preproject.StackOverFlow.comment.dto.AnswerCommentRequestDto.createAnswerCommentDto;
 import com.Team22.preproject.StackOverFlow.comment.dto.AnswerCommentRequestDto.updateAnswerCommentDto;
-import com.Team22.preproject.StackOverFlow.comment.dto.AnswerResponseDto;
-import com.Team22.preproject.StackOverFlow.comment.dto.AnswerResponseDto.AnswerCommentInfo;
+import com.Team22.preproject.StackOverFlow.comment.dto.AnswerCommentResponseDto.AnswerCommentInfo;
 import com.Team22.preproject.StackOverFlow.comment.entity.AnswerComment;
 import com.Team22.preproject.StackOverFlow.member.dto.MemberResponseDto;
 import org.mapstruct.Mapper;
