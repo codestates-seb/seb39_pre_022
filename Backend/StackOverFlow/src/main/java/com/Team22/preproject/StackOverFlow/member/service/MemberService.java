@@ -21,9 +21,9 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
 
 
-    public void createMember(Member member) {
+    public Member createMember(Member member) {
         verifyEmail(member.getEmail());
-        memberRepository.save(member);
+        return memberRepository.save(member);
     }
 
     public Member login(Member member){

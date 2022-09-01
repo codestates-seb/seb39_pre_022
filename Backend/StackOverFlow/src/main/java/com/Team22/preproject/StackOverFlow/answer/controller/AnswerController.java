@@ -4,6 +4,7 @@ import com.Team22.preproject.StackOverFlow.answer.dto.AnswerRequestDto;
 import com.Team22.preproject.StackOverFlow.answer.entity.Answer;
 import com.Team22.preproject.StackOverFlow.answer.mapper.AnswerMapper;
 import com.Team22.preproject.StackOverFlow.answer.service.AnswerService;
+import com.Team22.preproject.StackOverFlow.answer.service.LikeService;
 import com.Team22.preproject.StackOverFlow.auth.SessionConst;
 import com.Team22.preproject.StackOverFlow.dto.response.MultiResponseWithPageInfoDto;
 import com.Team22.preproject.StackOverFlow.dto.response.SingleResponseWithMessageDto;
@@ -28,6 +29,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AnswerController {
     private final AnswerService answerService;
+    private final LikeService likeService;
     private final AnswerMapper mapper;
 
     /**

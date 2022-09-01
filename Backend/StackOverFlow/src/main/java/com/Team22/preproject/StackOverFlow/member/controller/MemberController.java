@@ -1,7 +1,10 @@
 package com.Team22.preproject.StackOverFlow.member.controller;
 
+import com.Team22.preproject.StackOverFlow.auth.SessionConst;
 import com.Team22.preproject.StackOverFlow.dto.response.MessageResponseDto;
 import com.Team22.preproject.StackOverFlow.dto.response.SingleResponseWithMessageDto;
+import com.Team22.preproject.StackOverFlow.exception.BusinessLogicException;
+import com.Team22.preproject.StackOverFlow.exception.ExceptionCode;
 import com.Team22.preproject.StackOverFlow.member.dto.MemberRequestDto;
 import com.Team22.preproject.StackOverFlow.member.dto.MemberResponseDto;
 import com.Team22.preproject.StackOverFlow.member.entity.Member;
@@ -15,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -34,19 +38,17 @@ public class MemberController {
     private final MemberMapper mapper;
     private final PasswordEncoder passwordEncoder;
 
-    /*
-    로그아웃 기능 구현 필요
-    - 로그아웃 기능을 구현하려면 securityConfig 파일을 수정해야한다 - 용호님과 의논
-     */
-
     //회원가입
     @PostMapping("/signup")
     public ResponseEntity singUp(@RequestBody @Valid MemberRequestDto.singUpDto singUpDto){
-        singUpDto.setPassword(passwordEncoder.encode(singUpDto.getPassword()));
-        Member member = mapper.signUpDtoToMember(singUpDto);
-        memberService.createMember(member);
-        System.out.println("member = " + member);
 
+        // DB에 저장
+        singUpDto.setPassword(passwordEncoder.encode(singUpDto.getPassword()));
+        Member member = memberService.createMember(mapper.signUpDtoToMember(singUpDto));
+
+        log.info("member = {}", member);
+
+        // response body content 생성
         MessageResponseDto message = MessageResponseDto.builder()
                 .message("WELCOME")
                 .build();
@@ -57,11 +59,15 @@ public class MemberController {
     //로그인
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid MemberRequestDto.loginDto loginDto, HttpServletRequest request, HttpServletResponse response){
+
+        // member 조회
         Member member = mapper.loginDtoToMember(loginDto);
         Member loginMember = memberService.login(member);
 
-        HttpSession session = request.getSession(true); // sessionId: 12321414 가 쿠키에 등록됌
+        // session 생성
+        HttpSession session = request.getSession(true);
         session.setAttribute(LOGIN_MEMBER, loginMember);
+
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.memberToMemberInfo(loginMember),"SUCCESS"),HttpStatus.OK);
     }
 
@@ -73,7 +79,7 @@ public class MemberController {
 
         if (session == null)
         {
-            throw new IllegalArgumentException("session이 없는 요청입니다.");
+            throw new BusinessLogicException(ExceptionCode.CONSTRAINT_VIOLATION_ERROR);
         }
 
         session.invalidate();
@@ -82,12 +88,18 @@ public class MemberController {
     }
 
     //회원 정보 수정
-    @PatchMapping("/{member-id}")
-    public ResponseEntity updateMember(@Positive @PathVariable("member-id") long memberId, @RequestBody MemberRequestDto.updateDto updateDto){
-        updateDto.setMemberId(memberId);
+    @PatchMapping
+    public ResponseEntity updateMember(@RequestBody MemberRequestDto.updateDto updateDto,
+                                       @SessionAttribute(name= LOGIN_MEMBER) Member loginMember)
+    {
+        // updateDto memberId, password encoding 설정
+        updateDto.setMemberId(loginMember.getMemberId());
         updateDto.setPassword(passwordEncoder.encode(updateDto.getPassword()));
+        // DB update
         Member member = memberService.updateMember(mapper.updateDtoToMember(updateDto));
+        // update ResponseDto mapping
         MemberResponseDto.UpdateDto memberInfo = mapper.memberToUpdateDto(member);
+
         return new ResponseEntity<>(new SingleResponseWithMessageDto(memberInfo, "SUCCESS"), HttpStatus.OK);
     }
 
@@ -96,5 +108,28 @@ public class MemberController {
     public ResponseEntity deleteMember(@Positive @PathVariable("member-id") long memberId){
         memberService.deleteMember(memberId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+
+    @PostConstruct
+    public void init2Members() {
+        MemberRequestDto.singUpDto testUser1 = MemberRequestDto.singUpDto.builder()
+                .email("hdg@gmail.com")
+                .nickName("HonGilDong")
+                .password(passwordEncoder.encode("1234"))
+                .build();
+
+        Member testMember1 = mapper.signUpDtoToMember(testUser1);
+        memberService.createMember(testMember1);
+
+
+        MemberRequestDto.singUpDto testUser2 = MemberRequestDto.singUpDto.builder()
+                .email("test@gmail.com")
+                .nickName("test")
+                .password(passwordEncoder.encode("test!"))
+                .build();
+
+        Member testMember2 = mapper.signUpDtoToMember(testUser2);
+        memberService.createMember(testMember2);
     }
 }

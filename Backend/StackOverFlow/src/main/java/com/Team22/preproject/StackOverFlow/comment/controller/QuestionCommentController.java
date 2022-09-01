@@ -23,7 +23,7 @@ public class QuestionCommentController {
     private final QuestionCommentMapper mapper;
 
     @PostMapping("/{member-id}")
-    public ResponseEntity createQComment(@Positive @PathVariable("member-id") long memberId,
+    public ResponseEntity createQuestionComment(@Positive @PathVariable("member-id") long memberId,
                                          @Positive @PathVariable("question-id") long questionId,
                                          @RequestBody @Valid QuestionCommentRequestDto.CreateQCommentDto createQCommentDto){
         createQCommentDto.setQuestionId(questionId);
