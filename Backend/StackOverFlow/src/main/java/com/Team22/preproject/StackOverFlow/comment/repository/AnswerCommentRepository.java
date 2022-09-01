@@ -12,15 +12,15 @@ import java.util.Optional;
 
 @Repository
 public interface AnswerCommentRepository extends JpaRepository<AnswerComment, Long> {
-    @Query(value = "select * from ANSWERCOMMENT where ANSWER_ID = :answerId", nativeQuery = true)
+    @Query(value = "select * from ANSWER_COMMENT where ANSWER_ID = :answerId", nativeQuery = true)
     public List<AnswerComment> findByAnswerId(@Param("answerId")long answerId);
-    @Query(value = "select * from ANSWERCOMMENT where ANSWER_ID = :answerId and MEMBER_ID = :memberId", nativeQuery = true)
+    @Query(value = "select * from ANSWER_COMMENT where ANSWER_ID = :answerId and MEMBER_ID = :memberId", nativeQuery = true)
     public List<AnswerComment> findByAnswerIdAndMemberId(@Param("answerId")long answerId, @Param("memberId") long memberId);
 
-    @Query(value = "select * from ANSWERCOMMENT where ANSWER_ID = :answerId and MEMBER_ID = :memberId and ANSWER_COMMENT_ID = :answerCommentId", nativeQuery = true)
+    @Query(value = "select * from ANSWER_COMMENT where ANSWER_ID = :answerId and MEMBER_ID = :memberId and ANSWER_COMMENT_ID = :answerCommentId", nativeQuery = true)
     public AnswerComment findByAnswerIdAndMemberIdAndAnswerCommentId(@Param("answerId")long answerId, @Param("memberId") long memberId, @Param("answerCommentId") long answerCommentId);
 
-    @Query(value = "select * from ANSWERCOMMENT where MEMBER_ID = :memberId", nativeQuery = true)
+    @Query(value = "select * from ANSWER_COMMENT where MEMBER_ID = :memberId", nativeQuery = true)
     public List<AnswerComment> findByMemberId(@Param("memberId")long memberId);
 
 }

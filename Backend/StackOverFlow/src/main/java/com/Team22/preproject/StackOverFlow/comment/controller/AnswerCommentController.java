@@ -22,7 +22,7 @@ import static com.Team22.preproject.StackOverFlow.auth.SessionConst.LOGIN_MEMBER
 
 @RestController
 @Validated
-@RequestMapping("answers/{answerId}/comment")
+@RequestMapping("answers/{answer-Id}/comment")
 @RequiredArgsConstructor
 public class AnswerCommentController {
 
@@ -31,7 +31,7 @@ public class AnswerCommentController {
 
 
     @PostMapping
-    public ResponseEntity createAnswerComment(@Positive @PathVariable long answerId,
+    public ResponseEntity createAnswerComment(@Positive @PathVariable("answer-Id") long answerId,
                                               @RequestBody createAnswerCommentDto createAnswerCommentDto,
                                               @SessionAttribute(name= LOGIN_MEMBER) Member loginMember )
     {
