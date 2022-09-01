@@ -18,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -117,26 +118,26 @@ public class MemberController {
 
 
 
-//    @PostConstruct
-//    public void init2Members() {
-//        MemberRequestDto.singUpDto testUser1 = MemberRequestDto.singUpDto.builder()
-//                .email("hdg@gmail.com")
-//                .nickName("HonGilDong")
-//                .password(passwordEncoder.encode("1234"))
-//                .build();
-//
-//        Member testMember1 = mapper.signUpDtoToMember(testUser1);
-//        memberService.createMember(testMember1);
-//
-//
-//        MemberRequestDto.singUpDto testUser2 = MemberRequestDto.singUpDto.builder()
-//                .email("test@gmail.com")
-//                .nickName("test")
-//                .password(passwordEncoder.encode("test!"))
-//                .build();
-//
-//        Member testMember2 = mapper.signUpDtoToMember(testUser2);
-//        memberService.createMember(testMember2);
-//    }
+    @PostConstruct
+    public void init2Members() {
+        MemberRequestDto.singUpDto testUser1 = MemberRequestDto.singUpDto.builder()
+                .email("hdg@gmail.com")
+                .nickName("HonGilDong")
+                .password(passwordEncoder.encode("1234"))
+                .build();
+
+        Member testMember1 = mapper.signUpDtoToMember(testUser1);
+        memberService.createMember(testMember1);
+
+
+        MemberRequestDto.singUpDto testUser2 = MemberRequestDto.singUpDto.builder()
+                .email("test@gmail.com")
+                .nickName("test")
+                .password(passwordEncoder.encode("test!"))
+                .build();
+
+        Member testMember2 = mapper.signUpDtoToMember(testUser2);
+        memberService.createMember(testMember2);
+    }
 
 }
