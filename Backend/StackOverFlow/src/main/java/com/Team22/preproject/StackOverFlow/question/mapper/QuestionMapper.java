@@ -13,9 +13,7 @@ public interface QuestionMapper{
 //    Question createQuestionDtoToQuestion(QuestionRequestDto.CreatedQuestionDto createdQuestionDto);
     default Question createQuestionDtoToQuestion(QuestionRequestDto.CreatedQuestionDto createdQuestionDto){
         Question question = new Question();
-        Member member = new Member();
-        member.setMemberId(createdQuestionDto.getMemberId());
-        question.setMember(member);
+        question.setMember(createdQuestionDto.getMember());
         question.setTitle(createdQuestionDto.getTitle());
         question.setQuestion(createdQuestionDto.getQuestion());
         return question;
@@ -39,9 +37,7 @@ public interface QuestionMapper{
 
     default Question updateQuestionDtoToQuestion(QuestionRequestDto.UpdateQuestionDto updateQuestionDto){
         Question question = new Question();
-        Member member = new Member();
-        member.setMemberId(updateQuestionDto.getMemberId());
-        question.setMember(member);
+        question.setMember(updateQuestionDto.getMember());
         question.setQuestionId(updateQuestionDto.getQuestionId());
         question.setTitle(updateQuestionDto.getTitle());
         question.setQuestion(updateQuestionDto.getQuestion());

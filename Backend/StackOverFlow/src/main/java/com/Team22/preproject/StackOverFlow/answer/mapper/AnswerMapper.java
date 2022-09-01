@@ -18,9 +18,7 @@ public interface AnswerMapper {
 
     default Answer createAnswerDtoToAnswer(AnswerRequestDto.CreateAnswerDto createAnswerDto){
         Answer answer = new Answer();
-        Member member = new Member();
-        member.setMemberId(createAnswerDto.getMemberId());
-        answer.setMember(member);
+        answer.setMember(createAnswerDto.getMember());
         Question question = new Question();
         question.setQuestionId(createAnswerDto.getQuestionId());
         answer.setQuestion(question);
@@ -51,9 +49,7 @@ public interface AnswerMapper {
 
     default Answer updateAnswerToAnswer(AnswerRequestDto.UpdateAnswerDto answerDto){
         Question question = new Question();
-        Member member = new Member();
-        member.setMemberId(answerDto.getMemberId());
-        question.setMember(member);
+        question.setMember(answerDto.getMember());
         question.setQuestionId(answerDto.getQuestionId());
         Answer answer = new Answer();
         answer.setAnswerId(answerDto.getAnswerId());

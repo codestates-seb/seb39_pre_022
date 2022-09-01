@@ -44,7 +44,7 @@ public class AnswerController {
                                           @SessionAttribute(name=SessionConst.LOGIN_MEMBER, required = true) Member loginMember){
 
         createAnswerDto.setQuestionId(questionId);
-        createAnswerDto.setMemberId(loginMember.getMemberId());
+        createAnswerDto.setMember(loginMember);
 
         Answer answer = answerService.createAnswer(mapper.createAnswerDtoToAnswer(createAnswerDto));
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.createAnswerDtoInfo(answer), "CREATED"), HttpStatus.CREATED);
