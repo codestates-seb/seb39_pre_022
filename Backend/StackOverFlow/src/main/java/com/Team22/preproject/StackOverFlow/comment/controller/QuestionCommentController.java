@@ -18,7 +18,7 @@ import javax.validation.constraints.Positive;
 
 @Validated
 @RestController
-@RequestMapping("questions/{question-id}/comment")
+@RequestMapping("questions/{questionId}/comment")
 @RequiredArgsConstructor
 public class QuestionCommentController {
     private final QuestionCommentService questionCommentService;
@@ -26,7 +26,7 @@ public class QuestionCommentController {
 
     @PostMapping()
     public ResponseEntity createQComment(@SessionAttribute(name = SessionConst.LOGIN_MEMBER) Member member,
-                                         @Positive @PathVariable("question-id") long questionId,
+                                         @Positive @PathVariable long questionId,
                                          @RequestBody @Valid QuestionCommentRequestDto.CreateQCommentDto createQCommentDto){
         createQCommentDto.setQuestionId(questionId);
         createQCommentDto.setMemberId(member.getMemberId());
@@ -34,23 +34,23 @@ public class QuestionCommentController {
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.questionCommentToCommentInfo(questionComment),"SUCCESS"), HttpStatus.CREATED);
     }
 
-    @PatchMapping("/{question-comments-id}")
+    @PatchMapping("/{questionCommentId}")
     public ResponseEntity updateQComment(@SessionAttribute(name = SessionConst.LOGIN_MEMBER) Member member,
-                                         @Positive @PathVariable("question-id") long questionId,
-                                         @Positive @PathVariable("question-comments-id") long questionCommentsId,
+                                         @Positive @PathVariable long questionId,
+                                         @Positive @PathVariable long questionCommentId,
                                          @RequestBody @Valid QuestionCommentRequestDto.UpdateQCommentDto updateQCommentDto){
         updateQCommentDto.setMemberId(member.getMemberId());
         updateQCommentDto.setQuestionId(questionId);
-        updateQCommentDto.setQuestionCommentsId(questionCommentsId);
+        updateQCommentDto.setQuestionCommentsId(questionCommentId);
         QuestionComment questionComment = questionCommentService.updateQuestionComment(mapper.updateQuestionCommentDtoToComment(updateQCommentDto));
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.questionCommentToCommentInfo(questionComment),"SUCCESS"),HttpStatus.OK);
     }
 
-    @DeleteMapping("/{question-comments-id}")
+    @DeleteMapping("/{questionCommentId}")
     public ResponseEntity deleteQComment(@SessionAttribute(name = SessionConst.LOGIN_MEMBER) Member member,
-                                         @Positive @PathVariable("question-id") long questionId,
-                                         @Positive @PathVariable("question-comments-id") long questionCommentsId){
-        questionCommentService.deleteQuestionComment(questionCommentsId,questionId,member.getMemberId());
+                                         @Positive @PathVariable long questionId,
+                                         @Positive @PathVariable long questionCommentId){
+        questionCommentService.deleteQuestionComment(questionCommentId,questionId,member.getMemberId());
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 }

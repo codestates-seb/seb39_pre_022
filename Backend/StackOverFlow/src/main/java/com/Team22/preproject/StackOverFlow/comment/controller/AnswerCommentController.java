@@ -22,7 +22,7 @@ import static com.Team22.preproject.StackOverFlow.auth.SessionConst.LOGIN_MEMBER
 
 @RestController
 @Validated
-@RequestMapping("answers/{answer-Id}/comment")
+@RequestMapping("answers/{answerId}/comment")
 @RequiredArgsConstructor
 public class AnswerCommentController {
 
@@ -31,7 +31,7 @@ public class AnswerCommentController {
 
 
     @PostMapping
-    public ResponseEntity createAnswerComment(@Positive @PathVariable("answer-Id") long answerId,
+    public ResponseEntity createAnswerComment(@Positive @PathVariable long answerId,
                                               @RequestBody createAnswerCommentDto createAnswerCommentDto,
                                               @SessionAttribute(name= LOGIN_MEMBER) Member loginMember )
     {
@@ -45,8 +45,8 @@ public class AnswerCommentController {
 
 
     @PatchMapping("/{answerCommentId}")
-    public ResponseEntity updateAnswerComment(@Positive long answerId,
-                                              @Positive long answerCommentId,
+    public ResponseEntity updateAnswerComment(@Positive @PathVariable long answerId,
+                                              @Positive @PathVariable long answerCommentId,
                                               @RequestBody updateAnswerCommentDto updateAnswerCommentDto,
                                               @SessionAttribute(name= LOGIN_MEMBER) Member loginMember )
     {
@@ -61,8 +61,8 @@ public class AnswerCommentController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{answerCommentId}")
-    public MessageResponseDto deleteAnswerComment(@Positive long answerId,
-                                                  @Positive long answerCommentId,
+    public MessageResponseDto deleteAnswerComment(@Positive @PathVariable long answerId,
+                                                  @Positive @PathVariable long answerCommentId,
                                                   @SessionAttribute(name=LOGIN_MEMBER) Member loginMember)
     {
         AnswerComment answerComment = new AnswerComment();
