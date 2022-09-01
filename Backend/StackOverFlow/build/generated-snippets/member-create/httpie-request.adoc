@@ -1,0 +1,10 @@
+[source,bash]
+----
+$ echo '{
+  "email" : "hgd@gmail.com",
+  "password" : "1234",
+  "nickName" : "hgd"
+}' | http POST 'http://localhost:8080/members/signup' \
+    'Content-Type:application/json' \
+    'Accept:application/json'
+----

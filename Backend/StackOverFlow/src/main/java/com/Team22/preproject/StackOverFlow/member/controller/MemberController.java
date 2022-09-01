@@ -34,7 +34,6 @@ public class MemberController {
     private final MemberService memberService;
     private final MemberMapper mapper;
     private final PasswordEncoder passwordEncoder;
-    private final SessionManager sessionManager;
     /*
     로그아웃 기능 구현 필요
     - 로그아웃 기능을 구현하려면 securityConfig 파일을 수정해야한다 - 용호님과 의논

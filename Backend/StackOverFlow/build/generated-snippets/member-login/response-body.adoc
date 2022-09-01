@@ -1,0 +1,10 @@
+[source,options="nowrap"]
+----
+{
+  "data" : {
+    "email" : "hgd@gmail.com",
+    "nickName" : "hgd"
+  },
+  "message" : "SUCCESS"
+}
+----

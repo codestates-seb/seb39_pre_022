@@ -1,0 +1,10 @@
+[source,bash]
+----
+$ echo '{
+  "password" : "5678",
+  "nickName" : "change",
+  "memberId" : 1
+}' | http PATCH 'http://localhost:8080/members/1' \
+    'Content-Type:application/json' \
+    'Accept:application/json'
+----
