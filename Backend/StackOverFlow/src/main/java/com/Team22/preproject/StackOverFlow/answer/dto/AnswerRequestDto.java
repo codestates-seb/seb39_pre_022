@@ -1,5 +1,6 @@
 package com.Team22.preproject.StackOverFlow.answer.dto;
 
+import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +18,7 @@ public class AnswerRequestDto {
     public static class CreateAnswerDto {
         private long questionId;
 
-        private long memberId;
+        private Member member;
 
         @NotBlank
         private String answer;
@@ -31,8 +32,7 @@ public class AnswerRequestDto {
         private long answerId;
         private long questionId;
 
-        @NotNull
-        private long memberId;
+        private Member member;
 
         @NotBlank
         private String answer;

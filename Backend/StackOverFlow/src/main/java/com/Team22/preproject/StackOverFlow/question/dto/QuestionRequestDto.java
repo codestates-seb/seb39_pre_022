@@ -1,5 +1,6 @@
 package com.Team22.preproject.StackOverFlow.question.dto;
 
+import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,8 +16,7 @@ public class QuestionRequestDto {
     @AllArgsConstructor
     @Builder
     public static class CreatedQuestionDto{
-        @NotNull
-        private long memberId;
+        private Member member;
 
         @NotBlank
         private String title;
@@ -37,7 +37,6 @@ public class QuestionRequestDto {
         @NotBlank
         private String question;
 
-        @NotNull
-        private long memberId;
+        private Member member;
     }
 }
