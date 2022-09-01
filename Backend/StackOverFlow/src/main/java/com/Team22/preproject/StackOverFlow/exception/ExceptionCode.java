@@ -11,7 +11,8 @@ public enum ExceptionCode {
   NICKNAME_NOT_FOUND(404, "NickName Not Found"),
   QUESTION_NOT_FOUND(404, "Question Not Found" ),
   ANSWER_NOT_FOUND(404, "Answer Not Found" ),
-  QUESTION_COMMENT_NOT_FOUND(404,"QuestionComment Not Found" );
+  QUESTION_COMMENT_NOT_FOUND(404,"QuestionComment Not Found" ),
+  ANSWER_COMMENT_NOT_FOUND(404,"AnswerComment Not Found" );
 
 
   @Getter

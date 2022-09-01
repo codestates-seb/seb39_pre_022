@@ -22,10 +22,10 @@ public class QuestionCommentService {
     }
 
     public QuestionComment updateQuestionComment(QuestionComment questionComment) {
-        QuestionComment findQuestionComment = findVerifiedQuestionComment(questionComment.getQuestionCommentsId(),
+        QuestionComment findQuestionComment = findVerifiedQuestionComment(questionComment.getQuestionCommentId(),
                 questionComment.getQuestion().getQuestionId(),
                 questionComment.getMember().getMemberId());
-        Optional.ofNullable(questionComment.getQuestionComments()).ifPresent(findQuestionComment::setQuestionComments);
+        Optional.ofNullable(questionComment.getQuestionComment()).ifPresent(findQuestionComment::setQuestionComment);
         return questionCommentRepository.save(findQuestionComment);
     }
 
