@@ -42,13 +42,17 @@ public class Question extends Auditable {
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<Answer> answerList = new ArrayList<>();
 
-    public void addQuestionComments(QuestionComment questionComments){
-        if(!this.questionCommentsList.contains(questionComments)){
-            questionCommentsList.add(questionComments);
+    public void addQuestionComments(QuestionComment questionComment){
+        if(questionComment != null && !this.questionCommentsList.contains(questionComment)){
+            questionCommentsList.add(questionComment);
+            questionComment.addQuestion(this);
         }
     }
 
     public void addMember(Member member) {
-        this.member = member;
+        if(this.member == null && member != null){
+            this.member = member;
+            member.addQuestion(this);
+        }
     }
 }

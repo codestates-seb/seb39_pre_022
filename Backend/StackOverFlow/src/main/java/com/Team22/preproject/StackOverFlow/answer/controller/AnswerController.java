@@ -4,10 +4,11 @@ import com.Team22.preproject.StackOverFlow.answer.dto.AnswerRequestDto;
 import com.Team22.preproject.StackOverFlow.answer.entity.Answer;
 import com.Team22.preproject.StackOverFlow.answer.mapper.AnswerMapper;
 import com.Team22.preproject.StackOverFlow.answer.service.AnswerService;
+import com.Team22.preproject.StackOverFlow.answer.service.LikeService;
+import com.Team22.preproject.StackOverFlow.auth.SessionConst;
 import com.Team22.preproject.StackOverFlow.dto.response.MultiResponseWithPageInfoDto;
 import com.Team22.preproject.StackOverFlow.dto.response.SingleResponseWithMessageDto;
 import com.Team22.preproject.StackOverFlow.member.entity.Member;
-import com.Team22.preproject.StackOverFlow.question.entity.SessionConst;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.constraints.Positive;
 import javax.websocket.server.PathParam;
 import java.util.List;
@@ -25,15 +29,23 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AnswerController {
     private final AnswerService answerService;
+    private final LikeService likeService;
     private final AnswerMapper mapper;
 
-    //답변 등록
-    @PostMapping()
-    public ResponseEntity createdAnswer(@SessionAttribute(name = SessionConst.LOGIN_MEMBER) Member member,
-                                        @Positive @PathVariable("question-id") long questionId,
-                                       @RequestBody AnswerRequestDto.CreateAnswerDto createAnswerDto){
+    /**
+     * 답변 등록
+     * @param questionId 등록할 답변을 식별할 Id
+     * @param createAnswerDto
+     * @return
+     */
+    @PostMapping
+    public ResponseEntity createAnswer(@Positive @PathVariable("question-id") long questionId,
+                                          @RequestBody AnswerRequestDto.CreateAnswerDto createAnswerDto,
+                                          @SessionAttribute(name=SessionConst.LOGIN_MEMBER, required = true) Member loginMember){
+
         createAnswerDto.setQuestionId(questionId);
-        createAnswerDto.setMemberId(member.getMemberId());
+        createAnswerDto.setMemberId(loginMember.getMemberId());
+
         Answer answer = answerService.createAnswer(mapper.createAnswerDtoToAnswer(createAnswerDto));
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.createAnswerDtoInfo(answer), "CREATED"), HttpStatus.CREATED);
     }
@@ -50,11 +62,9 @@ public class AnswerController {
 
     //답변 수정
     @PatchMapping("/{answer-id}")
-    public ResponseEntity updateAnswer(@SessionAttribute(name = SessionConst.LOGIN_MEMBER) Member member,
-                                       @Positive @PathVariable("question-id") long questionId,
+    public ResponseEntity updateAnswer(@Positive @PathVariable("question-id") long questionId,
                                        @Positive @PathVariable("answer-id") long answerId,
                                        @RequestBody AnswerRequestDto.UpdateAnswerDto answerDto){
-        answerDto.setMemberId(member.getMemberId());
         answerDto.setAnswerId(answerId);
         answerDto.setQuestionId(questionId);
         Answer answer = answerService.updateAnswer(mapper.updateAnswerToAnswer(answerDto));

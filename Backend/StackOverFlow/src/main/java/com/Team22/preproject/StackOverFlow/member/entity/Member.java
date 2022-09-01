@@ -1,6 +1,7 @@
 package com.Team22.preproject.StackOverFlow.member.entity;
 
 import com.Team22.preproject.StackOverFlow.answer.entity.Answer;
+import com.Team22.preproject.StackOverFlow.answer.entity.Like;
 import com.Team22.preproject.StackOverFlow.audit.Auditable;
 import com.Team22.preproject.StackOverFlow.comment.entity.AnswerComment;
 import com.Team22.preproject.StackOverFlow.comment.entity.QuestionComment;
@@ -34,6 +35,9 @@ public class Member extends Auditable {
     private String nickName;
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    private List<Like> likes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Question> questions = new ArrayList<>();
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
@@ -45,13 +49,17 @@ public class Member extends Auditable {
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<AnswerComment> answerComments = new ArrayList<>();
 
-//    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-//    private List<Like> likes = new ArrayList<>();
 
+    public void addLike(Like like) {
+        if(like != null && !likes.contains(like)){
+            like.addMember(this);
+            this.likes.add(like);
+        }
+    }
     public void addAnswer(Answer answer){
         if(answer != null && !answers.contains(answer)){
-            answer.addMember(this);
             this.answers.add(answer);
+            answer.addMember(this);
         }
     }
     public void addQuestion(Question question){

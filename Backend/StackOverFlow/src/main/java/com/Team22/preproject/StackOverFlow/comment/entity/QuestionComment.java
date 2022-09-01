@@ -18,11 +18,11 @@ public class QuestionComment extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long questionCommentsId;
+    private long questionCommentId;
 
     @Column(nullable = false)
     @Length(max = 300)
-    private String questionComments;
+    private String questionComment;
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
@@ -41,6 +41,7 @@ public class QuestionComment extends Auditable {
     public void addQuestion(Question question) {
         if(this.question == null && question != null){
             this.question = question;
+            question.addQuestionComments(this);
         }
     }
 }

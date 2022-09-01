@@ -50,6 +50,7 @@ public class Answer extends Auditable{
         if(like != null && !this.likes.contains(like)){
             like.addAnswer(this);
             this.likes.add(like); // 코드의 this 인자를 보고 현재 클래스의 likes 배열에서 추가한 다는 것을 나타내는 명시적인 효과를 위해 적었습니다.
+            this.likeCount += (int)like.getVote();
         }
     }
 

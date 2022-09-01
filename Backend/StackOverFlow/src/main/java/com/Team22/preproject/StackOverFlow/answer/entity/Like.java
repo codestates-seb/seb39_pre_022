@@ -4,6 +4,8 @@ import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.aspectj.weaver.loadtime.definition.Definition;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 
@@ -18,7 +20,8 @@ public class Like {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long likeId;
 
-    private byte likes;
+    @Range(min=-1, max=1)
+    private byte vote;
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
@@ -29,10 +32,18 @@ public class Like {
     private Answer answer;
 
     public void addMember(Member member) {
-        this.member = member;
+        if(this.member == null && !member.getLikes().contains(this)){
+            this.member = member;
+        }
+
     }
 
-    public void addAnswer(Answer answer){
-        this.answer = answer;
+    public void addAnswer(Answer answer)
+    {
+        if(answer != null && this.answer == null)
+        {
+            answer.addLike(this);
+            this.answer = answer;
+        }
     }
 }
