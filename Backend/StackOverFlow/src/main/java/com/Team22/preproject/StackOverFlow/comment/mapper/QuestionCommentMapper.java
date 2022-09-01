@@ -1,13 +1,10 @@
 package com.Team22.preproject.StackOverFlow.comment.mapper;
 
-import com.Team22.preproject.StackOverFlow.comment.dto.QuestionCommentRequestDto;
 import com.Team22.preproject.StackOverFlow.comment.dto.QuestionCommentRequestDto.CreateQuestionCommentDto;
 import com.Team22.preproject.StackOverFlow.comment.dto.QuestionCommentRequestDto.UpdateQuestionCommentDto;
 import com.Team22.preproject.StackOverFlow.comment.dto.QuestionCommentResponseDto;
 import com.Team22.preproject.StackOverFlow.comment.entity.QuestionComment;
 import com.Team22.preproject.StackOverFlow.member.dto.MemberResponseDto;
-import com.Team22.preproject.StackOverFlow.member.entity.Member;
-import com.Team22.preproject.StackOverFlow.question.dto.QuestionResponseDto;
 import com.Team22.preproject.StackOverFlow.question.entity.Question;
 import org.mapstruct.Mapper;
 
@@ -22,7 +19,7 @@ public interface QuestionCommentMapper {
         question.setQuestionId(createQCommentDto.getQuestionId());
 
         questionComment.setQuestion(question);
-        questionComment.setQuestionComment(createQCommentDto.getQuestionComment());
+        questionComment.setContents(createQCommentDto.getQuestionComment());
 
         return questionComment;
     }
@@ -30,7 +27,7 @@ public interface QuestionCommentMapper {
     default QuestionCommentResponseDto.QuestionCommentsInfo questionCommentToCommentInfo(QuestionComment questionComment){
         return QuestionCommentResponseDto.QuestionCommentsInfo.builder()
                 .questionCommentId(questionComment.getQuestionCommentId())
-                .questionComments(questionComment.getQuestionComment())
+                .questionComments(questionComment.getContents())
                 .member(MemberResponseDto.MemberComments.builder()
                         .nickName(questionComment.getMember().getNickName())
                         .build())
@@ -46,7 +43,7 @@ public interface QuestionCommentMapper {
         question.setQuestionId(updateQCommentDto.getQuestionId());
         questionComment.setQuestionCommentId(updateQCommentDto.getQuestionCommentId());
         questionComment.setQuestion(question);
-        questionComment.setQuestionComment(updateQCommentDto.getQuestionComment());
+        questionComment.setContents(updateQCommentDto.getQuestionComment());
         return questionComment;
     }
 

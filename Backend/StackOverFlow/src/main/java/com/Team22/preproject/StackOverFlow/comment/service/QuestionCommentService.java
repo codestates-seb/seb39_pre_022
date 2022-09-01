@@ -1,6 +1,5 @@
 package com.Team22.preproject.StackOverFlow.comment.service;
 
-import com.Team22.preproject.StackOverFlow.comment.controller.QuestionCommentController;
 import com.Team22.preproject.StackOverFlow.comment.entity.QuestionComment;
 import com.Team22.preproject.StackOverFlow.comment.repository.QuestionCommentRepository;
 import com.Team22.preproject.StackOverFlow.exception.BusinessLogicException;
@@ -25,7 +24,7 @@ public class QuestionCommentService {
         QuestionComment findQuestionComment = findVerifiedQuestionComment(questionComment.getQuestionCommentId(),
                 questionComment.getQuestion().getQuestionId(),
                 questionComment.getMember().getMemberId());
-        Optional.ofNullable(questionComment.getQuestionComment()).ifPresent(findQuestionComment::setQuestionComment);
+        Optional.ofNullable(questionComment.getContents()).ifPresent(findQuestionComment::setContents);
         return questionCommentRepository.save(findQuestionComment);
     }
 

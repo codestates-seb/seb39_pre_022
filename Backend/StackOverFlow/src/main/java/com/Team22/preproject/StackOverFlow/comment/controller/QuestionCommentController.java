@@ -29,7 +29,7 @@ public class QuestionCommentController {
 
     @PostMapping
     public ResponseEntity createQuestionComment(@SessionAttribute(name = SessionConst.LOGIN_MEMBER) Member member,
-                                                @Positive @PathVariable long questionId,
+                                                @Positive @PathVariable(name="questionId") long questionId,
                                                 @RequestBody @Valid CreateQuestionCommentDto createQuestionCommentDto){
         createQuestionCommentDto.setQuestionId(questionId);
         createQuestionCommentDto.setMember(member);
@@ -39,8 +39,8 @@ public class QuestionCommentController {
 
     @PatchMapping("/{questionCommentId}")
     public ResponseEntity updateQuestionComment(@SessionAttribute(name = SessionConst.LOGIN_MEMBER) Member member,
-                                                @Positive @PathVariable long questionId,
-                                                @Positive @PathVariable long questionCommentId,
+                                                @Positive @PathVariable(name="questionId") long questionId,
+                                                @Positive @PathVariable(name="questionCommentId") long questionCommentId,
                                                 @RequestBody @Valid UpdateQuestionCommentDto updateQuestionCommentDto){
 
         updateQuestionCommentDto.setMember(member);
@@ -53,8 +53,8 @@ public class QuestionCommentController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{questionCommentId}")
     public MessageResponseDto deleteQuestionComment(@SessionAttribute(name = SessionConst.LOGIN_MEMBER) Member member,
-                                                    @Positive @PathVariable long questionId,
-                                                    @Positive @PathVariable long questionCommentId)
+                                                    @Positive @PathVariable(name="questionId") long questionId,
+                                                    @Positive @PathVariable(name="questionCommentId") long questionCommentId)
     {
         questionCommentService.deleteQuestionComment(questionCommentId,questionId,member.getMemberId());
         return new MessageResponseDto("NO_CONTENT");
