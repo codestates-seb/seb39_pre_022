@@ -14,13 +14,14 @@ public interface QuestionCommentMapper {
 
     default QuestionComment createQuestionCommentDtoToComment(QuestionCommentRequestDto.CreateQCommentDto createQCommentDto) {
         QuestionComment questionComment = new QuestionComment();
-        Member member = new Member();
-        member.setMemberId(createQCommentDto.getMemberId());
-        questionComment.setMember(member);
+        questionComment.setMember(createQCommentDto.getMember());
+
         Question question = new Question();
         question.setQuestionId(createQCommentDto.getQuestionId());
+
         questionComment.setQuestion(question);
         questionComment.setQuestionComment(createQCommentDto.getQuestionComments());
+
         return questionComment;
     }
 
@@ -36,9 +37,9 @@ public interface QuestionCommentMapper {
 
     default QuestionComment updateQuestionCommentDtoToComment(QuestionCommentRequestDto.UpdateQCommentDto updateQCommentDto){
         QuestionComment questionComment = new QuestionComment();
-        Member member = new Member();
-        member.setMemberId(updateQCommentDto.getMemberId());
-        questionComment.setMember(member);
+
+        questionComment.setMember(updateQCommentDto.getMember());
+
         Question question = new Question();
         question.setQuestionId(updateQCommentDto.getQuestionId());
         questionComment.setQuestionCommentId(updateQCommentDto.getQuestionCommentsId());
