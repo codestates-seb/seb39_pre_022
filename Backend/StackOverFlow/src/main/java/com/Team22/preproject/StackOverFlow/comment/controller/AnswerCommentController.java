@@ -31,7 +31,7 @@ public class AnswerCommentController {
 
 
     @PostMapping
-    public ResponseEntity createAnswerComment(@Positive long answerId,
+    public ResponseEntity createAnswerComment(@Positive @PathVariable long answerId,
                                               @RequestBody createAnswerCommentDto createAnswerCommentDto,
                                               @SessionAttribute(name= LOGIN_MEMBER) Member loginMember )
     {
@@ -45,7 +45,7 @@ public class AnswerCommentController {
 
 
     @PatchMapping("/{answerCommentId}")
-    public ResponseEntity createAnswerComment(@Positive long answerId,
+    public ResponseEntity updateAnswerComment(@Positive long answerId,
                                               @Positive long answerCommentId,
                                               @RequestBody updateAnswerCommentDto updateAnswerCommentDto,
                                               @SessionAttribute(name= LOGIN_MEMBER) Member loginMember )
