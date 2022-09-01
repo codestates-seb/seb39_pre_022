@@ -34,7 +34,9 @@ public class LikeService {
 
     }
 
-    public int sumOfVotes(Like like) {
+    public int sumOfVotes(Like like)
+
+    {
         return likeRepository.findSumOfVoteByAnswerId(like.getAnswer().getAnswerId());
     }
 

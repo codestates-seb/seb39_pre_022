@@ -19,7 +19,7 @@ public class AnswerCommentRequestDto {
         private Member member;
         private long answerId;
         @NotBlank
-        private String answerComment;
+        private String answerComments;
 
     }
 
@@ -30,10 +30,10 @@ public class AnswerCommentRequestDto {
     @Builder
     public static class updateAnswerCommentDto{
         private Member member;
-        private long answerCommentId;
+        private long answerCommentsId;
         private long answerId;
         @NotBlank
-        private String answerComment;
+        private String answerComments;
 
     }
 }

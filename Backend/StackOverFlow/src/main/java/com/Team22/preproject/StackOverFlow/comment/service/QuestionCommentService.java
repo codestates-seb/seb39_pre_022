@@ -21,10 +21,10 @@ public class QuestionCommentService {
     }
 
     public QuestionComment updateQuestionComment(QuestionComment questionComment) {
-        QuestionComment findQuestionComment = findVerifiedQuestionComment(questionComment.getQuestionCommentId(),
+        QuestionComment findQuestionComment = findVerifiedQuestionComment(questionComment.getQuestionCommentsId(),
                 questionComment.getQuestion().getQuestionId(),
                 questionComment.getMember().getMemberId());
-        Optional.ofNullable(questionComment.getQuestionComment()).ifPresent(findQuestionComment::setQuestionComment);
+        Optional.ofNullable(questionComment.getQuestionComments()).ifPresent(findQuestionComment::setQuestionComments);
         return questionCommentRepository.save(findQuestionComment);
     }
 
@@ -34,8 +34,8 @@ public class QuestionCommentService {
     }
 
     @Transactional(readOnly = true)
-    public QuestionComment findVerifiedQuestionComment(long questionCommentId, long questionId, long memberId){
-        Optional<QuestionComment> optionalQuestionComment = questionCommentRepository.finByIdAndQuestionIdAndMemberId(questionCommentId,questionId,memberId);
+    public QuestionComment findVerifiedQuestionComment(long questionCommentsId, long questionId, long memberId){
+        Optional<QuestionComment> optionalQuestionComment = questionCommentRepository.finByIdAndQuestionIdAndMemberId(questionCommentsId,questionId,memberId);
         return optionalQuestionComment.orElseThrow(()->new BusinessLogicException(ExceptionCode.QUESTION_COMMENT_NOT_FOUND));
     }
 

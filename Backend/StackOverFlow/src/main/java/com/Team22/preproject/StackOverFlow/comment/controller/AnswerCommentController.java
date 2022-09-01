@@ -44,14 +44,14 @@ public class AnswerCommentController {
 
 
 
-    @PatchMapping("/{answerCommentId}")
+    @PatchMapping("/{answerCommentsId}")
     public ResponseEntity updateAnswerComment(@Positive @PathVariable(name="answerId") long answerId,
-                                              @Positive @PathVariable(name="answerCommentId") long answerCommentId,
+                                              @Positive @PathVariable(name="answerCommentsId") long answerCommentsId,
                                               @RequestBody updateAnswerCommentDto updateAnswerCommentDto,
                                               @SessionAttribute(name= LOGIN_MEMBER) Member loginMember )
     {
         updateAnswerCommentDto.setAnswerId(answerId);
-        updateAnswerCommentDto.setAnswerCommentId(answerCommentId);
+        updateAnswerCommentDto.setAnswerCommentsId(answerCommentsId);
         updateAnswerCommentDto.setMember(loginMember);
 
         AnswerComment answerComment = answerCommentService.updateAnswerComment(mapper.updateAnswerCommentDtoToAnswerComment(updateAnswerCommentDto));
@@ -60,15 +60,15 @@ public class AnswerCommentController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/{answerCommentId}")
+    @DeleteMapping("/{answerCommentsId}")
     public MessageResponseDto deleteAnswerComment(@Positive @PathVariable(name="answerId") long answerId,
-                                                  @Positive @PathVariable(name="answerCommentId") long answerCommentId,
+                                                  @Positive @PathVariable(name="answerCommentsId") long answerCommentsId,
                                                   @SessionAttribute(name=LOGIN_MEMBER) Member loginMember)
     {
         AnswerComment answerComment = new AnswerComment();
         Answer answer = new Answer();
         answer.setAnswerId(answerId);
-        answerComment.setAnswerCommentId(answerCommentId);
+        answerComment.setAnswerCommentsId(answerCommentsId);
         answerComment.setMember(loginMember);
 
         answerCommentService.deleteAnswerComment(answerComment);

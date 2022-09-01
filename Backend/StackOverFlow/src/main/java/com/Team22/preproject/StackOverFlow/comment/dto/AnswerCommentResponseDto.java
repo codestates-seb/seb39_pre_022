@@ -13,8 +13,8 @@ public class AnswerCommentResponseDto {
     @AllArgsConstructor
     @Builder
     public static class AnswerCommentInfo {
-        private long answerCommentId;
-        private String answerComment;
+        private long answerCommentsId;
+        private String answerComments;
         private MemberComments member;
     }
 }

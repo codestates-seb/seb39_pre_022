@@ -45,7 +45,7 @@ public class QuestionCommentController {
 
         updateQuestionCommentDto.setMember(member);
         updateQuestionCommentDto.setQuestionId(questionId);
-        updateQuestionCommentDto.setQuestionCommentId(questionCommentId);
+        updateQuestionCommentDto.setQuestionCommentsId(questionCommentId);
         QuestionComment questionComment = questionCommentService.updateQuestionComment(mapper.updateQuestionCommentDtoToComment(updateQuestionCommentDto));
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.questionCommentToCommentInfo(questionComment),"SUCCESS"),HttpStatus.OK);
     }

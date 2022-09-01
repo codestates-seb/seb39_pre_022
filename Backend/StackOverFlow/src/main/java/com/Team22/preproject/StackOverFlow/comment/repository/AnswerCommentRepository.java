@@ -17,8 +17,8 @@ public interface AnswerCommentRepository extends JpaRepository<AnswerComment, Lo
     @Query(value = "select * from ANSWER_COMMENT where ANSWER_ID = :answerId and MEMBER_ID = :memberId", nativeQuery = true)
     public List<AnswerComment> findByAnswerIdAndMemberId(@Param("answerId")long answerId, @Param("memberId") long memberId);
 
-    @Query(value = "select * from ANSWER_COMMENT where ANSWER_ID = :answerId and MEMBER_ID = :memberId and ANSWER_COMMENT_ID = :answerCommentId", nativeQuery = true)
-    public AnswerComment findByAnswerIdAndMemberIdAndAnswerCommentId(@Param("answerId")long answerId, @Param("memberId") long memberId, @Param("answerCommentId") long answerCommentId);
+    @Query(value = "select * from ANSWER_COMMENT where ANSWER_ID = :answerId and MEMBER_ID = :memberId and ANSWER_COMMENTS_ID = :answerCommentsId", nativeQuery = true)
+    public AnswerComment findByAnswerIdAndMemberIdAndAnswerCommentId(@Param("answerId")long answerId, @Param("memberId") long memberId, @Param("answerCommentsId") long answerCommentId);
 
     @Query(value = "select * from ANSWER_COMMENT where MEMBER_ID = :memberId", nativeQuery = true)
     public List<AnswerComment> findByMemberId(@Param("memberId")long memberId);

@@ -19,15 +19,15 @@ public interface QuestionCommentMapper {
         question.setQuestionId(createQuestionCommentDto.getQuestionId());
 
         questionComment.setQuestion(question);
-        questionComment.setQuestionComment(createQuestionCommentDto.getQuestionComment());
+        questionComment.setQuestionComments(createQuestionCommentDto.getQuestionComments());
 
         return questionComment;
     }
 
     default QuestionCommentResponseDto.QuestionCommentsInfo questionCommentToCommentInfo(QuestionComment questionComment){
         return QuestionCommentResponseDto.QuestionCommentsInfo.builder()
-                .questionCommentId(questionComment.getQuestionCommentId())
-                .questionComments(questionComment.getQuestionComment())
+                .questionCommentsId(questionComment.getQuestionCommentsId())
+                .questionComments(questionComment.getQuestionComments())
                 .member(MemberResponseDto.MemberComments.builder()
                         .nickName(questionComment.getMember().getNickName())
                         .build())
@@ -41,9 +41,9 @@ public interface QuestionCommentMapper {
 
         Question question = new Question();
         question.setQuestionId(updateQuestionCommentDto.getQuestionId());
-        questionComment.setQuestionCommentId(updateQuestionCommentDto.getQuestionCommentId());
+        questionComment.setQuestionCommentsId(updateQuestionCommentDto.getQuestionCommentsId());
         questionComment.setQuestion(question);
-        questionComment.setQuestionComment(updateQuestionCommentDto.getQuestionComment());
+        questionComment.setQuestionComments(updateQuestionCommentDto.getQuestionComments());
         return questionComment;
     }
 

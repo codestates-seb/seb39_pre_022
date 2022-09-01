@@ -14,7 +14,7 @@ public class QuestionCommentResponseDto {
     @AllArgsConstructor
     @Builder
     public static class QuestionCommentsInfo {
-        private long questionCommentId;
+        private long questionCommentsId;
         private String questionComments;
         private MemberComments member;
     }

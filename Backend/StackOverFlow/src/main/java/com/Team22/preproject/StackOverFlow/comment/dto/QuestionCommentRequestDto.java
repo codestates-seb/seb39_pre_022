@@ -18,7 +18,7 @@ public class QuestionCommentRequestDto {
         private Member member;
         private long questionId;
         @NotEmpty
-        private String questionComment;
+        private String questionComments;
     }
 
     @Data
@@ -27,10 +27,10 @@ public class QuestionCommentRequestDto {
     @Builder
     public static class UpdateQuestionCommentDto {
         private long questionId;
-        private long questionCommentId;
+        private long questionCommentsId;
         private Member member;
         @NotEmpty
-        private String questionComment;
+        private String questionComments;
     }
 
 }
