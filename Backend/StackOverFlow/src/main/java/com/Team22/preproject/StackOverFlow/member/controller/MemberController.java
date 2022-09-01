@@ -2,6 +2,8 @@ package com.Team22.preproject.StackOverFlow.member.controller;
 
 import com.Team22.preproject.StackOverFlow.dto.response.MessageResponseDto;
 import com.Team22.preproject.StackOverFlow.dto.response.SingleResponseWithMessageDto;
+import com.Team22.preproject.StackOverFlow.exception.BusinessLogicException;
+import com.Team22.preproject.StackOverFlow.exception.ExceptionCode;
 import com.Team22.preproject.StackOverFlow.member.dto.MemberRequestDto;
 import com.Team22.preproject.StackOverFlow.member.dto.MemberResponseDto;
 import com.Team22.preproject.StackOverFlow.member.entity.Member;
@@ -80,4 +82,61 @@ public class MemberController {
         memberService.deleteMember(memberId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request)
+    {
+        HttpSession session = request.getSession(false);
+
+        if (session == null)
+        {
+            throw new BusinessLogicException(ExceptionCode.CONSTRAINT_VIOLATION_ERROR);
+        }
+
+        session.invalidate();
+
+        return "redirect:/";
+    }
+
+    //회원 정보 수정
+    @PatchMapping
+    public ResponseEntity updateMember(@RequestBody MemberRequestDto.updateDto updateDto,
+                                       @SessionAttribute(name= LOGIN_MEMBER) Member loginMember)
+    {
+        // updateDto memberId, password encoding 설정
+        updateDto.setMemberId(loginMember.getMemberId());
+        updateDto.setPassword(passwordEncoder.encode(updateDto.getPassword()));
+        // DB update
+        Member member = memberService.updateMember(mapper.updateDtoToMember(updateDto));
+        // update ResponseDto mapping
+        MemberResponseDto.UpdateDto memberInfo = mapper.memberToUpdateDto(member);
+
+        return new ResponseEntity<>(new SingleResponseWithMessageDto(memberInfo, "SUCCESS"), HttpStatus.OK);
+    }
+
+
+
+
+//    @PostConstruct
+//    public void init2Members() {
+//        MemberRequestDto.singUpDto testUser1 = MemberRequestDto.singUpDto.builder()
+//                .email("hdg@gmail.com")
+//                .nickName("HonGilDong")
+//                .password(passwordEncoder.encode("1234"))
+//                .build();
+//
+//        Member testMember1 = mapper.signUpDtoToMember(testUser1);
+//        memberService.createMember(testMember1);
+//
+//
+//        MemberRequestDto.singUpDto testUser2 = MemberRequestDto.singUpDto.builder()
+//                .email("test@gmail.com")
+//                .nickName("test")
+//                .password(passwordEncoder.encode("test!"))
+//                .build();
+//
+//        Member testMember2 = mapper.signUpDtoToMember(testUser2);
+//        memberService.createMember(testMember2);
+//    }
+
 }
