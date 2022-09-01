@@ -67,8 +67,8 @@ public class AnswerCommentController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{answerCommentId}")
     public MessageResponseDto deleteAnswerComment(@Positive long answerId,
-                                      @Positive long answerCommentId,
-                                      @SessionAttribute(name=LOGIN_MEMBER) Member loginMember)
+                                                  @Positive long answerCommentId,
+                                                  @SessionAttribute(name=LOGIN_MEMBER) Member loginMember)
     {
         AnswerComment answerComment = new AnswerComment();
         Answer answer = new Answer();
