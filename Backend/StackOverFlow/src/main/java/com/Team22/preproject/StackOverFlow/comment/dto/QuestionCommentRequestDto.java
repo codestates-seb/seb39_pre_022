@@ -1,5 +1,6 @@
 package com.Team22.preproject.StackOverFlow.comment.dto;
 
+import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,22 +14,23 @@ public class QuestionCommentRequestDto {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class CreateQCommentDto {
-        private long memberId;
+    public static class CreateQuestionCommentDto {
+        private Member member;
         private long questionId;
         @NotEmpty
-        private String questionComments;
+        private String questionComment;
     }
 
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
-    public static class UpdateQCommentDto {
+    public static class UpdateQuestionCommentDto {
         private long questionId;
-        private long memberId;
+        private long questionCommentId;
+        private Member member;
         @NotEmpty
-        private String questionComments;
+        private String questionComment;
     }
 
 }

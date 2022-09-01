@@ -40,7 +40,7 @@ public class LikeController {
 
     @DeleteMapping
     public ResponseEntity downVote(@SessionAttribute(name= SessionConst.LOGIN_MEMBER)Member loginMember,
-                       @PathVariable(name="answer-id") long answerId)
+                                   @PathVariable(name="answer-id") long answerId)
     {
         SetLikeDto setLikeDto = SetLikeDto.builder()
                 .member(loginMember)
