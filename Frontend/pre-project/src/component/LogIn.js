@@ -3,26 +3,37 @@ import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../img/stack-overflow-logo.png';
 import Navbar from './Navbar';
+import { useCookies } from 'react-cookie'; // useCookies import
 
 export default function Login() {
     const url = 'http://localhost:8080/members/login';
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [ok, setOk] = useState(false);
     const navigate = useNavigate();
 
+    const [cookies, setCookie, removeCookie] = useCookies(['id']); // 쿠키 훅 
+    // console.log(cookies)
+
     const login = () => {
+        const token = cookies.id;
+
         fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', },
             body: JSON.stringify({
                 email: email,
                 password: password,
-            })
+            }),
+            token: token
         })
             .then((res) => {
                 // console.log(res)
                 console.log('로그인 성공');
+                setCookie('id', res.data.token)
+                setOk(true)
                 navigate('/')
+                localStorage.setItem('access-token', res.access_token)
             })
             .catch((err) => {
                 console.log(err)
@@ -33,7 +44,10 @@ export default function Login() {
 
     return (
         <LoginContainer>
-            <Navbar />
+            <Navbar
+                email={email}
+                ok={ok}
+            />
             <Link to='/'><img className='logo' src={logo} alt='stack-overflow-logo' /></Link>
             <div className='container'>
                 <form onSubmit={(e) => e.preventDefault()} className='login-form'>

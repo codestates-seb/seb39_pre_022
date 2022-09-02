@@ -1,12 +1,37 @@
 import React from 'react';
 import Navbar from './Navbar';
+import Questions from './Questions';
 import { Link, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import Questions from './Questions';
+import styled from 'styled-components';
 
 export default function Question() {
+    const url = 'http://localhost:8080/questions/{question-Id}/answer';
+    const [answer, setAnswer] = React.useState('')
+    const navigate = useNavigate();
+
+    const answerHander = () => {
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                answer: answer
+            })
+        })
+            .then((res) => {
+                console.log(res)
+                console.log('답변 등록 성공');
+                navigate('/question')
+            })
+            .catch((err) => {
+                console.log('error:', err)
+                console.log('답변 등록 실패');
+            });
+    }
+
     return (
         <Answer>
             <Navbar />
@@ -28,12 +53,13 @@ export default function Question() {
                     onChange={(event, editor) => {
                         const data = editor.getData();
                         console.log(data)
+                        setAnswer(data)
                     }}
                     onFocus={(event, editor) => {
                         console.log('Focus.', editor);
                     }}
                 />
-                <button className='answer_btn'>Post Your Answer</button>
+                <button onClick={answerHander} className='answer_btn'>Post Your Answer</button>
             </div>
         </Answer>
     )

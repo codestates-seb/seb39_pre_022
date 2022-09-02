@@ -11,7 +11,7 @@ import {
 } from "../styles/NavbarStyle";
 import LogoImg from "../img/logo.png";
 
-function Navbar() {
+function Navbar({ email, ok }) {
   const [extendNavbar, setExtendNavbar] = useState(false);
   const [search, setSearch] = useState("");
   return (
@@ -26,7 +26,7 @@ function Navbar() {
               placeholder="Search"
               onChange={e => setSearch(e.target.value)}
             />
-            {console.log(search)}
+            {/* {console.log(search)} */}
           </NavbarLink>
 
           <OpenLinksButton /* 사이즈가 작아졌을 때 나타나는 버거메뉴 */
@@ -40,6 +40,8 @@ function Navbar() {
         </LeftContainer>
 
         <RightContainer>
+          {/* 로그인일 때 이메일 일단 표시 */}
+          {ok && <button>{email}</button>}
           <NavbarLink to="/login"><button className="loginBtn">Log in</button></NavbarLink>
           <NavbarLink to="/signup"><button className="signupBtn">Sign up</button></NavbarLink>
         </RightContainer>

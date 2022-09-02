@@ -13,7 +13,10 @@ export default function SignUp() {
     const signUp = () => {
         fetch(url, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: "application/json",
+            },
             body: JSON.stringify({
                 nickName: nickName,
                 email: email,
@@ -21,12 +24,12 @@ export default function SignUp() {
             })
         })
             .then((res) => {
+                console.log('회원가입 성공')
                 console.log('respnose:', res)
-                if (res.status === 200) {
-                    navigate('/login')
-                }
+                navigate('/login')
             })
             .catch((err) => {
+                console.log('회원가입 실패')
                 console.log('error:', err)
             });
     }

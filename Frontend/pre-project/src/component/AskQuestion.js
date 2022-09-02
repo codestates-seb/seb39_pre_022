@@ -7,6 +7,8 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default function AskQuestion() {
+    // console.log(CKEditor.instances.contents.getData());
+
     const url = 'http://localhost:8080/questoins/{member-id}';
     const [title, setTitle] = useState('')
     const [question, setQuestion] = useState('')
@@ -23,12 +25,12 @@ export default function AskQuestion() {
             })
         })
             .then((res) => {
-                // console.log(res)
+                console.log(res)
                 console.log('질문 등록 성공');
                 navigate('/question')
             })
             .catch((err) => {
-                console.log(err)
+                console.log('error:', err)
                 console.log('질문 등록 실패');
             });
     }
@@ -82,10 +84,14 @@ export default function AskQuestion() {
                         <label htmlFor='body'>Body</label>
                         <p className='label'>Include all the information someone would need to answer your question</p>
                         <CKEditor
+                            id='text'
                             editor={ClassicEditor}
                             onChange={(event, editor) => {
+                                console.log(event)
                                 const data = editor.getData();
                                 console.log(data)
+                                setQuestion(data)
+                                console.log(setQuestion)
                             }}
                             onFocus={(event, editor) => {
                                 console.log('Focus.', editor);
