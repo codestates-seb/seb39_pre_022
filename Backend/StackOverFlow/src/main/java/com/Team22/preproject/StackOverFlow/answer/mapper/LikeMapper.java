@@ -6,6 +6,8 @@ import com.Team22.preproject.StackOverFlow.answer.dto.LikeResponseDto.LikeInfoDt
 import com.Team22.preproject.StackOverFlow.answer.entity.Answer;
 import com.Team22.preproject.StackOverFlow.answer.entity.Like;
 import org.mapstruct.Mapper;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 
 @Mapper(componentModel = "spring")
 public interface LikeMapper {
@@ -18,8 +20,8 @@ public interface LikeMapper {
         Answer answer = new Answer();
         answer.setAnswerId(setLikeDto.getAnswerId());
 
-        like.addMember(setLikeDto.getMember());
-        like.addAnswer(answer);
+        like.setMember(setLikeDto.getMember());
+        like.setAnswer(answer);
 
         return like;
     }

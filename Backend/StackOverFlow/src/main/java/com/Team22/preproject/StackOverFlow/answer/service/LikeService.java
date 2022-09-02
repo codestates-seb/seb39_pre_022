@@ -6,6 +6,7 @@ import com.Team22.preproject.StackOverFlow.answer.repository.LikeRepository;
 import com.Team22.preproject.StackOverFlow.exception.BusinessLogicException;
 import com.Team22.preproject.StackOverFlow.exception.ExceptionCode;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,12 +14,15 @@ import java.util.Optional;
 
 @Service
 @Transactional
+@Slf4j
 @RequiredArgsConstructor
 public class LikeService {
     private final LikeRepository likeRepository;
 
 
-    public Like createLike(Like like) {
+    public Like createLike(Like like)
+    {
+        log.info("Like 객체 = {}", like);
         return likeRepository.save(like);
     }
 
@@ -45,7 +49,9 @@ public class LikeService {
     @Transactional(readOnly = true)
     public Like findVerifiedLike(long answerId, long memberId){
         Optional<Like> optionalLike = likeRepository.findByAnswerIdAndMemberId(answerId, memberId);
-        return optionalLike.get();
+        log.info("OptionalLike {}", optionalLike);
+        if(optionalLike.isPresent()) return optionalLike.get();
+        else return null;
     }
 
 }

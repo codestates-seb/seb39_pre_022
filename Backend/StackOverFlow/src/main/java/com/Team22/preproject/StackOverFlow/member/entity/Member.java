@@ -52,7 +52,6 @@ public class Member extends Auditable {
 
     public void addLike(Like like) {
         if(like != null && !likes.contains(like)){
-            like.addMember(this);
             this.likes.add(like);
         }
     }

@@ -43,7 +43,7 @@ public class Answer extends Auditable{
     @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<AnswerComment> answerComments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "answer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Like> likes = new ArrayList<>();
 
     public void addLike(Like like) {
