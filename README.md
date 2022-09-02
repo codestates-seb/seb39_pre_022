@@ -13,5 +13,7 @@
 ```npm install --save styled-components```
 
 ### 추가
-```npm install react-cookie```
+```npm install react-cookie``` <br>
 ```npm install react-router-dom```
+
+-----
