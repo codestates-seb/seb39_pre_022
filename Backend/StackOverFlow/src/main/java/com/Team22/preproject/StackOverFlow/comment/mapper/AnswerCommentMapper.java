@@ -16,7 +16,7 @@ public interface AnswerCommentMapper {
         AnswerComment answerComment = new AnswerComment();
         Answer answer = new Answer();
 
-        answerComment.setAnswerComments(createAnswerCommentDto.getAnswerComments());
+        answerComment.setAnswerComment(createAnswerCommentDto.getAnswerComment());
         answerComment.setMember(createAnswerCommentDto.getMember());
 
         answer.setAnswerId(createAnswerCommentDto.getAnswerId());
@@ -30,8 +30,8 @@ public interface AnswerCommentMapper {
         AnswerComment answerComment = new AnswerComment();
         Answer answer = new Answer();
 
-        answerComment.setAnswerCommentsId(updateAnswerCommentDto.getAnswerCommentsId());
-        answerComment.setAnswerComments(updateAnswerCommentDto.getAnswerComments());
+        answerComment.setAnswerCommentId(updateAnswerCommentDto.getAnswerCommentId());
+        answerComment.setAnswerComment(updateAnswerCommentDto.getAnswerComment());
         answerComment.setMember(updateAnswerCommentDto.getMember());
 
         answer.setAnswerId(updateAnswerCommentDto.getAnswerId());
@@ -44,8 +44,8 @@ public interface AnswerCommentMapper {
     public default AnswerCommentInfo answerCommentToAnswerCommentInfo(AnswerComment answerComment)
     {
         AnswerCommentInfo answerCommentInfo = new AnswerCommentInfo();
-        answerCommentInfo.setAnswerCommentsId(answerComment.getAnswerCommentsId());
-        answerCommentInfo.setAnswerComments(answerComment.getAnswerComments());
+        answerCommentInfo.setAnswerCommentId(answerComment.getAnswerCommentId());
+        answerCommentInfo.setAnswerComment(answerComment.getAnswerComment());
         answerCommentInfo.setMember(MemberResponseDto.MemberComments.builder()
                 .nickName(answerComment.getMember().getNickName()).build());
 

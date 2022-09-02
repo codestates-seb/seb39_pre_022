@@ -21,21 +21,21 @@ public class QuestionCommentService {
     }
 
     public QuestionComment updateQuestionComment(QuestionComment questionComment) {
-        QuestionComment findQuestionComment = findVerifiedQuestionComment(questionComment.getQuestionCommentsId(),
+        QuestionComment findQuestionComment = findVerifiedQuestionComment(questionComment.getQuestionCommentId(),
                 questionComment.getQuestion().getQuestionId(),
                 questionComment.getMember().getMemberId());
-        Optional.ofNullable(questionComment.getQuestionComments()).ifPresent(findQuestionComment::setQuestionComments);
+        Optional.ofNullable(questionComment.getQuestionComment()).ifPresent(findQuestionComment::setQuestionComment);
         return questionCommentRepository.save(findQuestionComment);
     }
 
-    public void deleteQuestionComment(long questionCommentsId, long questionId, long memberId) {
-        QuestionComment findQuestionComment = findVerifiedQuestionComment(questionCommentsId,questionId,memberId);
+    public void deleteQuestionComment(long questionCommentId, long questionId, long memberId) {
+        QuestionComment findQuestionComment = findVerifiedQuestionComment(questionCommentId,questionId,memberId);
         questionCommentRepository.delete(findQuestionComment);
     }
 
     @Transactional(readOnly = true)
-    public QuestionComment findVerifiedQuestionComment(long questionCommentsId, long questionId, long memberId){
-        Optional<QuestionComment> optionalQuestionComment = questionCommentRepository.finByIdAndQuestionIdAndMemberId(questionCommentsId,questionId,memberId);
+    public QuestionComment findVerifiedQuestionComment(long questionCommentId, long questionId, long memberId){
+        Optional<QuestionComment> optionalQuestionComment = questionCommentRepository.finByIdAndQuestionIdAndMemberId(questionCommentId,questionId,memberId);
         return optionalQuestionComment.orElseThrow(()->new BusinessLogicException(ExceptionCode.QUESTION_COMMENT_NOT_FOUND));
     }
 

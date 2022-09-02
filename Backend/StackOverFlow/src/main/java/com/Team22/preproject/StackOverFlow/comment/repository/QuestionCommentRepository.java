@@ -12,8 +12,8 @@ import java.util.Optional;
 public interface QuestionCommentRepository extends JpaRepository<QuestionComment, Long> {
 
 
-    @Query(value = "select * from QUESTION_COMMENT where QUESTION_COMMENTS_ID = :questionCommentsId and MEMBER_ID = :memberId and QUESTION_ID = :questionId", nativeQuery = true)
-    Optional<QuestionComment> finByIdAndQuestionIdAndMemberId(@Param("questionCommentsId") long questionCommentsId,
+    @Query(value = "select * from QUESTION_COMMENT where QUESTION_COMMENT_ID = :questionCommentId and MEMBER_ID = :memberId and QUESTION_ID = :questionId", nativeQuery = true)
+    Optional<QuestionComment> finByIdAndQuestionIdAndMemberId(@Param("questionCommentId") long questionCommentId,
                                                               @Param("questionId") long questionId,
                                                               @Param("memberId") long memberId);
 

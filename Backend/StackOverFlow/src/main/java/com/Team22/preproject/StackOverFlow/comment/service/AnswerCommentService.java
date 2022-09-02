@@ -31,7 +31,7 @@ public class AnswerCommentService {
 
     public AnswerComment updateAnswerComment(AnswerComment answerComment){
         AnswerComment findAnswer = findAnswerComment(answerComment);
-        ofNullable(answerComment.getAnswerComments()).ifPresent(findAnswer::setAnswerComments);
+        ofNullable(answerComment.getAnswerComment()).ifPresent(findAnswer::setAnswerComment);
         return answerCommentRepository.save(findAnswer);
     }
 
@@ -41,7 +41,7 @@ public class AnswerCommentService {
 
     @Transactional(readOnly = true)
     public AnswerComment findAnswerComment(AnswerComment answerComment){
-        Optional<AnswerComment> findAnswer = answerCommentRepository.findById(answerComment.getAnswerCommentsId());
+        Optional<AnswerComment> findAnswer = answerCommentRepository.findById(answerComment.getAnswerCommentId());
         return findAnswer
                 .orElseThrow(() ->  new BusinessLogicException(ExceptionCode.ANSWER_COMMENT_NOT_FOUND));
     }
@@ -54,6 +54,6 @@ public class AnswerCommentService {
     }
 
     private boolean exist(AnswerComment answerComment) {
-        return answerCommentRepository.findByAnswerIdAndMemberIdAndAnswerCommentId(answerComment.getAnswer().getAnswerId(), answerComment.getMember().getMemberId(), answerComment.getAnswerCommentsId()) != null;
+        return answerCommentRepository.findByAnswerIdAndMemberIdAndAnswerCommentId(answerComment.getAnswer().getAnswerId(), answerComment.getMember().getMemberId(), answerComment.getAnswerCommentId()) != null;
     }
 }
