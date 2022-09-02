@@ -24,8 +24,18 @@ public interface QuestionMapper{
     QuestionResponseDto.CreateQuestionDto createdDtoToQuestion(Question question);
 
     QuestionResponseDto.QuestionInfo questionToInfo(Question question);
-
     List<QuestionResponseDto.QuestionInfo> questionToQuestionInfo(List<Question> questionList);
+
+    default QuestionResponseDto.QuestionInfoList questionToInfoList(Question question){
+        return QuestionResponseDto.QuestionInfoList.builder()
+                .questionId(question.getQuestionId())
+                .title(question.getTitle())
+                .question(question.getQuestion())
+                .memberId(question.getMember().getMemberId())
+                .build();
+    }
+
+    List<QuestionResponseDto.QuestionInfoList> questionToQuestionInfoList(List<Question> questionList);
 
     default Question updateQuestionDtoToQuestion(QuestionRequestDto.UpdateQuestionDto updateQuestionDto){
         Question question = new Question();
@@ -37,4 +47,7 @@ public interface QuestionMapper{
         question.setQuestion(updateQuestionDto.getQuestion());
         return question;
     }
+
+//    List<QuestionResponseDto.QuestionAndAnswer> questionToQuestionAnswerInfoList(List<Question> questionList);
+
 }

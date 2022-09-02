@@ -8,7 +8,6 @@ import Questions from './component/Questions';
 import AskQuestion from './component/AskQuestion';
 
 
-
 export default function App() {
   return (
     <BrowserRouter>
@@ -25,7 +24,6 @@ export default function App() {
     </BrowserRouter>
   );
 }
-
 
 // 1rem === 12-3px
 // 세밀하게 작업할 때는 .단위

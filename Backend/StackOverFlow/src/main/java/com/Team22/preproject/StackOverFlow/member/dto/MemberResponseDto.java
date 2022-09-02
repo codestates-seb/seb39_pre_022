@@ -24,4 +24,5 @@ public class MemberResponseDto {
         private String nickName;
         private long memberId;
     }
+
 }

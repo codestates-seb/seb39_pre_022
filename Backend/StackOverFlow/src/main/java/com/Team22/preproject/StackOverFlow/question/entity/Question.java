@@ -4,6 +4,7 @@ import com.Team22.preproject.StackOverFlow.answer.entity.Answer;
 import com.Team22.preproject.StackOverFlow.audit.Auditable;
 import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import com.Team22.preproject.StackOverFlow.comment.entity.QuestionComment;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

@@ -1,10 +1,8 @@
 package com.Team22.preproject.StackOverFlow.question.controller;
 
 
-import com.Team22.preproject.StackOverFlow.dto.response.MultiResponseWithMessageDto;
 import com.Team22.preproject.StackOverFlow.dto.response.MultiResponseWithPageInfoDto;
 import com.Team22.preproject.StackOverFlow.dto.response.SingleResponseWithMessageDto;
-import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import com.Team22.preproject.StackOverFlow.question.dto.QuestionRequestDto;
 import com.Team22.preproject.StackOverFlow.question.entity.Question;
 import com.Team22.preproject.StackOverFlow.question.mapper.QuestionMapper;
@@ -13,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,7 +41,7 @@ public class QuestionController {
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.createdDtoToQuestion(question),"CREATED"), HttpStatus.CREATED);
     }
 
-    //본인이 작성한 질문 조회
+    //본인이 작성한 특정 질문 조회
     @GetMapping("/{member-id}/question/{question-id}")
     public ResponseEntity getQuestion(@Positive @PathVariable("member-id") long memberId,
                                         @Positive @PathVariable("question-id") long questionId){
@@ -84,17 +81,27 @@ public class QuestionController {
     }
 
 
-//    //전체 질문 조회
+    //전체 질문 조회(예비 메인)
+    @GetMapping
+    public ResponseEntity getQuestions(@Positive @PathParam("page") int page,
+                                       @Positive @PathParam("size") int size,
+                                       Question question){
+        Page<Question> pageQuestions = questionService.findQuestions(page-1,size);
+        List<Question> questionList = pageQuestions.getContent();
+
+        return new ResponseEntity(new MultiResponseWithPageInfoDto<>(mapper.questionToQuestionInfoList(questionList),pageQuestions),HttpStatus.OK);
+    }
+
+    //main페이지
 //    @GetMapping
-//    public ResponseEntity getQuestions(@Positive @PathParam("page") int page,
-//                                       @Positive @PathParam("size") int size){
+//    public ResponseEntity getAllQuestionAndAnswer(@Positive @PathParam("page") int page,
+//                                                  @Positive @PathParam("size") int size,
+//                                                  Question question){
 //        Page<Question> pageQuestions = questionService.findQuestions(page-1,size);
 //        List<Question> questionList = pageQuestions.getContent();
 //
-//        return new ResponseEntity(new MultiResponseWithPageInfoDto<>(mapper.questionToQuestionInfo(questionList),pageQuestions),HttpStatus.OK);
+//        return new ResponseEntity(new MultiResponseWithPageInfoDto<>(mapper.questionToQuestionAnswerInfoList(questionList),pageQuestions),HttpStatus.OK);
 //    }
-
-    //최신순 조회
 
     //내용별 조회
 }
