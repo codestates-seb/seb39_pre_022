@@ -11,3 +11,7 @@
 
 ### 스타일 컴포넌트
 ```npm install --save styled-components```
+
+### 추가
+```npm install react-cookie```
+```npm install react-router-dom```
