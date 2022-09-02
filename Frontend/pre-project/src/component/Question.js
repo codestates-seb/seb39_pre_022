@@ -1,6 +1,5 @@
 import React from 'react';
-import Navbar from './Navbar';
-import Questions from './Questions';
+import Questions from "./page/Posts";
 import { Link, useNavigate } from 'react-router-dom';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -34,8 +33,8 @@ export default function Question() {
 
     return (
         <Answer>
-            <Navbar />
-            <hr></hr>
+            {/* <Navbar />
+            <hr></hr> */}
             <Link className='ask_Link' to='/askquestion'><button className='ask_btn'>Ask Question</button></Link>
             <div className='you'>
                 <Questions />

@@ -1,18 +1,13 @@
 import React from 'react';
 import Navbar from './Navbar';
 import Posts from './Posts'
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Main() {
     return (
         <MainContainer>
             <Navbar />
-            <hr></hr>
-            <section>
-                <span className='question_content'>Top Questions</span><Link to='/askquestion'><button className='ask_btn'>Ask Question</button></Link>
-            </section>
-            <Link to='/question'>plz help me</Link>
             <Posts />
         </MainContainer>
     )

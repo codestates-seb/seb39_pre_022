@@ -4,9 +4,8 @@ import Main from './component/Main';
 import Login from './component/LogIn';
 import SignUp from './component/SignUp';
 import Question from './component/Question';
-import Questions from './component/Questions';
 import AskQuestion from './component/AskQuestion';
-
+import Pege from "./component/page/Posts";
 
 export default function App() {
   return (
@@ -14,7 +13,7 @@ export default function App() {
       <div className="App">
         <Routes>
           <Route path='/' element={<Main />} />
-          <Route path='/questions' element={<Questions />} />
+          <Route path='/questions' element={<Pege />} />
           <Route path='/question' element={<Question />} />
           <Route path='/askquestion' element={<AskQuestion />} />
           <Route path='/login' element={<Login />} />

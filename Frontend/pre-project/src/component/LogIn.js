@@ -12,6 +12,7 @@ export default function Login() {
     const [ok, setOk] = useState(false);
     const navigate = useNavigate();
 
+    // eslint-disable-next-line no-unused-vars
     const [cookies, setCookie, removeCookie] = useCookies(['id']); // 쿠키 훅 
     // console.log(cookies)
 
@@ -86,8 +87,9 @@ export default function Login() {
 const LoginContainer = styled.div`
 background: rgb(241, 242, 243);
 height: 100vh;
-
+text-align: center; // 추가했습니다.
 .logo{
+
     width: 2rem;
     margin-top: 11rem;
     padding: 1.5rem;

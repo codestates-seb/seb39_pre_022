@@ -1,15 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Questions from "./Questions";
-//import dummy from "../mockData.json";
-//글 목록 li
-
 export const Ul = styled.ul`
 display: flex;
 justify-content: center;
 align-items: center;
-//background-color: aqua;
-
+padding: 0;
+ul{padding:0;}
 li{
   display: list-item;
   width: 70%;
@@ -17,7 +14,6 @@ li{
   border-top: solid 1px lightgray;
   margin: auto;
   padding: 0 1rem;
-  //background-color: pink;
 }
 h2{
   color: #0074cc;
@@ -36,7 +32,7 @@ const Post = ({ posts, loading }) => {
       <ul>
         {posts.map((post) => (
           <li key={post.id}>
-            <h2 to="/questions" element={<Questions />}>{post.title}</h2>
+            <h2 ><Link to='/questions'>{post.title}</Link></h2>
             <p className="postBody">{post.body}</p>
             <p className="profile">username: {post.userId}</p>
 

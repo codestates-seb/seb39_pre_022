@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Post from "./Post";
-import Pagination from "./Pagination";
-import styled from 'styled-components';
+import Navbar from "../Navbar";
+import styled from "styled-components";
 
 const TopQuestions = styled.div`
 section{
@@ -15,13 +15,12 @@ section{
   //background-color: aliceblue;
 }
 `
-
 function Posts() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(10);
-  // 제한하고 싶은 게시물의 갯수.
+  const [postsPerPage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +31,7 @@ function Posts() {
       setPosts(response.data);
       setLoading(false);
     };
-    fetchData();
+    fetchData(); 
   }, []);
 
   const indexOfLast = currentPage * postsPerPage;
@@ -45,18 +44,15 @@ function Posts() {
 
   return (
     <div className="Posts">
-             <TopQuestions>
+      <Navbar />
+      <TopQuestions>
              <section>
                 <span className='question_content'>Top Questions</span><Link to='/askquestion'><button className='ask_btn'>Ask Question</button></Link>
             </section>
             </TopQuestions>
-            {/* <Link to='/question'>plz help me</Link> */}
       <Post posts={currentPosts(posts)} loading={loading}></Post>
-      <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={posts.length}
-        paginate={setCurrentPage}
-      ></Pagination>
+      
+      {/* <Link to='/question'>plz help me</Link> */}
     </div>
   );
 }

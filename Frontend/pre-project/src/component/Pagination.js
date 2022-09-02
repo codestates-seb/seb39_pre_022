@@ -59,10 +59,10 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
             handleClick()
 
             }}
-            style={{
-              backgroundColor: isActive ? "#f48225" : "",
-              color: isActive ? "white" : "",
-            }}
+            // style={{
+            //   backgroundColor: isActive ? "#f48225" : "",
+            //   color: isActive ? "white" : "",
+            // }}
               className="page-link">
               {number}
             </PageLi>

@@ -13,6 +13,7 @@ import LogoImg from "../img/logo.png";
 
 function Navbar({ email, ok }) {
   const [extendNavbar, setExtendNavbar] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [search, setSearch] = useState("");
   return (
     <NavbarContainer extendNavbar={extendNavbar}>
@@ -26,7 +27,6 @@ function Navbar({ email, ok }) {
               placeholder="Search"
               onChange={e => setSearch(e.target.value)}
             />
-            {/* {console.log(search)} */}
           </NavbarLink>
 
           <OpenLinksButton /* 사이즈가 작아졌을 때 나타나는 버거메뉴 */
