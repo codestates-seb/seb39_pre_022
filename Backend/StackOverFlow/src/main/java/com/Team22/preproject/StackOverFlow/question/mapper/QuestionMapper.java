@@ -22,11 +22,13 @@ public interface QuestionMapper{
     QuestionResponseDto.CreateQuestionDto createdDtoToQuestion(Question question);
 
     QuestionResponseDto.QuestionInfo questionToInfo(Question question);
+
     List<QuestionResponseDto.QuestionInfo> questionToQuestionInfo(List<Question> questionList);
+
 
     default QuestionResponseDto.QuestionInfoList questionToInfoList(Question question){
         return QuestionResponseDto.QuestionInfoList.builder()
-                .questionId(question.getQuestionId())
+//                .questionId(question.getQuestionId())
                 .title(question.getTitle())
                 .question(question.getQuestion())
                 .memberId(question.getMember().getMemberId())

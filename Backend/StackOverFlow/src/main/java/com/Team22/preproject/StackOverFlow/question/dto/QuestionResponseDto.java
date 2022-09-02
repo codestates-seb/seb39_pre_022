@@ -27,17 +27,17 @@ public class QuestionResponseDto {
     @AllArgsConstructor
     @Builder
     public static class QuestionInfoList{
-        private long questionId;
+//        private long questionId;
         private long memberId;
         private String title;
         private String question;
     }
+
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
     public static class QuestionInfo{
-        private long questionId;
         private String title;
         private String question;
     }
