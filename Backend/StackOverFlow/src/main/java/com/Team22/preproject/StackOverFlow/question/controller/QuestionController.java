@@ -31,7 +31,6 @@ import java.util.List;
 public class QuestionController {
     private final QuestionService questionService;
     private final QuestionMapper mapper;
-    private final SessionManager sessionManager;
     /*
         db에서 memberId를 가져오려면 path에 memberId를 넣어주거나 body에 넣어줘야 한다 코드가 지저분하기 때문에 바꿔줘야한다
         만약 body에 넣어주면 get method에서는 잘 동작하지 않는다 get은 dto를 사용하지 않기 때문에 - 용호님이랑 의논

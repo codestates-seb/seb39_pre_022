@@ -5,12 +5,15 @@ import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import com.Team22.preproject.StackOverFlow.question.dto.QuestionRequestDto;
 import com.Team22.preproject.StackOverFlow.question.dto.QuestionResponseDto;
 import com.Team22.preproject.StackOverFlow.question.entity.Question;
+import com.Team22.preproject.StackOverFlow.question.entity.SessionConst;
 import com.Team22.preproject.StackOverFlow.stub.member.MemberStub;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,7 +33,7 @@ public class QuestionStub {
         return questions;
     }
 
-    public static Question getQuestion(){
+    public static Question getQuestion(@SessionAttribute(name = SessionConst.LOGIN_MEMBER)Member member){
         Question question = new Question();
         question.setQuestionId(question.getQuestionId());
         question.setTitle("How to Java...");
@@ -51,7 +54,7 @@ public class QuestionStub {
 
     public static QuestionResponseDto.CreateQuestionDto createResponse(){
         return QuestionResponseDto.CreateQuestionDto.builder()
-                .questionId(getQuestion().getQuestionId())
+                .questionId(getQuestion(member).getQuestionId())
                 .title(createdQuestionDto().getTitle())
                 .question(createdQuestionDto().getQuestion())
                 .build();
@@ -76,8 +79,8 @@ public class QuestionStub {
 
     public static QuestionResponseDto.QuestionInfo questionInfo(){
         return QuestionResponseDto.QuestionInfo.builder()
-                .title(getQuestion().getTitle())
-                .question(getQuestion().getQuestion())
+                .title(getQuestion(member).getTitle())
+                .question(getQuestion(member).getQuestion())
                 .build();
     }
 

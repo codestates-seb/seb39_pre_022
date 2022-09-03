@@ -15,11 +15,12 @@ public class MemberStub {
     private static MemberMapper mapper;
     private static PasswordEncoder passwordEncoder;
 
+
     public static Member getMember(){
         Member member = new Member();
         member.setMemberId(1L);
         member.setEmail("hgd@gmail.com");
-        member.setPassword("1234");
+        member.setPassword("1234567891");
         member.setNickName("hgd");
         return member;
     }
@@ -29,7 +30,7 @@ public class MemberStub {
         return MemberRequestDto.singUpDto.builder()
                 .email("hgd@gmail.com")
                 .nickName("hgd")
-                .password("1234")
+                .password("1234567891")
                 .build();
     }
 

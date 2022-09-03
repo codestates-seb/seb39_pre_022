@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-09-01T20:56:43+0900",
-    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 11.0.15 (Azul Systems, Inc.)"
+    date = "2022-09-03T14:02:35+0900",
+    comments = "version: 1.5.2.Final, compiler: javac, environment: Java 11.0.13 (Oracle Corporation)"
 )
 @Component
 public class QuestionMapperImpl implements QuestionMapper {
@@ -38,7 +38,6 @@ public class QuestionMapperImpl implements QuestionMapper {
 
         QuestionResponseDto.QuestionInfo.QuestionInfoBuilder questionInfo = QuestionResponseDto.QuestionInfo.builder();
 
-        questionInfo.questionId( question.getQuestionId() );
         questionInfo.title( question.getTitle() );
         questionInfo.question( question.getQuestion() );
 

@@ -46,12 +46,12 @@ public class AnswerCommentController {
 
     @PatchMapping("/{answerCommentsId}")
     public ResponseEntity updateAnswerComment(@Positive @PathVariable(name="answerId") long answerId,
-                                              @Positive @PathVariable(name="answerCommentsId") long answerCommentsId,
+                                              @Positive @PathVariable(name="answerCommentId") long answerCommentId,
                                               @RequestBody updateAnswerCommentDto updateAnswerCommentDto,
                                               @SessionAttribute(name= LOGIN_MEMBER) Member loginMember )
     {
         updateAnswerCommentDto.setAnswerId(answerId);
-        updateAnswerCommentDto.setAnswerCommentsId(answerCommentsId);
+        updateAnswerCommentDto.setAnswerCommentId(answerCommentId);
         updateAnswerCommentDto.setMember(loginMember);
 
         AnswerComment answerComment = answerCommentService.updateAnswerComment(mapper.updateAnswerCommentDtoToAnswerComment(updateAnswerCommentDto));
@@ -62,13 +62,13 @@ public class AnswerCommentController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{answerCommentsId}")
     public MessageResponseDto deleteAnswerComment(@Positive @PathVariable(name="answerId") long answerId,
-                                                  @Positive @PathVariable(name="answerCommentsId") long answerCommentsId,
+                                                  @Positive @PathVariable(name="answerCommentId") long answerCommentId,
                                                   @SessionAttribute(name=LOGIN_MEMBER) Member loginMember)
     {
         AnswerComment answerComment = new AnswerComment();
         Answer answer = new Answer();
         answer.setAnswerId(answerId);
-        answerComment.setAnswerCommentsId(answerCommentsId);
+        answerComment.setAnswerCommentId(answerCommentId);
         answerComment.setMember(loginMember);
 
         answerCommentService.deleteAnswerComment(answerComment);

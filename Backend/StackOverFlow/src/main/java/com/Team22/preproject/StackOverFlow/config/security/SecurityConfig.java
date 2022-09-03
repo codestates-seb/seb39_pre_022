@@ -35,14 +35,15 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
             http.csrf().disable()
-//                    .cors().disable()
                             .authorizeRequests()
                             .anyRequest()
                             .permitAll();
-            http.headers().frameOptions().disable();
+            http.headers().frameOptions().disable()
+                            .and()
+                                    .apply(new CustomDsl());
             http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .maximumSessions(1)
             .and()
-                    .apply(new CustomDsl())
                     .and()
             .formLogin().disable();
     return http.build();
