@@ -20,7 +20,7 @@ import java.util.List;
 @Setter
 @Entity
 @NoArgsConstructor
-public class Question {
+public class Question extends Auditable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,12 +34,12 @@ public class Question {
     @Length(max = 300)
     private String title;
 
-    @Column(name = "CREATED_AT", updatable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
-
-    @LastModifiedDate
-    @Column(name = "MODIFIED_AT")
-    private LocalDateTime modifiedAt = LocalDateTime.now();
+//    @Column(name = "CREATED_AT", updatable = false)
+//    private LocalDateTime createdAt = LocalDateTime.now();
+//
+//    @LastModifiedDate
+//    @Column(name = "MODIFIED_AT")
+//    private LocalDateTime modifiedAt = LocalDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")

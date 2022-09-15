@@ -105,7 +105,6 @@ class QuestionControllerTest {
         actions.andExpect(status().isCreated())
                 .andExpect(jsonPath("$.data.title").value(createResponseDto.getTitle()))
                 .andExpect(jsonPath("$.message").value(messageResponseDto.getMessage()))
-//                .andExpect(jsonPath("$.session").value(session.getSessionContext()))
                 .andDo(document(
                         "question-create",
                         getRequestPreProcessor(),

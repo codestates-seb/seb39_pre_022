@@ -10,6 +10,9 @@ import com.Team22.preproject.StackOverFlow.member.entity.Member;
 import com.Team22.preproject.StackOverFlow.member.mapper.MemberMapper;
 import com.Team22.preproject.StackOverFlow.member.service.MemberService;
 import com.Team22.preproject.StackOverFlow.session.SessionManager;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -27,6 +30,7 @@ import javax.validation.constraints.Positive;
 
 import static com.Team22.preproject.StackOverFlow.auth.SessionConst.LOGIN_MEMBER;
 
+@Api(tags = {"Member API 제공 Controller"})
 @Validated
 @Slf4j
 @RestController
@@ -55,6 +59,11 @@ public class MemberController {
 
         return new ResponseEntity<>(message, HttpStatus.CREATED);
     }
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "email", value = "이메일", readOnly = true, dataType = "String", paramType = "body"),
+            @ApiImplicitParam(name = "nickName", value = "닉네임", readOnly = true, dataType = "String", paramType = "body"),
+            @ApiImplicitParam(name = "password", value = "비밀번호", readOnly = true, dataType = "String", paramType = "body")
+    })
 
     //로그인
     @PostMapping("/login")
@@ -66,6 +75,11 @@ public class MemberController {
         session.setAttribute(LOGIN_MEMBER, loginMember);
         return new ResponseEntity<>(new SingleResponseWithMessageDto<>(mapper.memberToMemberInfo(loginMember),"SUCCESS"),HttpStatus.OK);
     }
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "email", value = "이메일", readOnly = true, dataType = "hgd@gmail.com", paramType = "body"),
+            @ApiImplicitParam(name = "password", value = "비밀번호", readOnly = true, dataType = "1234567896433", paramType = "body")
+    })
+
 
     //회원 정보 수정
     @PatchMapping("/{member-id}")
